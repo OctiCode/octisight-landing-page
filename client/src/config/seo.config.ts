@@ -1,4 +1,4 @@
 export const seoConfig = {
-  title: "OctiSight",
-  description: "Landing page",
+	title: "OctiSight",
+	description: "Landing page",
 };

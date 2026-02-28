@@ -1,4 +1,4 @@
 export const siteConfig = {
-  name: "OctiSight",
-  url: "https://octisight.com",
+	name: "OctiSight",
+	url: "https://octisight.com",
 };

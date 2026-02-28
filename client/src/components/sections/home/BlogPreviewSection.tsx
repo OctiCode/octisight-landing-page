@@ -1,3 +1,3 @@
 export default function BlogPreviewSection() {
-  return <section></section>;
+	return <section></section>;
 }

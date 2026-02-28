@@ -1,3 +1,3 @@
 export default function LatestNewsSection() {
-  return <section></section>;
+	return <section></section>;
 }

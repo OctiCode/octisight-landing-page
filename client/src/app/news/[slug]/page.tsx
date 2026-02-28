@@ -1,3 +1,3 @@
 export default function NewsPostPage() {
-  return <div>News Post</div>;
+	return <div>News Post</div>;
 }

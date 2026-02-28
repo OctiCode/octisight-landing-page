@@ -1,3 +1,3 @@
 export default function HowItWorksPage() {
-  return <div>How It Works</div>;
+	return <div>How It Works</div>;
 }

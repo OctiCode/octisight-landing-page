@@ -1,3 +1,3 @@
 export default function HeroSection() {
-  return <section></section>;
+	return <section></section>;
 }

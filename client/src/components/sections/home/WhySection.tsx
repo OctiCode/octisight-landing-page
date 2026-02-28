@@ -1,3 +1,3 @@
 export default function WhySection() {
-  return <section></section>;
+	return <section></section>;
 }
