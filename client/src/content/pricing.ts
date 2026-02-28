@@ -1,3 +1,3 @@
 export const pricingContent = {
-  plans: [],
+	plans: [],
 };

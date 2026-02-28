@@ -1,3 +1,3 @@
 export const faqContent = {
-  items: [],
+	items: [],
 };

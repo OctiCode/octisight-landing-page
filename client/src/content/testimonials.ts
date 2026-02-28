@@ -1,3 +1,3 @@
 export const testimonialsContent = {
-  items: [],
+	items: [],
 };
