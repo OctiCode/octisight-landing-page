@@ -378,6 +378,72 @@ export const blogSection = {
 
 /**
  * ───────────────────────────────────────────────────────────────────────────
+ * FOOTER SECTION
+ * ───────────────────────────────────────────────────────────────────────────
+ * Site footer with navigation, company info, and social links
+ */
+export const footerSection = {
+	logo: {
+		src: "/images/logo/OctiSight_logo-02.svg",
+		alt: "OctiSight",
+	},
+	tagline:
+		"Security, From Insight to Action. Modern cybersecurity that's human-first, intelligent, and built for teams of all sizes.",
+	navigation: {
+		product: {
+			title: "Product",
+			links: [
+				{
+					text: "Vulnerability Intelligence",
+					href: "/product/vulnerability-intelligence",
+				},
+				{ text: "Asset Visibility", href: "/product/asset-visibility" },
+				{ text: "AI Remediation", href: "/product/ai-remediation" },
+				{ text: "Smart Alerts", href: "/product/smart-alerts" },
+				{ text: "Reporting", href: "/product/reporting" },
+			],
+		},
+		company: {
+			title: "Company",
+			links: [
+				{ text: "About Us", href: "/about" },
+				{ text: "How It Works", href: "/how-it-works" },
+				{ text: "Security & Trust", href: "/security" },
+				{ text: "Pricing", href: "/pricing" },
+			],
+		},
+		resources: {
+			title: "Resources",
+			links: [
+				{ text: "Documentation", href: "/docs" },
+				{ text: "API Reference", href: "/api-reference" },
+				{ text: "Support", href: "/support" },
+				{ text: "Status", href: "/status" },
+			],
+		},
+	},
+	social: [
+		{
+			name: "Facebook",
+			href: "https://facebook.com/octisight",
+			icon: "Facebook",
+		},
+		{ name: "Twitter", href: "https://twitter.com/octisight", icon: "Twitter" },
+		{
+			name: "Instagram",
+			href: "https://instagram.com/octisight",
+			icon: "Instagram",
+		},
+		{
+			name: "LinkedIn",
+			href: "https://linkedin.com/company/octisight",
+			icon: "Linkedin",
+		},
+	],
+} as const;
+
+/**
+ * ───────────────────────────────────────────────────────────────────────────
  * COMPLETE HOME CONTENT EXPORT
  * ───────────────────────────────────────────────────────────────────────────
  * Aggregated content object for easy import
@@ -392,6 +458,7 @@ export const homeContent = {
 	faq: faqSection,
 	latestNews: latestNewsSection,
 	blog: blogSection,
+	footer: footerSection,
 } as const;
 
 /**
@@ -410,3 +477,4 @@ export type CustomerReviewsSection = typeof customerReviewsSection;
 export type FAQSection = typeof faqSection;
 export type LatestNewsSection = typeof latestNewsSection;
 export type BlogSection = typeof blogSection;
+export type FooterSection = typeof footerSection;
