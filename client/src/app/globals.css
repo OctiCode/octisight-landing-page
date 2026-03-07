@@ -1,6 +1,18 @@
 @import "tailwindcss";
 
-/* Gotham Font Family */
+/* Gotham Font Family - Complete Weight Range */
+
+/* Light - 300 */
+@font-face {
+	font-family: "Gotham";
+	src: url("/fonts/Gotham-Light.woff2") format("woff2"),
+		url("/fonts/Gotham-Light.woff") format("woff");
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Book (Regular) - 400 */
 @font-face {
 	font-family: "Gotham";
 	src: url("/fonts/Gotham-Book.woff2") format("woff2"),
@@ -10,6 +22,7 @@
 	font-display: swap;
 }
 
+/* Medium - 500 */
 @font-face {
 	font-family: "Gotham";
 	src: url("/fonts/Gotham-Medium.woff2") format("woff2"),
@@ -19,6 +32,7 @@
 	font-display: swap;
 }
 
+/* Bold - 700 */
 @font-face {
 	font-family: "Gotham";
 	src: url("/fonts/Gotham-Bold.woff2") format("woff2"),
@@ -27,6 +41,27 @@
 	font-style: normal;
 	font-display: swap;
 }
+
+/* Black - 900 */
+@font-face {
+	font-family: "Gotham";
+	src: url("/fonts/Gotham-Black.woff2") format("woff2"),
+		url("/fonts/Gotham-Black.woff") format("woff");
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Ultra - 950 */
+@font-face {
+	font-family: "Gotham";
+	src: url("/fonts/Gotham-Ultra.woff2") format("woff2"),
+		url("/fonts/Gotham-Ultra.woff") format("woff");
+	font-weight: 950;
+	font-style: normal;
+	font-display: swap;
+}
+
 
 /* Tailwind v4 Theme Configuration */
 @theme {
@@ -54,4 +89,22 @@
 body {
 	font-family: var(--font-family-sans);
 	color: var(--color-text);
+}
+
+/* Custom Animations */
+@keyframes float {
+	0%, 100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
+}
+
+.animate-float {
+	animation: float 6s ease-in-out infinite;
+}
+
+.delay-1000 {
+	animation-delay: 1s;
 }
