@@ -1,1 +1,57 @@
 @import "tailwindcss";
+
+/* Gotham Font Family */
+@font-face {
+	font-family: "Gotham";
+	src: url("/fonts/Gotham-Book.woff2") format("woff2"),
+		url("/fonts/Gotham-Book.woff") format("woff");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Gotham";
+	src: url("/fonts/Gotham-Medium.woff2") format("woff2"),
+		url("/fonts/Gotham-Medium.woff") format("woff");
+	font-weight: 500;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Gotham";
+	src: url("/fonts/Gotham-Bold.woff2") format("woff2"),
+		url("/fonts/Gotham-Bold.woff") format("woff");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+/* Tailwind v4 Theme Configuration */
+@theme {
+	/* Brand Colors */
+	--color-primary: #5b1166;
+	--color-secondary: #8e209e;
+	--color-accent: #c530db;
+	--color-background: #130015;
+	--color-text: #f6f6f6;
+	--color-contrast: #2d0533;
+	--color-light-contrast: #e071f5;
+	--color-light-2-contrast: #ebb0f9;
+	--color-light-3-contrast: #f8e7fd;
+	--color-red-border: #82181a;
+	--color-red-button: #5a0f17;
+	--color-alert-40: #460809;
+	--color-success: #88cc2a;
+	--color-success-contrast: #7fb335;
+
+	/* Font Family */
+	--font-family-sans: "Gotham", system-ui, sans-serif;
+	--font-family-gotham: "Gotham", system-ui, sans-serif;
+}
+
+body {
+	font-family: var(--font-family-sans);
+	color: var(--color-text);
+}
