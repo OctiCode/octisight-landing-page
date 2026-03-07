@@ -3,6 +3,7 @@ import AboutSection from "@/components/sections/home/AboutSection";
 import FeaturesSection from "@/components/sections/home/FeaturesSection";
 import WhySection from "@/components/sections/home/WhySection";
 import PricingSection from "@/components/sections/home/PricingSection";
+import CTASection from "@/components/sections/home/CTASection";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 
@@ -15,6 +16,7 @@ export default function Home() {
 			<FeaturesSection />
 			<WhySection />
 			<PricingSection />
+			<CTASection />
 			<Footer />
 		</div>
 	);

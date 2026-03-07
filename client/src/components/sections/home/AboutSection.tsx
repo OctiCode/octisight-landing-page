@@ -20,32 +20,25 @@ export default function AboutSection() {
 
 	return (
 		<section className="relative w-full min-h-[calc(100vh-4rem)] sm:h-auto py-8 sm:py-10">
-			{/* Content Container */}
 			<div className="relative z-10 mx-auto max-w-7xl h-full px-6 flex items-center">
 				<div className="flex flex-col items-center justify-center gap-4 sm:gap-6 w-full text-center py-8">
-					{/* Badge */}
 					<div className="inline-flex">
 						<span className="px-4 py-2 rounded-full bg-primary/40 border border-light-contrast/30 text-light-contrast text-sm font-book backdrop-blur-sm">
 							{aboutSection.headerTitle}
 						</span>
 					</div>
 
-					{/* Main Heading */}
 					<h2 className="text-3xl sm:text-4xl lg:text-5xl font-black leading-tight text-white">
 						{aboutSection.title}
 					</h2>
 
-					{/* Description */}
 					<p className="text-base sm:text-lg text-text/90 max-w-3xl leading-relaxed">
 						{aboutSection.paragraph}
 					</p>
 
-					{/* Video Container */}
 					<div className="relative w-full max-w-4xl mt-4 sm:mt-6">
-						{/* Glow effect behind video */}
 						<div className="absolute inset-0 bg-light-contrast/20 blur-[80px] rounded-3xl scale-110" />
 
-						{/* Video Wrapper */}
 						<div className="relative rounded-2xl overflow-hidden shadow-2xl border border-light-contrast/20">
 							<video
 								ref={videoRef}
@@ -59,7 +52,7 @@ export default function AboutSection() {
 								Your browser does not support the video tag.
 							</video>
 
-							{/* Custom Play Button Overlay (shows when paused) */}
+							{/* Custom play button overlay - only visible when video is paused */}
 							{!isPlaying && (
 								<button
 									onClick={handlePlayPause}
@@ -68,7 +61,7 @@ export default function AboutSection() {
 								>
 									<div className="w-20 h-20 rounded-full bg-accent/90 hover:bg-accent flex items-center justify-center shadow-lg shadow-accent/50 group-hover:scale-110 transition-transform duration-300">
 										<svg
-											className="w-10 h-10 text-white ml-1"
+											className="w-10 h-10 text-white"
 											fill="currentColor"
 											viewBox="0 0 24 24"
 										>
