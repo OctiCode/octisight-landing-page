@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="public/images/logo/OctiSight_logo-02.svg" alt="OctiSight Logo" width="400"/>
+</div>
+
 # OctiSight Landing Page
 
 Modern, responsive landing page for **OctiSight** - Next-generation cybersecurity platform powered by AI. Built with cutting-edge web technologies and best practices for optimal performance and user experience.
