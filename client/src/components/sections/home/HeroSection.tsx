@@ -98,7 +98,7 @@ export default function HeroSection() {
 	}, []);
 
 	return (
-		<section className="relative w-full h-[calc(100vh-4rem)] overflow-hidden bg-gradient-to-br from-background via-contrast to-background">
+		<section className="relative w-full h-[calc(100vh-4rem)] overflow-hidden bg-gradient-to-br from-background via-contrast to-background pb-0">
 			{/* Animated Network Background */}
 			<canvas
 				ref={canvasRef}
@@ -171,9 +171,6 @@ export default function HeroSection() {
 					</div>
 				</div>
 			</div>
-
-			{/* Bottom Gradient Fade */}
-			<div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent" />
 		</section>
 	);
 }
