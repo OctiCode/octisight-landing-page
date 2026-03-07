@@ -94,43 +94,37 @@ export default function HeroSection() {
 	}, []);
 
 	return (
-		<section className="relative w-full h-[calc(100vh-4rem)] overflow-hidden bg-gradient-to-br from-background via-contrast to-background pb-0">
-			<canvas
-				ref={canvasRef}
-				className="absolute inset-0 w-full h-full opacity-50"
-			/>
+		<section className="relative w-full h-[calc(100vh-4rem)] overflow-hidden bg-gradient-to-b from-background via-contrast to-background pb-0">
+			<canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
 
-			<div className="absolute inset-0 bg-black/40" />
+			<div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/50 to-black/0" />
 
-			<div className="absolute top-20 right-20 w-96 h-96 bg-accent/30 rounded-full blur-[120px] animate-pulse" />
-			<div className="absolute bottom-20 left-20 w-80 h-80 bg-secondary/20 rounded-full blur-[100px] animate-pulse delay-1000" />
-
-			<div className="relative z-10 mx-auto max-w-7xl h-full px-6 flex items-center">
-				<div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-12 items-center w-full">
-					<div className="flex flex-col gap-6 text-white">
+			<div className="relative z-10 mx-auto max-w-7xl h-full px-4 sm:px-6 flex items-center">
+				<div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 sm:gap-10 lg:gap-12 items-center w-full">
+					<div className="flex flex-col gap-4 sm:gap-5 md:gap-6 text-white">
 						<div className="inline-flex">
 							<span className="px-4 py-2 rounded-full bg-primary/40 border border-light-contrast/30 text-light-contrast text-sm font-book backdrop-blur-sm">
 								{heroSection.headerTitle}
 							</span>
 						</div>
 
-						<h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight">
+						<h1 className="text-3xl my-2 sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
 							{heroSection.title}
 						</h1>
 
-						<p className="text-lg text-justify sm:text-xl text-text/90 max-w-xl leading-relaxed">
+						<p className="text-base sm:text-lg md:text-xl text-text/90 max-w-xl leading-relaxed">
 							{heroSection.paragraph}
 						</p>
 
-						<div className="flex flex-col sm:flex-row gap-4 mt-4">
+						<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 sm:mt-4">
 							<Link href={heroSection.buttons.primary.href}>
-								<Button className="bg-accent hover:bg-light-contrast text-white px-8 py-6 text-lg font-medium rounded-lg transition-all duration-300 shadow-sm shadow-accent/30 hover:shadow-accent/50 w-full sm:w-auto">
+								<Button className="bg-accent hover:bg-light-contrast text-white px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-medium rounded-lg transition-all duration-300 shadow-sm shadow-accent/30 hover:shadow-accent/50 w-full sm:w-auto">
 									{heroSection.buttons.primary.text}
 								</Button>
 							</Link>
 
 							<Link href={heroSection.buttons.secondary.href}>
-								<Button className="bg-transparent hover:bg-text/10 text-text border-2 border-text/30 hover:border-text/50 px-8 py-6 text-lg font-medium rounded-lg transition-all duration-300 w-full sm:w-auto">
+								<Button className="bg-transparent hover:bg-text/10 text-text border-2 border-text/30 hover:border-text/50 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-medium rounded-lg transition-all duration-300 w-full sm:w-auto">
 									{heroSection.buttons.secondary.text}
 								</Button>
 							</Link>

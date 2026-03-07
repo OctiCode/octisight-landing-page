@@ -4,6 +4,7 @@ import { footerSection } from "@/content/home";
 import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 
 const iconMap = {
 	Facebook: Facebook,
@@ -13,13 +14,13 @@ const iconMap = {
 };
 
 export default function Footer() {
-	const currentYear = new Date().getFullYear();
+	const currentYear = useMemo(() => new Date().getFullYear(), []);
 
 	return (
 		<footer className="bg-gradient-to-br from-background via-contrast to-background border-t border-primary/20">
 			<div className="mx-auto max-w-7xl px-6 py-12">
 				{/* Main Footer Content */}
-				<div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
+				<div className="grid grid-cols-2 gap-8 lg:grid-cols-5">
 					{/* Logo and Tagline */}
 					<div className="lg:col-span-2">
 						<Link href="/" className="inline-block mb-4">
