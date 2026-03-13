@@ -8,6 +8,7 @@ import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import ReviewsSection from "@/components/sections/home/ReviewsSection";
 import FAQSection from "@/components/sections/home/FAQSection";
+import LatestNewsSection from "@/components/sections/home/LatestNewsSection";
 
 export default function Home() {
 	return (
@@ -20,6 +21,7 @@ export default function Home() {
 			<PricingSection />
 			<ReviewsSection />
 			<FAQSection />
+			<LatestNewsSection />
 			<CTASection />
 			<Footer />
 		</div>

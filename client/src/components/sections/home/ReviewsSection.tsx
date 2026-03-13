@@ -19,7 +19,7 @@ type Review = {
 	rating: number;
 };
 
-const SCROLL_SPEED_PX_PER_SEC = 60;
+const SCROLL_SPEED_PX_PER_SEC = 40;
 const MOMENTUM_FRICTION = 0.92;
 const MOMENTUM_MIN_VELOCITY = 0.3;
 const RESUME_DELAY_MS = 1200;
