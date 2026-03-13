@@ -7,6 +7,7 @@ import CTASection from "@/components/sections/home/CTASection";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import ReviewsSection from "@/components/sections/home/ReviewsSection";
+import FAQSection from "@/components/sections/home/FAQSection";
 
 export default function Home() {
 	return (
@@ -18,6 +19,7 @@ export default function Home() {
 			<WhySection />
 			<PricingSection />
 			<ReviewsSection />
+			<FAQSection />
 			<CTASection />
 			<Footer />
 		</div>

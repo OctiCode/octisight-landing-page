@@ -170,7 +170,7 @@ export default function ReviewsSection() {
 	}, []);
 
 	return (
-		<section className="relative w-full min-h-[calc(100vh-4rem)] sm:h-auto py-8 sm:py-10 md:py-14">
+		<section className="relative w-full pt-8 sm:pt-10 md:pt-14 pb-4 sm:pb-6 md:pb-8">
 			<div className="relative z-10 mx-auto max-w-7xl h-full px-4 sm:px-6 flex items-center">
 				<div className="flex flex-col items-center justify-center gap-3 sm:gap-4 w-full text-center py-4 sm:py-6">
 					<div className="inline-flex">
