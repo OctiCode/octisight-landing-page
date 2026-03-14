@@ -1,262 +1,178 @@
 "use client";
 
-import { latestNewsSection } from "@/content/home";
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
-import {
-	useRef,
-	useCallback,
-	useEffect,
-	useState,
-	useMemo,
-	type PointerEvent as ReactPointerEvent,
-} from "react";
-
-type NewsItem = {
-	id: string | number;
-	title: string;
-	excerpt: string;
-	date: string;
-	category: string;
-	image: string;
-	slug: string;
-};
-
-const SCROLL_SPEED_PX_PER_SEC = 30;
-const MOMENTUM_FRICTION = 0.92;
-const MOMENTUM_MIN_VELOCITY = 0.3;
-const RESUME_DELAY_MS = 1200;
-
-const mockNews: NewsItem[] = [
-	{
-		id: "news1",
-		title: "OctiSight Raises $50M Series B to Expand Powered Security Platform",
-		excerpt:
-			"New funding accelerates OctiSight's mission to democratize enterprise-grade vulnerability management with AI and automation.",
-		date: "2024-03-15",
-		category: "Company News",
-		image: "/images/elements/newsimage.jpg",
-		slug: "octisight-raises-50m-series-b",
-	},
-	{
-		id: "news2",
-		title: "New Report: The State of Vulnerability Management 2026",
-		excerpt:
-			"OctiSight releases comprehensive industry report analyzing vulnerability management trends, challenges, and best practices.",
-		date: "2024-03-10",
-		category: "Research",
-		image: "/images/elements/newsimage.jpg",
-		slug: "vulnerability-management-report-2026",
-	},
-	{
-		id: "news3",
-		title: "OctiSight Achieves SOC 2 Type II Compliance",
-		excerpt:
-			"Enterprise customers can now trust OctiSight with their most sensitive security data with our latest certification.",
-		date: "2024-03-05",
-		category: "Product",
-		image: "/images/elements/newsimage.jpg",
-		slug: "octisight-soc2-type-ii-compliance",
-	},
-	{
-		id: "news4",
-		title: "Introducing AI-Powered Remediation Recommendations",
-		excerpt:
-			"Our latest feature uses machine learning to provide context-aware fix suggestions, reducing remediation time by 60%.",
-		date: "2024-02-28",
-		category: "Product",
-		image: "/images/elements/newsimage.jpg",
-		slug: "ai-powered-remediation-recommendations",
-	},
-];
+import Link from "next/link";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { latestNewsSection } from "@/content/home";
+import type { NewsListItem } from "@/types/news";
 
 export default function LatestNewsSection() {
+	const [news, setNews] = useState<NewsListItem[]>([]);
+	// Logical index in [0, N-1] — drives the opacity highlight only
+	const [activeReal, setActiveReal] = useState(0);
+
+	const containerRef = useRef<HTMLDivElement>(null);
 	const trackRef = useRef<HTMLDivElement>(null);
-	const offsetRef = useRef(0);
-	const halfWidthRef = useRef(0);
-	const rafIdRef = useRef<number>(0);
-	const isAutoRef = useRef(true);
-	const isDraggingRef = useRef(false);
-	const pointerStartXRef = useRef(0);
-	const offsetAtDragStartRef = useRef(0);
-	const prevDragXRef = useRef(0);
-	const prevDragTimeRef = useRef(0);
-	const velocityRef = useRef(0);
-	const resumeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-	const [dragging, setDragging] = useState(false);
-
-	const applyOffset = useCallback((px: number) => {
-		const track = trackRef.current;
-		const half = halfWidthRef.current;
-		if (!track || !half) return;
-
-		let o = px % half;
-		if (o > 0) o -= half;
-		offsetRef.current = o;
-		track.style.transform = `translateX(${o}px)`;
-	}, []);
-
-	const startAutoScroll = useCallback(() => {
-		if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-		isAutoRef.current = true;
-		let prev: number | null = null;
-
-		const tick = (now: number) => {
-			if (!isAutoRef.current) return;
-			if (prev !== null) {
-				applyOffset(
-					offsetRef.current - SCROLL_SPEED_PX_PER_SEC * ((now - prev) / 1000),
-				);
-			}
-			prev = now;
-			rafIdRef.current = requestAnimationFrame(tick);
-		};
-		rafIdRef.current = requestAnimationFrame(tick);
-	}, [applyOffset]);
-
-	const stopAutoScroll = useCallback(() => {
-		isAutoRef.current = false;
-		if (rafIdRef.current) {
-			cancelAnimationFrame(rafIdRef.current);
-			rafIdRef.current = 0;
-		}
-	}, []);
-
-	const startMomentum = useCallback(() => {
-		if (rafIdRef.current) cancelAnimationFrame(rafIdRef.current);
-
-		const tick = () => {
-			velocityRef.current *= MOMENTUM_FRICTION;
-			if (Math.abs(velocityRef.current) < MOMENTUM_MIN_VELOCITY) {
-				if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-				resumeTimerRef.current = setTimeout(startAutoScroll, RESUME_DELAY_MS);
-				return;
-			}
-			applyOffset(offsetRef.current + velocityRef.current);
-			rafIdRef.current = requestAnimationFrame(tick);
-		};
-		rafIdRef.current = requestAnimationFrame(tick);
-	}, [applyOffset, startAutoScroll]);
+	// Current DOM index (accounts for clone offset)
+	const domIndexRef = useRef(0);
+	// Block new presses while a transition is running
+	const isAnimatingRef = useRef(false);
 
 	useEffect(() => {
-		const measure = () => {
-			if (trackRef.current)
-				halfWidthRef.current = trackRef.current.scrollWidth / 2;
-		};
-		measure();
-		const ro = new ResizeObserver(measure);
-		if (trackRef.current) ro.observe(trackRef.current);
+		fetch("/api/news")
+			.then((res) => res.json())
+			.then((data) => setNews(data.slice(0, 4)))
+			.catch((err) => console.error("Error fetching news:", err));
+	}, []);
+
+	const n = news.length;
+
+	/** translateX that centres the card at `domIdx` inside the container. */
+	const offsetForDomIndex = useCallback(
+		(domIdx: number): number => {
+			const track = trackRef.current;
+			const container = containerRef.current;
+			if (!track || !container || !n) return 0;
+			const card = track.children[domIdx] as HTMLElement | undefined;
+			if (!card) return 0;
+			const centred =
+				card.offsetLeft - (container.offsetWidth - card.offsetWidth) / 2;
+			return -centred;
+		},
+		[n],
+	);
+
+	/** Slide track to `domIdx`. `animated = false` → instant (teleport). */
+	const moveTo = useCallback(
+		(domIdx: number, animated: boolean) => {
+			const track = trackRef.current;
+			if (!track) return;
+			domIndexRef.current = domIdx;
+			track.style.transition = animated
+				? "transform 0.45s cubic-bezier(0.4, 0, 0.2, 1)"
+				: "none";
+			track.style.transform = `translateX(${offsetForDomIndex(domIdx)}px)`;
+		},
+		[offsetForDomIndex],
+	);
+
+	// Once news is available, position on real[0] (DOM index = N), no animation
+	useEffect(() => {
+		if (!n) return;
+		const id = requestAnimationFrame(() => {
+			domIndexRef.current = n;
+			moveTo(n, false);
+		});
+		return () => cancelAnimationFrame(id);
+	}, [n, moveTo]);
+
+	// Re-centre on resize (no animation)
+	useEffect(() => {
+		if (!n) return;
+		const ro = new ResizeObserver(() => moveTo(domIndexRef.current, false));
+		if (containerRef.current) ro.observe(containerRef.current);
 		return () => ro.disconnect();
-	}, []);
+	}, [n, moveTo]);
 
-	useEffect(() => {
-		const t = setTimeout(startAutoScroll, 80);
-		return () => {
-			clearTimeout(t);
-			stopAutoScroll();
-			if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-		};
-	}, [startAutoScroll, stopAutoScroll]);
+	/**
+	 * Called after every CSS transition ends.
+	 * If we landed on a clone, teleport to the matching real card.
+	 */
+	const onTransitionEnd = useCallback(
+		(e: React.TransitionEvent<HTMLDivElement>) => {
+			// Only care about the transform transition on the track itself
+			if (e.propertyName !== "transform") return;
 
-	const onPointerDown = useCallback(
-		(e: ReactPointerEvent<HTMLDivElement>) => {
-			if (e.pointerType === "mouse" && e.button !== 0) return;
+			const domIdx = domIndexRef.current;
 
-			stopAutoScroll();
-			if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+			if (domIdx >= 2 * n) {
+				const realIdx = domIdx - n;
+				moveTo(realIdx, false);
+				setActiveReal(realIdx - n);
+			} else if (domIdx < n) {
+				const realIdx = domIdx + n;
+				moveTo(realIdx, false);
+				setActiveReal(realIdx - n);
+			}
 
-			isDraggingRef.current = true;
-			setDragging(true);
-			velocityRef.current = 0;
-
-			pointerStartXRef.current = e.clientX;
-			offsetAtDragStartRef.current = offsetRef.current;
-			prevDragXRef.current = e.clientX;
-			prevDragTimeRef.current = performance.now();
-
-			(e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
+			isAnimatingRef.current = false;
 		},
-		[stopAutoScroll],
+		[n, moveTo],
 	);
 
-	const onPointerMove = useCallback(
-		(e: ReactPointerEvent<HTMLDivElement>) => {
-			if (!isDraggingRef.current) return;
+	const handleNext = useCallback(() => {
+		if (!n || isAnimatingRef.current) return;
+		isAnimatingRef.current = true;
+		const next = domIndexRef.current + 1;
+		moveTo(next, true);
+		setActiveReal((prev) => (prev + 1) % n);
+	}, [n, moveTo]);
 
-			const dx = e.clientX - pointerStartXRef.current;
-			applyOffset(offsetAtDragStartRef.current + dx);
+	const handlePrev = useCallback(() => {
+		if (!n || isAnimatingRef.current) return;
+		isAnimatingRef.current = true;
+		const prev = domIndexRef.current - 1;
+		moveTo(prev, true);
+		setActiveReal((prev) => (prev - 1 + n) % n);
+	}, [n, moveTo]);
 
-			const now = performance.now();
-			const dt = now - prevDragTimeRef.current;
-			if (dt > 0)
-				velocityRef.current = ((e.clientX - prevDragXRef.current) / dt) * 16;
-			prevDragXRef.current = e.clientX;
-			prevDragTimeRef.current = now;
-		},
-		[applyOffset],
+	// Flatten into DOM order: left-clones | real | right-clones
+	const allItems = useMemo(
+		() => [
+			...news.map((item) => ({
+				item,
+				key: `lc-${item.id}`,
+				isClone: true,
+				realIdx: undefined,
+			})),
+			...news.map((item, i) => ({
+				item,
+				key: `real-${item.id}`,
+				isClone: false,
+				realIdx: i,
+			})),
+			...news.map((item) => ({
+				item,
+				key: `rc-${item.id}`,
+				isClone: true,
+				realIdx: undefined,
+			})),
+		],
+		[news],
 	);
 
-	const onPointerUp = useCallback(() => {
-		if (!isDraggingRef.current) return;
-		isDraggingRef.current = false;
-		setDragging(false);
-
-		if (Math.abs(velocityRef.current) > MOMENTUM_MIN_VELOCITY) {
-			startMomentum();
-		} else {
-			if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
-			resumeTimerRef.current = setTimeout(startAutoScroll, RESUME_DELAY_MS);
-		}
-	}, [startMomentum, startAutoScroll]);
-
-	const onClickCapture = useCallback((e: React.MouseEvent) => {
-		if (Math.abs(e.clientX - pointerStartXRef.current) > 4) e.stopPropagation();
-	}, []);
+	const canNavigate = n > 1;
 
 	return (
 		<section className="relative w-full pt-8 sm:pt-10 md:pt-14 pb-4 sm:pb-6 md:pb-8">
 			<div className="relative z-10 mx-auto max-w-7xl h-full px-4 sm:px-6 flex items-center">
 				<div className="flex flex-col items-center justify-center gap-3 sm:gap-4 w-full text-center py-4 sm:py-6">
+					{/* Badge */}
 					<div className="inline-flex">
 						<span className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-primary/40 border border-light-contrast/30 text-light-contrast text-xs sm:text-sm font-book backdrop-blur-sm">
 							{latestNewsSection.headerTitle}
 						</span>
 					</div>
 
+					{/* Heading */}
 					<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-white max-w-4xl mt-1 mb-1">
 						{latestNewsSection.title}
 					</h2>
 
+					{/* Sub-paragraph */}
 					<p className="text-sm sm:text-base md:text-lg text-text/90 max-w-2xl leading-relaxed px-1">
 						{latestNewsSection.paragraph}
 					</p>
 
-					<p
-						className="flex items-center gap-1.5 text-text/35 text-xs sm:hidden select-none mt-0.5"
-						aria-hidden="true"
-					>
-						<span>←</span>
-						<span>Swipe to explore</span>
-						<span>→</span>
-					</p>
-
-					<div
-						className={`news-carousel-root relative w-full mt-4 sm:mt-6 md:mt-8 overflow-hidden select-none ${
-							dragging ? "cursor-grabbing" : "cursor-grab"
-						}`}
-						onPointerDown={onPointerDown}
-						onPointerMove={onPointerMove}
-						onPointerUp={onPointerUp}
-						onPointerCancel={onPointerUp}
-						onClickCapture={onClickCapture}
-						role="region"
-						aria-label="Latest news — swipe or drag to browse"
-					>
+					{/* Carousel */}
+					<div ref={containerRef} className="relative w-full overflow-hidden">
+						{/* Left fade */}
 						<div
 							className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"
 							aria-hidden="true"
 						/>
+						{/* Right fade */}
 						<div
 							className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"
 							aria-hidden="true"
@@ -265,37 +181,58 @@ export default function LatestNewsSection() {
 						<div
 							ref={trackRef}
 							className="news-carousel-track"
-							style={{ transform: "translateX(0px)" }}
+							onTransitionEnd={onTransitionEnd}
 						>
-							{mockNews.map((item) => (
-								<NewsCard key={`a-${item.id}`} news={item} />
-							))}
-							{mockNews.map((item) => (
-								<NewsCard key={`b-${item.id}`} news={item} ariaHidden />
+							{allItems.map(({ item, key, isClone, realIdx = 0 }) => (
+								<NewsCard
+									key={key}
+									news={item}
+									isActive={!isClone && realIdx === activeReal}
+									ariaHidden={isClone}
+								/>
 							))}
 						</div>
 					</div>
 
-					<Link
-						href={latestNewsSection.cta.href}
-						className="mt-6 sm:mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-bold text-sm sm:text-base border hover:border-white border-primary transition-all duration-300 hover:scale-105"
-					>
-						{latestNewsSection.cta.text}
-						<ArrowRight className="w-4 h-4" />
-					</Link>
+					{/* CTA row: ← | View All News | → */}
+					<div className="mt-6 sm:mt-8 flex items-center gap-3">
+						{canNavigate && (
+							<button
+								type="button"
+								onClick={handlePrev}
+								aria-label="Previous news"
+								className="inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full text-white border border-primary hover:border-white transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+							>
+								<ChevronLeft className="w-5 h-5" />
+							</button>
+						)}
+
+						<Link
+							href={latestNewsSection.cta.href}
+							className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-white font-bold text-sm sm:text-base border border-primary hover:border-white transition-all duration-300 hover:scale-105"
+						>
+							{latestNewsSection.cta.text}
+							<ArrowRight className="w-4 h-4" />
+						</Link>
+
+						{canNavigate && (
+							<button
+								type="button"
+								onClick={handleNext}
+								aria-label="Next news"
+								className="inline-flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full text-white border border-primary hover:border-white transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+							>
+								<ChevronRight className="w-5 h-5" />
+							</button>
+						)}
+					</div>
 				</div>
 			</div>
 
 			<style>{`
-				.news-carousel-root {
-					touch-action: pan-y;
-					-webkit-tap-highlight-color: transparent;
-					padding-bottom: 6px;
-				}
-
 				.news-carousel-track {
 					display: flex;
-					gap: 0.875rem;
+					gap: 1.25rem;
 					width: max-content;
 					will-change: transform;
 				}
@@ -311,7 +248,6 @@ export default function LatestNewsSection() {
 					.news-card-item { flex: 0 0 70vw; max-width: 70vw; }
 				}
 				@media (min-width: 640px) {
-					.news-carousel-track { gap: 1.25rem; }
 					.news-card-item { flex: 0 0 62vw; max-width: 62vw; }
 				}
 				@media (min-width: 768px) {
@@ -321,10 +257,6 @@ export default function LatestNewsSection() {
 					.news-card-item { flex: 0 0 35vw; max-width: 35vw; }
 				}
 				@media (min-width: 1280px) {
-					.news-carousel-track { gap: 1.5rem; }
-					.news-card-item { flex: 0 0 32vw; max-width: 32vw; }
-				}
-				@media (min-width: 1536px) {
 					.news-card-item { flex: 0 0 32vw; max-width: 32vw; }
 				}
 
@@ -336,13 +268,13 @@ export default function LatestNewsSection() {
 	);
 }
 
-function NewsCard({
-	news,
-	ariaHidden,
-}: {
-	news: NewsItem;
+interface NewsCardProps {
+	news: NewsListItem;
+	isActive?: boolean;
 	ariaHidden?: boolean;
-}) {
+}
+
+function NewsCard({ news, isActive, ariaHidden }: NewsCardProps) {
 	const formattedDate = useMemo(() => {
 		const date = new Date(news.date);
 		return date.toLocaleDateString("en-US", {
@@ -352,30 +284,12 @@ function NewsCard({
 		});
 	}, [news.date]);
 
-	const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
-		const clickX = e.clientX;
-		const startX = (e.currentTarget as any)._startX || clickX;
-
-		if (Math.abs(clickX - startX) > 5) {
-			e.preventDefault();
-		}
-	}, []);
-
-	const handleMouseDown = useCallback(
-		(e: React.MouseEvent<HTMLAnchorElement>) => {
-			(e.currentTarget as any)._startX = e.clientX;
-		},
-		[],
-	);
-
 	return (
-		<article className="news-card-item" aria-hidden={ariaHidden || undefined}>
-			<Link
-				href={`/news/${news.slug}`}
-				className="block h-full group"
-				onClick={handleClick}
-				onMouseDown={handleMouseDown}
-			>
+		<article
+			className={`news-card-item transition-opacity duration-300 ${isActive ? "opacity-100" : "opacity-50"}`}
+			aria-hidden={ariaHidden}
+		>
+			<Link href={`/news/${news.slug}`} className="block h-full group">
 				<div className="relative bg-gradient-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border border-light-contrast/40 rounded-2xl overflow-hidden hover:border-light-contrast/70 transition-all duration-300 h-full">
 					<div className="relative w-full aspect-[16/10] bg-gradient-to-br from-primary/20 to-contrast/30 overflow-hidden">
 						<Image

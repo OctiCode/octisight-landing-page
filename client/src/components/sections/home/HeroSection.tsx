@@ -8,9 +8,9 @@ import { useEffect, useRef } from "react";
 
 const NETWORK_CONFIG = {
 	nodeCount: 50,
-	connectionDistance: 150,
+	connectionDistance: 170,
 	nodeColor: "rgba(224, 113, 245, 1)",
-	connectionOpacity: 0.15,
+	connectionOpacity: 0.5,
 } as const;
 
 export default function HeroSection() {

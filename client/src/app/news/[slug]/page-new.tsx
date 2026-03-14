@@ -1,30 +1,92 @@
+"use client";
+
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Calendar, Share2 } from "lucide-react";
-import { NewsService } from "@/lib/services/newsService";
-import { notFound } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const formatDate = (dateString: string) => {
-	const date = new Date(dateString);
-	return date.toLocaleDateString("en-US", {
-		month: "long",
-		day: "numeric",
-		year: "numeric",
-	});
+type NewsItem = {
+	id: string | number;
+	title: string;
+	excerpt: string;
+	content: string;
+	date: string;
+	category: string;
+	image: string;
+	slug: string;
+	author: {
+		name: string;
+		role: string;
+	};
 };
 
-export default async function NewsPostPage({
-	params,
-}: {
-	params: Promise<{ slug: string }>;
-}) {
-	const { slug } = await params;
-	const news = await NewsService.getNewsBySlug(slug);
+async function fetchNewsArticle(slug: string): Promise<NewsItem | null> {
+	try {
+		const response = await fetch(`/api/news/${slug}`);
+		if (!response.ok) return null;
+		return await response.json();
+	} catch (error) {
+		console.error("Error fetching news article:", error);
+		return null;
+	}
+}
+
+export default function NewsPostPage({ params }: { params: { slug: string } }) {
+	const [news, setNews] = useState<NewsItem | null>(null);
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		fetchNewsArticle(params.slug).then((data) => {
+			setNews(data);
+			setLoading(false);
+		});
+	}, [params.slug]);
+
+	const formatDate = (dateString: string) => {
+		const date = new Date(dateString);
+		return date.toLocaleDateString("en-US", {
+			month: "long",
+			day: "numeric",
+			year: "numeric",
+		});
+	};
+
+	if (loading) {
+		return (
+			<div className="bg-background min-h-screen">
+				<Navbar />
+				<main className="relative w-full pt-24 pb-12">
+					<div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
+						<div className="animate-pulse">
+							<div className="h-8 bg-primary/20 rounded w-1/2 mx-auto mb-4"></div>
+							<div className="h-4 bg-primary/10 rounded w-3/4 mx-auto"></div>
+						</div>
+					</div>
+				</main>
+				<Footer />
+			</div>
+		);
+	}
 
 	if (!news) {
-		notFound();
+		return (
+			<div className="bg-background min-h-screen">
+				<Navbar />
+				<main className="relative w-full pt-24 pb-12">
+					<div className="mx-auto max-w-4xl px-4 sm:px-6 text-center">
+						<h1 className="text-3xl font-black text-white mb-4">
+							Article Not Found
+						</h1>
+						<Link href="/news" className="text-accent hover:underline">
+							← Back to News
+						</Link>
+					</div>
+				</main>
+				<Footer />
+			</div>
+		);
 	}
 
 	return (
@@ -105,6 +167,22 @@ export default async function NewsPostPage({
 									<p className="text-text/70 text-sm">{news.author.role}</p>
 								</div>
 							</div>
+
+							<button
+								className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-light-contrast/40 text-text/70 hover:text-white hover:border-light-contrast/70 transition-all duration-300"
+								onClick={() => {
+									if (navigator.share) {
+										navigator.share({
+											title: news.title,
+											text: news.excerpt,
+											url: window.location.href,
+										});
+									}
+								}}
+							>
+								<Share2 className="w-4 h-4" />
+								<span className="text-sm">Share</span>
+							</button>
 						</div>
 					</div>
 				</div>
