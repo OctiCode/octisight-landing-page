@@ -9,6 +9,9 @@ import Footer from "../components/layout/Footer";
 import ReviewsSection from "@/components/sections/home/ReviewsSection";
 import FAQSection from "@/components/sections/home/FAQSection";
 import LatestNewsSection from "@/components/sections/home/LatestNewsSection";
+import LatestBlogsSection from "@/components/sections/home/LatestBlogsSection";
+
+export const revalidate = 300;
 
 export default function Home() {
 	return (
@@ -22,6 +25,7 @@ export default function Home() {
 			<ReviewsSection />
 			<FAQSection />
 			<LatestNewsSection />
+			<LatestBlogsSection />
 			<CTASection />
 			<Footer />
 		</div>
