@@ -112,7 +112,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 							)}
 							{blog.author.name && (
 								<div className="flex items-center gap-2">
-									<div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent/30 to-primary/30 border-2 border-white/10 flex items-center justify-center overflow-hidden">
+									<div className="w-8 h-8 rounded-full bg-linear-to-br from-accent/30 to-primary/30 border-2 border-white/10 flex items-center justify-center overflow-hidden">
 										{blog.author.avatar ? (
 											<Image
 												src={blog.author.avatar}
@@ -151,20 +151,20 @@ export default async function BlogPostPage({ params }: PageProps) {
 							prose-li:mb-2 prose-li:leading-relaxed
 							prose-blockquote:border-l-4 prose-blockquote:border-accent/40 prose-blockquote:pl-5 prose-blockquote:italic prose-blockquote:text-text/70
 							prose-code:text-accent/90 prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm
-							prose-pre:bg-white/[0.03] prose-pre:border prose-pre:border-white/[0.08] prose-pre:rounded-xl prose-pre:p-5 prose-pre:overflow-x-auto
+							prose-pre:bg-white/3 prose-pre:border prose-pre:border-white/8 prose-pre:rounded-xl prose-pre:p-5 prose-pre:overflow-x-auto
 							prose-img:rounded-xl prose-img:w-full prose-img:my-8
 							prose-figure:my-8
 							prose-figcaption:text-center prose-figcaption:text-text/50 prose-figcaption:text-sm prose-figcaption:mt-3
 							prose-table:w-full prose-table:text-sm
 							prose-th:text-left prose-th:text-white prose-th:font-bold prose-th:pb-3 prose-th:border-b prose-th:border-white/10
-							prose-td:py-3 prose-td:border-b prose-td:border-white/[0.06] prose-td:text-text/80
+							prose-td:py-3 prose-td:border-b prose-td:border-white/6 prose-td:text-text/80
 							prose-hr:border-white/10 prose-hr:my-10"
 						dangerouslySetInnerHTML={{ __html: blog.content }}
 					/>
 
 					<div className="mt-12 pt-8 border-t border-light-contrast/20">
 						<div className="flex items-center gap-3">
-							<div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent/30 to-primary/30 border-2 border-white/10 flex items-center justify-center overflow-hidden">
+							<div className="w-12 h-12 rounded-full bg-linear-to-br from-accent/30 to-primary/30 border-2 border-white/10 flex items-center justify-center overflow-hidden">
 								{blog.author.avatar ? (
 									<Image
 										src={blog.author.avatar}

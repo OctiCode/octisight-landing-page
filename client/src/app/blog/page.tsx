@@ -45,7 +45,7 @@ export default async function BlogPage() {
 							{blogs.map((item) => (
 								<article key={item.id} className="group">
 									<Link href={`/blog/${item.slug}`} className="block h-full">
-										<div className="relative h-full rounded-2xl overflow-hidden border border-white/[0.08] bg-white/[0.03] hover:border-accent/30 transition-colors duration-300 flex flex-col">
+										<div className="relative h-full rounded-2xl overflow-hidden border border-white/8 bg-white/3 hover:border-accent/30 transition-colors duration-300 flex flex-col">
 											{item.image ? (
 												<div className="relative w-full aspect-[2.4/1] overflow-hidden">
 													<Image
@@ -68,18 +68,18 @@ export default async function BlogPage() {
 												</div>
 											)}
 
-											<div className="flex flex-col flex-grow p-5 sm:p-6 gap-3 sm:gap-4">
+											<div className="flex flex-col grow p-5 sm:p-6 gap-3 sm:gap-4">
 												<h2 className="text-white font-bold text-lg sm:text-xl leading-snug line-clamp-2 group-hover:text-accent/90 transition-colors duration-300">
 													{item.title}
 												</h2>
 
 												{item.excerpt && (
-													<p className="text-text/60 text-sm leading-relaxed line-clamp-3 flex-grow">
+													<p className="text-text/60 text-sm leading-relaxed line-clamp-3 grow">
 														{item.excerpt}
 													</p>
 												)}
 
-												<div className="flex items-center justify-end mt-auto pt-4 border-t border-white/[0.06]">
+												<div className="flex items-center justify-end mt-auto pt-4 border-t border-white/6">
 													<span className="flex items-center gap-1 text-accent/70 text-xs font-medium group-hover:text-accent group-hover:gap-1.5 transition-all duration-300">
 														<BookOpen className="w-3.5 h-3.5" />
 														Read
