@@ -142,12 +142,12 @@ export default function BlogCarousel({ blogs }: BlogCarouselProps) {
 			<div ref={containerRef} className="relative w-full overflow-hidden">
 				{/* Left fade */}
 				<div
-					className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"
+					className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-linear-to-r from-background to-transparent z-10 pointer-events-none"
 					aria-hidden="true"
 				/>
 				{/* Right fade */}
 				<div
-					className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"
+					className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-linear-to-l from-background to-transparent z-10 pointer-events-none"
 					aria-hidden="true"
 				/>
 
@@ -254,7 +254,7 @@ function BlogCard({ blog, isActive, ariaHidden }: BlogCardProps) {
 			aria-hidden={ariaHidden}
 		>
 			<Link href={`/blog/${blog.slug}`} className="block h-full group">
-				<div className="relative h-full rounded-xl overflow-hidden border border-white/[0.08] bg-white/[0.03] hover:border-accent/30 transition-colors duration-300 flex flex-col">
+				<div className="relative h-full rounded-xl overflow-hidden border border-white/8 bg-white/3 hover:border-accent/30 transition-colors duration-300 flex flex-col">
 					{/* Image — only render if available */}
 					{blog.image && (
 						<div className="relative w-full aspect-[2.4/1] overflow-hidden">
@@ -282,7 +282,7 @@ function BlogCard({ blog, isActive, ariaHidden }: BlogCardProps) {
 					)}
 
 					{/* Body */}
-					<div className="flex flex-col flex-grow p-3.5 sm:p-4 gap-2.5">
+					<div className="flex flex-col grow p-3.5 sm:p-4 gap-2.5">
 						{/* Title */}
 						<h3 className="text-white font-bold text-sm sm:text-base leading-snug line-clamp-2 group-hover:text-accent/90 transition-colors duration-300 text-left">
 							{blog.title}
@@ -290,13 +290,13 @@ function BlogCard({ blog, isActive, ariaHidden }: BlogCardProps) {
 
 						{/* Excerpt */}
 						{blog.excerpt && (
-							<p className="text-text/55 text-xs sm:text-sm leading-relaxed line-clamp-2 flex-grow text-left">
+							<p className="text-text/55 text-xs sm:text-sm leading-relaxed line-clamp-2 grow text-left">
 								{blog.excerpt}
 							</p>
 						)}
 
 						{/* Footer */}
-						<div className="flex items-center justify-end mt-auto pt-2.5 border-t border-white/[0.06]">
+						<div className="flex items-center justify-end mt-auto pt-2.5 border-t border-white/6">
 							<span className="flex items-center gap-1 text-accent/70 text-[0.65rem] sm:text-xs font-medium group-hover:text-accent group-hover:gap-1.5 transition-all duration-300">
 								<BookOpen className="w-3 h-3" />
 								Read

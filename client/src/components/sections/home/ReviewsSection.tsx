@@ -209,11 +209,11 @@ export default function ReviewsSection() {
 						aria-label="Customer reviews — swipe or drag to browse"
 					>
 						<div
-							className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none"
+							className="absolute left-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-linear-to-r from-background to-transparent z-10 pointer-events-none"
 							aria-hidden="true"
 						/>
 						<div
-							className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"
+							className="absolute right-0 top-0 bottom-0 w-12 sm:w-20 md:w-32 bg-linear-to-l from-background to-transparent z-10 pointer-events-none"
 							aria-hidden="true"
 						/>
 
@@ -292,7 +292,7 @@ function ReviewCard({
 }) {
 	return (
 		<article className="review-card-item" aria-hidden={ariaHidden || undefined}>
-			<div className="relative bg-gradient-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border border-light-contrast/40 rounded-2xl p-4 sm:p-5 md:p-6 lg:p-7 hover:border-light-contrast/70 hover:from-primary/15 hover:to-contrast/25 transition-colors duration-300 h-full flex flex-col gap-3 sm:gap-4">
+			<div className="relative bg-linear-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border border-light-contrast/40 rounded-2xl p-4 sm:p-5 md:p-6 lg:p-7 hover:border-light-contrast/70 hover:from-primary/15 hover:to-contrast/25 transition-colors duration-300 h-full flex flex-col gap-3 sm:gap-4">
 				<div
 					className="flex gap-0.5"
 					aria-label={`${review.rating} out of 5 stars`}
@@ -309,14 +309,14 @@ function ReviewCard({
 					))}
 				</div>
 
-				<p className="text-sm sm:text-base text-text/85 leading-relaxed flex-grow text-left italic">
+				<p className="text-sm sm:text-base text-text/85 leading-relaxed grow text-left italic">
 					&ldquo;{review.message}&rdquo;
 				</p>
 
 				<div className="h-px bg-light-contrast/10" aria-hidden="true" />
 
 				<div className="flex items-center gap-2.5 sm:gap-3">
-					<div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 border-2 border-light-contrast/25 flex items-center justify-center shrink-0">
+					<div className="w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-linear-to-br from-primary/30 to-accent/30 border-2 border-light-contrast/25 flex items-center justify-center shrink-0">
 						<span className="text-white font-bold text-sm sm:text-base select-none">
 							{review.username.charAt(0)}
 						</span>

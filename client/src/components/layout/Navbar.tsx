@@ -1,30 +1,76 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 
-export default function Navbar() {
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
+const NAV_LINKS = [
+	{ href: "/#about", label: "About" },
+	{ href: "/#how-it-works", label: "How it works" },
+	{ href: "/#pricing", label: "Pricing" },
+	{ href: "/#contact", label: "Contact" },
+] as const;
 
-	const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-	const navLinks = [
-		{ href: "#products", label: "Products" },
-		{ href: "#how-it-works", label: "How it works" },
-		{ href: "#security", label: "Security" },
-		{ href: "#pricing", label: "Pricing" },
-		{ href: "#about", label: "About" },
-		{ href: "#contact", label: "Contact us" },
-	];
+/**
+ * Handles anchor links correctly whether the user is already on the home page
+ * or navigating from another page.
+ *
+ * - Same page  → preventDefault + smooth scroll via scrollIntoView
+ * - Other page → navigate to /#hash, browser handles scroll on load
+ */
+function useAnchorNav() {
+	const pathname = usePathname();
 
 	return (
-		<header className="w-full border-b bg-white relative z-50 sticky top-0 left-0 right-0">
-			<div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
+		e: React.MouseEvent<HTMLAnchorElement>,
+		href: string,
+		onDone?: () => void,
+	) => {
+		const isAnchor = href.startsWith("/#");
+		if (!isAnchor) {
+			onDone?.();
+			return;
+		}
+
+		const id = href.slice(2); // strip "/#"
+
+		if (pathname === "/") {
+			e.preventDefault();
+			document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+			onDone?.();
+		} else {
+			// Let Next.js navigate; scroll happens after page load via hash
+			onDone?.();
+		}
+	};
+}
+
+export default function Navbar() {
+	const [isOpen, setIsOpen] = useState(false);
+	const pathname = usePathname();
+	const handleAnchor = useAnchorNav();
+
+	// Close mobile menu on route change
+	useEffect(() => {
+		setIsOpen(false);
+	}, [pathname]);
+
+	// Prevent body scroll when mobile menu is open
+	useEffect(() => {
+		document.body.style.overflow = isOpen ? "hidden" : "";
+		return () => {
+			document.body.style.overflow = "";
+		};
+	}, [isOpen]);
+
+	return (
+		<header className="w-full border-b bg-white sticky top-0 left-0 right-0 z-50">
+			<div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
 				{/* Logo */}
-				<Link href="/" className="flex items-center z-50">
+				<Link href="/" className="flex items-center z-50 shrink-0">
 					<Image
 						src="/images/logo/OctiSight_logo-01.svg"
 						alt="OctiSight"
@@ -35,104 +81,97 @@ export default function Navbar() {
 					/>
 				</Link>
 
-				{/* Desktop Navigation */}
-				<nav className="hidden items-center gap-6 text-sm font-book text-gray-600 md:flex">
-					{navLinks.map((link) => (
+				{/* Desktop nav */}
+				<nav
+					className="hidden md:flex items-center gap-6 text-sm font-book text-gray-600"
+					aria-label="Main navigation"
+				>
+					{NAV_LINKS.map(({ href, label }) => (
 						<Link
-							key={link.href}
-							href={link.href}
-							className="text-contrast hover:text-primary transition-colors"
+							key={href}
+							href={href}
+							onClick={(e) => handleAnchor(e, href)}
+							className="text-contrast hover:text-primary transition-colors duration-200"
 						>
-							{link.label}
+							{label}
 						</Link>
 					))}
 				</nav>
 
-				{/* Desktop Right Side */}
+				{/* Desktop actions */}
 				<div className="hidden md:flex items-center gap-4">
 					<Link
 						href="/login"
-						className="text-sm font-medium text-gray-600 hover:text-primary"
+						className="text-sm font-medium text-gray-600 hover:text-primary transition-colors duration-200"
 					>
 						Sign in
 					</Link>
-
-					<Button className="bg-accent hover:bg-secondary text-white">
-						Get Started
-					</Button>
+					<Link href="/signup">
+						<Button className="bg-accent hover:bg-secondary text-white cursor-pointer">
+							Get Started
+						</Button>
+					</Link>
 				</div>
 
-				{/* Mobile Menu Button */}
+				{/* Mobile toggle */}
 				<button
-					onClick={toggleMenu}
+					type="button"
+					onClick={() => setIsOpen((v) => !v)}
 					className="md:hidden z-50 p-2 text-gray-600 hover:text-primary transition-colors"
-					aria-label="Toggle menu"
+					aria-label={isOpen ? "Close menu" : "Open menu"}
+					aria-expanded={isOpen}
 				>
-					{isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+					{isOpen ? <X size={24} /> : <Menu size={24} />}
 				</button>
 			</div>
 
-			{/* Mobile Menu - Full Screen Dropdown */}
+			{/* Mobile menu */}
 			<div
-				className={`fixed inset-0 top-16 bg-white md:hidden transition-all duration-300 ease-in-out z-50 ${
-					isMenuOpen
-						? "opacity-100 translate-y-0"
-						: "opacity-0 -translate-y-full pointer-events-none"
+				className={`fixed inset-0 top-16 bg-white md:hidden transition-all duration-300 ease-in-out z-40 ${
+					isOpen
+						? "opacity-100 translate-y-0 pointer-events-auto"
+						: "opacity-0 -translate-y-4 pointer-events-none"
 				}`}
+				aria-hidden={!isOpen}
 			>
-				<nav className="flex flex-col h-full px-6 py-8 overflow-y-auto">
-					{/* Mobile Navigation Links */}
-					<div className="flex flex-col justify-center items-center my-10 gap-6">
-						{navLinks.map((link, index) => (
+				<nav
+					className="flex flex-col h-full px-6 py-8 overflow-y-auto"
+					aria-label="Mobile navigation"
+				>
+					<div className="flex flex-col items-center gap-2 my-8">
+						{NAV_LINKS.map(({ href, label }, index) => (
 							<Link
-								key={link.href}
-								href={link.href}
-								onClick={toggleMenu}
-								className="text-2xl font-medium text-contrast hover:text-primary transition-colors"
+								key={href}
+								href={href}
+								onClick={(e) => handleAnchor(e, href, () => setIsOpen(false))}
+								className="w-full text-center py-3 text-xl font-medium text-contrast hover:text-primary transition-colors duration-200 border-b border-gray-100 last:border-0"
 								style={{
-									animation: isMenuOpen
-										? `slideIn 0.3s ease-out ${index * 0.05}s forwards`
-										: "none",
-									opacity: 0,
+									opacity: isOpen ? 1 : 0,
+									transform: isOpen ? "translateY(0)" : "translateY(-12px)",
+									transition: `opacity 0.25s ease ${index * 0.05}s, transform 0.25s ease ${index * 0.05}s`,
 								}}
 							>
-								{link.label}
+								{label}
 							</Link>
 						))}
 					</div>
 
-					{/* Mobile Auth Buttons */}
-					<div className="mt-auto flex flex-col gap-4 pb-8">
+					<div className="mt-auto flex flex-col gap-3 pb-8">
 						<Link
 							href="/login"
-							onClick={toggleMenu}
-							className="text-center py-3 text-lg font-medium text-gray-600 hover:text-primary transition-colors"
+							onClick={() => setIsOpen(false)}
+							className="text-center py-3 text-base font-medium text-gray-600 hover:text-primary transition-colors"
 						>
 							Sign in
 						</Link>
-
-						<Button
-							onClick={toggleMenu}
-							className="bg-accent hover:bg-secondary text-white py-6 text-lg"
-						>
-							Get Started
-						</Button>
+						<Link href="/signup" onClick={() => setIsOpen(false)}>
+							<Button className="w-full bg-accent hover:bg-secondary text-white py-6 text-lg cursor-pointer">
+								Get Started
+							</Button>
+						</Link>
 					</div>
 				</nav>
 			</div>
-
-			<style jsx>{`
-				@keyframes slideIn {
-					from {
-						opacity: 0;
-						transform: translateY(-20px);
-					}
-					to {
-						opacity: 1;
-						transform: translateY(0);
-					}
-				}
-			`}</style>
 		</header>
 	);
 }

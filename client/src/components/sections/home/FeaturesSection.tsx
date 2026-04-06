@@ -47,7 +47,7 @@ export default function FeaturesSection() {
 							return (
 								<div
 									key={feature.id}
-									className="group relative bg-gradient-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border-[1px] border-light-contrast/40 rounded-xl p-4 sm:p-5 md:p-6 hover:border-light-contrast/80 hover:from-primary/15 hover:to-contrast/25 transition-all duration-300"
+									className="group relative bg-linear-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border-[1px] border-light-contrast/40 rounded-xl p-4 sm:p-5 md:p-6 hover:border-light-contrast/80 hover:from-primary/15 hover:to-contrast/25 transition-all duration-300"
 								>
 									<div className="mb-3 sm:mb-4">
 										<div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-transparent border-2 border-light-contrast/30 flex items-center justify-center">

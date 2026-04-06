@@ -33,7 +33,7 @@ export default function PricingSection() {
 						{pricingSection.plans.map((plan) => (
 							<div
 								key={plan.id}
-								className={`relative flex flex-col py-10 px-7 sm:px-6 md:px-8 bg-gradient-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border-[1px] rounded-3xl transition-all duration-300 ${
+								className={`relative flex flex-col py-10 px-7 sm:px-6 md:px-8 bg-linear-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border-[1px] rounded-3xl transition-all duration-300 ${
 									plan.highlighted
 										? "border-accent shadow-md shadow-accent/20 scale-105"
 										: "border-light-contrast/40 hover:border-light-contrast/80"
@@ -98,7 +98,7 @@ export default function PricingSection() {
 										<div className="w-full border-t border-light-contrast/20" />
 									</div>
 									<div className="relative flex justify-center">
-										<span className="px-4 text-xs text-text/40 bg-gradient-to-br from-primary/10 to-contrast/20 uppercase tracking-wider">
+										<span className="px-4 text-xs text-text/40 bg-linear-to-br from-primary/10 to-contrast/20 uppercase tracking-wider">
 											{PRICING_FEATURES.dividerLabel}
 										</span>
 									</div>

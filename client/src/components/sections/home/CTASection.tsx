@@ -4,16 +4,16 @@ import Link from "next/link";
 
 const CTA_CONTENT = {
 	badge: "Let's go!",
-	title: "Ready to get started?",
+	title: "Stop guessing your security risks.",
 	description:
-		"Join hundreds of organizations securing their infrastructure with OctiSight.",
+		"Start knowing exactly what affects your business and how to fix it.",
 	buttons: {
 		primary: {
-			text: "Start Free Trial",
+			text: "Scan My Business Now",
 			href: "/signup",
 		},
 		secondary: {
-			text: "Schedule a Demo",
+			text: "Book a Demo",
 			href: "/demo",
 		},
 	},

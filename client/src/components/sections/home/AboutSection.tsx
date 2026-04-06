@@ -19,7 +19,10 @@ export default function AboutSection() {
 	};
 
 	return (
-		<section className="relative w-full sm:min-h-[calc(100vh-4rem)] sm:h-auto py-6 sm:py-8 md:py-10">
+		<section
+			id="about"
+			className="relative w-full sm:min-h-[calc(100vh-4rem)] sm:h-auto py-6 sm:py-8 md:py-10"
+		>
 			<div className="relative z-10 mx-auto max-w-7xl h-full px-4 sm:px-6 flex items-center">
 				<div className="flex flex-col items-center justify-center gap-2 w-full text-center py-4 sm:py-6 md:py-8">
 					<div className="inline-flex">

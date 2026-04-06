@@ -37,7 +37,7 @@ export default function FAQSection() {
 								return (
 									<div
 										key={faq.id}
-										className="relative bg-gradient-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border border-light-contrast/40 rounded-xl overflow-hidden hover:border-light-contrast/70 transition-colors duration-300"
+										className="relative bg-linear-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border border-light-contrast/40 rounded-xl overflow-hidden hover:border-light-contrast/70 transition-colors duration-300"
 									>
 										<button
 											type="button"

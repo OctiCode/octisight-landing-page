@@ -28,7 +28,7 @@ export default function WhySection() {
 							{whyOctiSightSection.cards.map((card) => (
 								<div
 									key={card.id}
-									className="group relative bg-gradient-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border-1 border-light-contrast/40 rounded-xl p-4 sm:p-5 hover:border-light-contrast/80 hover:from-primary/15 hover:to-contrast/25 transition-all duration-300"
+									className="group relative bg-linear-to-br from-primary/10 to-contrast/20 backdrop-blur-sm border border-light-contrast/40 rounded-xl p-4 sm:p-5 hover:border-light-contrast/80 hover:from-primary/15 hover:to-contrast/25 transition-all duration-300"
 								>
 									<h3 className="text-base sm:text-lg font-bold text-white mb-2 text-left uppercase tracking-wide">
 										{card.title}
