@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="client/public/images/logo/OctiSight_logo-02.svg" alt="OctiSight Logo" width="400"/>
+  <img src="public/images/logo/OctiSight_logo-02.svg" alt="OctiSight Logo" width="400"/>
 </div>
 
 # OctiSight Landing Page
