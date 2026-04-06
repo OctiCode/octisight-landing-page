@@ -18,18 +18,18 @@
  */
 export const heroSection = {
 	headerTitle: "Next-Generation Cybersecurity",
-	title: "Security, From Insight to Action",
+	title: "Security from insight to action",
 	paragraph:
-		"Modern vulnerability management powered by AI. Get complete visibility, contextual intelligence, and actionable remediation guidance—all in one platform.",
+		"OctiSight connects to your systems, analyzes thousands of vulnerabilities, and shows you only what truly matters with clear actions to fix them.",
 	buttons: {
 		primary: {
-			text: "Get Started Free →",
+			text: "Scan My Systems",
 			href: "/signup",
 			variant: "primary" as const,
 		},
 		secondary: {
-			text: "See how it works",
-			href: "/how-it-works",
+			text: "Book a Demo",
+			href: "/signup",
 			variant: "secondary" as const,
 		},
 	},
@@ -141,6 +141,117 @@ export const whyOctiSightSection = {
 			title: "Scale with Confidence",
 			paragraph:
 				"Whether you're a startup or an enterprise, OctiSight grows with you. One platform, unlimited potential.",
+		},
+	],
+} as const;
+
+/**
+ * ───────────────────────────────────────────────────────────────────────────
+ * OBJECTION HANDLING SECTION
+ * ───────────────────────────────────────────────────────────────────────────
+ * Q&A format addressing the most common concerns
+ */
+export const objectionHandlingSection = {
+	headerTitle: "Objection Handling",
+	title: "You don't need to be a cybersecurity expert",
+	items: [
+		{
+			id: "obj1",
+			question: "Is this complicated to set up?",
+			answerOpener: "No,",
+			answerRest: "you can connect your systems in minutes.",
+		},
+		{
+			id: "obj2",
+			question: "Do I need a security team?",
+			answerOpener: "No,",
+			answerRest: "OctiSight is designed for non-experts.",
+		},
+		{
+			id: "obj3",
+			question: "Will I get overwhelmed with alerts?",
+			answerOpener: "No,",
+			answerRest: "we filter and prioritize only what matters.",
+		},
+		{
+			id: "obj4",
+			question: "Is my data secure?",
+			answerOpener: "Yes,",
+			answerRest: "security and privacy are built into everything we do.",
+		},
+	],
+} as const;
+
+/**
+ * ───────────────────────────────────────────────────────────────────────────
+ * USE CASES SECTION
+ * ───────────────────────────────────────────────────────────────────────────
+ * Audience segments — who OctiSight is built for
+ */
+export const useCasesSection = {
+	headerTitle: "Use Cases",
+	title: "Built for modern businesses",
+	cases: [
+		{
+			id: "smb",
+			icon: "Building2",
+			audience: "SMBs & Founders",
+			description: "Stay secure without hiring a full security team.",
+		},
+		{
+			id: "it-managers",
+			icon: "Monitor",
+			audience: "IT Managers",
+			description: "Get clear visibility without wasting time on noise.",
+		},
+		{
+			id: "startups",
+			icon: "Rocket",
+			audience: "Startups & SaaS",
+			description: "Scale fast without compromising security.",
+		},
+		{
+			id: "agencies",
+			icon: "Users2",
+			audience: "Agencies & Service Providers",
+			description: "Protect your clients and your reputation.",
+		},
+	],
+} as const;
+
+/**
+ * ───────────────────────────────────────────────────────────────────────────
+ * BENEFITS SECTION
+ * ───────────────────────────────────────────────────────────────────────────
+ * Core business value props — why OctiSight matters for the customer
+ */
+export const benefitsSection = {
+	headerTitle: "Why OctiSight",
+	title: "Focus on growth, we handle the risk.",
+	blocks: [
+		{
+			id: "reduce-exposure",
+			icon: "ShieldCheck",
+			title: "Reduce your exposure",
+			description: "Identify and fix the vulnerabilities that actually matter.",
+		},
+		{
+			id: "save-time",
+			icon: "Clock",
+			title: "Save time",
+			description: "No more manual analysis or reading complex reports.",
+		},
+		{
+			id: "avoid-incidents",
+			icon: "Lock",
+			title: "Avoid costly incidents",
+			description: "Prevent breaches before they happen.",
+		},
+		{
+			id: "stay-focused",
+			icon: "Zap",
+			title: "Stay focused on your business",
+			description: "Security becomes simple, not a distraction.",
 		},
 	],
 } as const;
@@ -300,39 +411,19 @@ export const faqSection = {
 	faqs: [
 		{
 			id: "faq1",
-			question: "How long does it take to set up OctiSight?",
+			question: "What systems can I connect?",
 			answer:
-				"Most teams are up and running within 30 minutes. Our guided onboarding process walks you through connecting your first assets, and our support team is available to help if needed.",
+				"Modern applications, infrastructure, and environments (expand later)",
 		},
 		{
 			id: "faq2",
-			question: "Do you offer a free trial?",
-			answer:
-				"Yes! We offer a 14-day free trial with full access to all features. No credit card required to start, and you can cancel anytime during or after the trial period.",
+			question: "How fast does it work?",
+			answer: "You get insights within minutes of connection.",
 		},
 		{
 			id: "faq3",
-			question: "What integrations does OctiSight support?",
-			answer:
-				"OctiSight integrates with popular tools including Jira, Slack, GitHub, GitLab, AWS, Azure, GCP, and many more. Enterprise plans include custom integration support and full API access.",
-		},
-		{
-			id: "faq4",
-			question: "Is my data secure with OctiSight?",
-			answer:
-				"Absolutely. We use bank-level encryption (AES-256) for data at rest and TLS 1.3 for data in transit. We're SOC 2 Type II certified and compliant with GDPR, HIPAA, and ISO 27001 standards.",
-		},
-		{
-			id: "faq5",
-			question: "Can I upgrade or downgrade my plan?",
-			answer:
-				"Yes, you can change your plan at any time. Upgrades take effect immediately, and downgrades will be applied at the start of your next billing cycle. No penalties for changing plans.",
-		},
-		{
-			id: "faq6",
-			question: "What kind of support do you provide?",
-			answer:
-				"All plans include email support. Professional plans get priority support with faster response times. Enterprise customers receive dedicated support with a named account manager and 24/7 emergency support.",
+			question: "Is this suitable for non-technical users?",
+			answer: "Yes explanations adapt to your level.",
 		},
 	],
 } as const;
@@ -364,7 +455,7 @@ export const latestNewsSection = {
  * Content fetched dynamically from API
  */
 export const blogSection = {
-	headerTitle: "Blog",
+	headerTitle: "Blogs & News",
 	title: "Security insights and best practices",
 	paragraph:
 		"Expert articles on vulnerability management, security trends, and OctiSight features.",
@@ -391,34 +482,27 @@ export const footerSection = {
 		"Security, From Insight to Action. Modern cybersecurity that's human-first, intelligent, and built for teams of all sizes.",
 	navigation: {
 		product: {
-			title: "Product",
+			title: "Platform",
 			links: [
-				{
-					text: "Vulnerability Intelligence",
-					href: "/product/vulnerability-intelligence",
-				},
-				{ text: "Asset Visibility", href: "/product/asset-visibility" },
-				{ text: "AI Remediation", href: "/product/ai-remediation" },
-				{ text: "Smart Alerts", href: "/product/smart-alerts" },
-				{ text: "Reporting", href: "/product/reporting" },
+				{ text: "How It Works", href: "/how-it-works" },
+				{ text: "Pricing", href: "/#pricing" },
+				{ text: "Blog", href: "/blog" },
+				{ text: "News", href: "/news" },
 			],
 		},
 		company: {
 			title: "Company",
 			links: [
-				{ text: "About Us", href: "/about" },
-				{ text: "How It Works", href: "/how-it-works" },
-				{ text: "Security & Trust", href: "/security" },
-				{ text: "Pricing", href: "/pricing" },
+				{ text: "About Us", href: "/#about" },
+				{ text: "Contact", href: "/#contact" },
 			],
 		},
 		resources: {
-			title: "Resources",
+			title: "Get Started",
 			links: [
-				{ text: "Documentation", href: "/docs" },
-				{ text: "API Reference", href: "/api-reference" },
-				{ text: "Support", href: "/support" },
-				{ text: "Status", href: "/status" },
+				{ text: "Create Account", href: "/signup" },
+				{ text: "Book a Demo", href: "/demo" },
+				{ text: "Sign In", href: "/login" },
 			],
 		},
 	},
@@ -431,7 +515,7 @@ export const footerSection = {
 		{ name: "Twitter", href: "https://twitter.com/octisight", icon: "Twitter" },
 		{
 			name: "Instagram",
-			href: "https://instagram.com/octisight",
+			href: "https://instagram.com/octicode",
 			icon: "Instagram",
 		},
 		{
@@ -453,6 +537,7 @@ export const homeContent = {
 	about: aboutSection,
 	platformFeatures: platformFeaturesSection,
 	whyOctiSight: whyOctiSightSection,
+	benefits: benefitsSection,
 	pricing: pricingSection,
 	customerReviews: customerReviewsSection,
 	faq: faqSection,
@@ -472,6 +557,9 @@ export type HeroSection = typeof heroSection;
 export type AboutSection = typeof aboutSection;
 export type PlatformFeaturesSection = typeof platformFeaturesSection;
 export type WhyOctiSightSection = typeof whyOctiSightSection;
+export type BenefitsSection = typeof benefitsSection;
+export type UseCasesSection = typeof useCasesSection;
+export type ObjectionHandlingSection = typeof objectionHandlingSection;
 export type PricingSection = typeof pricingSection;
 export type CustomerReviewsSection = typeof customerReviewsSection;
 export type FAQSection = typeof faqSection;
