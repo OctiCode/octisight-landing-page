@@ -56,7 +56,7 @@ export default function WhySection() {
 								width={600}
 								height={600}
 								className="w-full max-w-sm sm:max-w-md lg:max-w-lg h-auto drop-shadow-2xl"
-								priority
+								sizes="(max-width: 640px) 100vw, (max-width: 1024px) 80vw, 512px"
 							/>
 						</div>
 					</div>

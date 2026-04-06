@@ -1,5 +1,3 @@
-"use client";
-
 import { Clock, Lock, ShieldCheck, Zap, type LucideIcon } from "lucide-react";
 import { benefitsSection } from "@/content/home";
 

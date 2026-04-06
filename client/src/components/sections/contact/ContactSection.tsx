@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 import ContactForm from "./ContactForm";

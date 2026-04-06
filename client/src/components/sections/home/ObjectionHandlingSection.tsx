@@ -1,5 +1,3 @@
-"use client";
-
 import { MessageCircleQuestion } from "lucide-react";
 import { objectionHandlingSection } from "@/content/home";
 

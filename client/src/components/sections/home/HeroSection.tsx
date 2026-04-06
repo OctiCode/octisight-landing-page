@@ -147,6 +147,7 @@ export default function HeroSection() {
 									width={500}
 									height={200}
 									className="w-full max-w-md h-auto drop-shadow-2xl animate-float"
+									sizes="(max-width: 1024px) 0px, 448px"
 									priority
 								/>
 							</div>
