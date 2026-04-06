@@ -8,7 +8,7 @@ import { BlogService } from "@/lib/services/blogService";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 
-export const revalidate = BlogService.REVALIDATE;
+export const revalidate = 300; // 5 minutes ISR
 
 type PageProps = { params: Promise<{ slug: string }> };
 

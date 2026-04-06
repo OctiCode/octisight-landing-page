@@ -7,7 +7,7 @@ import BackButton from "@/components/ui/BackButton";
 import { BlogService } from "@/lib/services/blogService";
 import type { Metadata } from "next";
 
-export const revalidate = BlogService.REVALIDATE;
+export const revalidate = 300; // 5 minutes ISR
 
 export const metadata: Metadata = {
 	title: "Blog | OctiSight",
