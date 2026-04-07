@@ -48,7 +48,7 @@ export const aboutSection = {
 	paragraph:
 		"We're on a mission to make cybersecurity accessible, understandable, and actionable for teams of all sizes and skill levels.",
 	video: {
-		path: "/assets/videos/octisight-video.mp4",
+		path: "/assets/videos/octisight-pitch.mp4",
 		poster: "/assets/images/video-poster.jpg", // Optional: Add poster image
 		alt: "OctiSight platform demonstration",
 	},
