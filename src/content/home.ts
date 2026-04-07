@@ -487,7 +487,6 @@ export const footerSection = {
 				{ text: "How It Works", href: "/how-it-works" },
 				{ text: "Pricing", href: "/#pricing" },
 				{ text: "Blog", href: "/blog" },
-				{ text: "News", href: "/news" },
 			],
 		},
 		company: {
@@ -508,19 +507,8 @@ export const footerSection = {
 	},
 	social: [
 		{
-			name: "Facebook",
-			href: "https://facebook.com/octisight",
-			icon: "Facebook",
-		},
-		{ name: "Twitter", href: "https://twitter.com/octisight", icon: "Twitter" },
-		{
-			name: "Instagram",
-			href: "https://instagram.com/octicode",
-			icon: "Instagram",
-		},
-		{
 			name: "LinkedIn",
-			href: "https://linkedin.com/company/octisight",
+			href: "https://www.linkedin.com/company/ostisight/about/?viewAsMember=true",
 			icon: "Linkedin",
 		},
 	],
