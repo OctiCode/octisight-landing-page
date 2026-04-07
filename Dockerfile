@@ -13,6 +13,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
+ENV WORDPRESS_GRAPHQL_URL=https://cms.octisight.io/graphql
 ENV NEXT_PUBLIC_EMAILJS_SERVICE_ID=service_nbeuqbs
 ENV NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=template_m970a2n
 ENV NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=BP3ZMGda5OHQG87i5
