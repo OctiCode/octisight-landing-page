@@ -1,4 +1,5 @@
-import Link from "next/link";
+"use client";
+
 import { Phone, ScanSearch, Sparkles } from "lucide-react";
 
 export default function EarlyAccessPricingSection() {
@@ -50,15 +51,14 @@ export default function EarlyAccessPricingSection() {
 							</p>
 						</div>
 
-						<Link href="/signup" className="relative">
-							<button
-								type="button"
-								className="w-full cursor-pointer flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-accent hover:bg-accent/80 shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all duration-300 text-sm sm:text-base"
-							>
-								<ScanSearch className="w-4 h-4 sm:w-5 sm:h-5" />
-								Join the Whitelist
-							</button>
-						</Link>
+						<button
+							type="button"
+							onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+							className="relative w-full cursor-pointer flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-accent hover:bg-accent/80 shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all duration-300 text-sm sm:text-base"
+						>
+							<ScanSearch className="w-4 h-4 sm:w-5 sm:h-5" />
+							Join the Whitelist
+						</button>
 					</div>
 
 					{/* Sales card */}
@@ -82,15 +82,14 @@ export default function EarlyAccessPricingSection() {
 							</p>
 						</div>
 
-						<Link href="/contact?inquiry=sales" className="relative">
-							<button
-								type="button"
-								className="w-full cursor-pointer flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-transparent border-2 border-light-contrast/40 hover:border-light-contrast/80 hover:bg-primary/10 transition-all duration-300 text-sm sm:text-base"
-							>
-								<Phone className="w-4 h-4 sm:w-5 sm:h-5" />
-								Talk to Sales
-							</button>
-						</Link>
+						<button
+							type="button"
+							onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+							className="relative w-full cursor-pointer flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-transparent border-2 border-light-contrast/40 hover:border-light-contrast/80 hover:bg-primary/10 transition-all duration-300 text-sm sm:text-base"
+						>
+							<Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+							Talk to Sales
+						</button>
 					</div>
 				</div>
 

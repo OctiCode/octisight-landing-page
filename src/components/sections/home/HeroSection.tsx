@@ -1,9 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { heroSection } from "@/content/home";
 import Image from "next/image";
-import Link from "next/link";
+import { heroSection } from "@/content/home";
 import { ScanSearch } from "lucide-react";
 import { useEffect, useRef } from "react";
 
@@ -118,18 +116,14 @@ export default function HeroSection() {
 						</p>
 
 						<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 sm:mt-4">
-							<Link href={heroSection.buttons.primary.href}>
-								<Button className="bg-accent hover:bg-light-contrast text-white px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-medium rounded-lg transition-all duration-300 shadow-sm shadow-accent/30 hover:shadow-accent/50 w-full sm:w-auto flex items-center gap-2">
-									{heroSection.buttons.primary.text}
-									<ScanSearch className="w-5 h-5" />
-								</Button>
-							</Link>
-
-							<Link href={heroSection.buttons.secondary.href}>
-								<Button className="bg-transparent hover:bg-text/10 text-text border-2 border-text/30 hover:border-text/50 px-6 sm:px-8 py-4 sm:py-6 text-base sm:text-lg font-medium rounded-lg transition-all duration-300 w-full sm:w-auto">
-									{heroSection.buttons.secondary.text}
-								</Button>
-							</Link>
+							<button
+								type="button"
+								onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+								className="cursor-pointer bg-accent hover:bg-light-contrast text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium rounded-lg transition-all duration-300 shadow-sm shadow-accent/30 hover:shadow-accent/50 w-full sm:w-auto flex items-center justify-center gap-2"
+							>
+								Book a Demo
+								<ScanSearch className="w-5 h-5" />
+							</button>
 						</div>
 						<p className="text-sm sm:text-base text-text/70 mt-2 sm:mt-4">
 							Built for SMBs. Powered by AI. No security team required.
@@ -140,14 +134,14 @@ export default function HeroSection() {
 						<div className="relative">
 							<div className="absolute inset-0 bg-light-contrast/20 blur-[80px] rounded-full scale-150" />
 
-							<div className="relative">
+							<div className="relative rounded-xl overflow-hidden shadow-2xl shadow-accent/20 border border-light-contrast/20">
 								<Image
-									src="/images/logo/OctiSight_logo-02.svg"
-									alt="OctiSight"
-									width={500}
-									height={200}
-									className="w-full max-w-md h-auto drop-shadow-2xl animate-float"
-									sizes="(max-width: 1024px) 0px, 448px"
+									src="/images/dashboard/screenshot-vulns.png"
+									alt="OctiSight vulnerability dashboard"
+									width={2028}
+									height={1208}
+									className="w-full max-w-xl h-auto"
+									sizes="(max-width: 1024px) 0px, 576px"
 									priority
 								/>
 							</div>

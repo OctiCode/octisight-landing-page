@@ -100,17 +100,11 @@ export default function Navbar() {
 
 				{/* Desktop actions */}
 				<div className="hidden md:flex items-center gap-4">
-					<Link
-						href="/login"
-						className="text-sm font-medium text-gray-600 hover:text-primary transition-colors duration-200"
-					>
-						Sign in
-					</Link>
-					<Link href="/signup">
+					<a href="https://app.octisight.io/auth/login">
 						<Button className="bg-accent hover:bg-secondary text-white cursor-pointer">
-							Get Started
+							Sign in
 						</Button>
-					</Link>
+					</a>
 				</div>
 
 				{/* Mobile toggle */}
@@ -157,18 +151,11 @@ export default function Navbar() {
 					</div>
 
 					<div className="mt-auto flex flex-col gap-3 pb-8">
-						<Link
-							href="/login"
-							onClick={() => setIsOpen(false)}
-							className="text-center py-3 text-base font-medium text-gray-600 hover:text-primary transition-colors"
-						>
-							Sign in
-						</Link>
-						<Link href="/signup" onClick={() => setIsOpen(false)}>
+						<a href="https://app.octisight.io/auth/login" onClick={() => setIsOpen(false)}>
 							<Button className="w-full bg-accent hover:bg-secondary text-white py-6 text-lg cursor-pointer">
-								Get Started
+								Sign in
 							</Button>
-						</Link>
+						</a>
 					</div>
 				</nav>
 			</div>

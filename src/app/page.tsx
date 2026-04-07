@@ -10,7 +10,6 @@ import MidCTASection from "@/components/sections/home/MidCTASection";
 import ObjectionHandlingSection from "@/components/sections/home/ObjectionHandlingSection";
 import ContactSection from "@/components/sections/contact/ContactSection";
 import EarlyAccessPricingSection from "@/components/sections/home/EarlyAccessPricingSection";
-import CTASection from "@/components/sections/home/CTASection";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import ReviewsSection from "@/components/sections/home/ReviewsSection";
@@ -36,7 +35,6 @@ export default function Home() {
 			<EarlyAccessPricingSection />
 			{/* <ReviewsSection /> */}
 			<FAQSection />
-			<CTASection />
 			<ContactSection />
 			<LatestBlogsSection />
 			<Footer />

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { ScanSearch } from "lucide-react";
 
 export default function MidCTASection() {
@@ -18,7 +17,7 @@ export default function MidCTASection() {
 						No setup complexity. No commitment.
 					</p>
 
-					<Link href="/signup">
+					<a href="https://app.octisight.io/auth/login">
 						<button
 							type="button"
 							className="cursor-pointer px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl font-semibold text-white bg-accent hover:bg-accent/80 shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all duration-300 text-sm sm:text-base"
@@ -26,7 +25,7 @@ export default function MidCTASection() {
 							Scan My Systems{" "}
 							<ScanSearch className="inline w-4 h-4 sm:w-5 sm:h-5 ml-1.5 -mt-0.5" />
 						</button>
-					</Link>
+					</a>
 				</div>
 			</div>
 		</section>
