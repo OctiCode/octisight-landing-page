@@ -55,15 +55,14 @@ a, button, [role="button"] {
 	animation-delay: 1s;
 }
 
-/* WordPress content — force images full width */
-.wp-content img {
+.blog-content img {
 	width: 100% !important;
 	height: auto !important;
 	max-width: 100% !important;
 	border-radius: 0.75rem;
 }
 
-.wp-content figure {
+.blog-content figure {
 	width: 100% !important;
 	max-width: 100% !important;
 	margin-left: 0;

@@ -1,5 +1,3 @@
-/* ─── App-level types (consumed by components) ─────────────────── */
-
 export type BlogListItem = {
 	id: string;
 	title: string;
@@ -18,37 +16,4 @@ export type BlogItem = BlogListItem & {
 		name: string;
 		avatar: string;
 	};
-};
-
-/* ─── WordPress GraphQL raw response shapes ────────────────────── */
-
-export type WPPostNode = {
-	id: string;
-	title: string;
-	slug: string;
-	date?: string;
-	excerpt?: string;
-	content?: string;
-	featuredImage: {
-		node: {
-			sourceUrl: string;
-		};
-	} | null;
-	categories: {
-		nodes: { name: string; slug: string }[];
-	};
-	author?: {
-		node: {
-			name: string;
-			avatar: { url: string } | null;
-		};
-	};
-};
-
-export type WPPostsResponse = {
-	posts: { nodes: WPPostNode[] };
-};
-
-export type WPPostBySlugResponse = {
-	post: WPPostNode | null;
 };

@@ -136,7 +136,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 					</div>
 
 					<div
-						className="wp-content prose prose-invert prose-lg max-w-none
+						className="blog-content prose prose-invert prose-lg max-w-none
 							prose-headings:font-bold prose-headings:text-white prose-headings:leading-tight
 							prose-h1:text-3xl prose-h1:sm:text-4xl prose-h1:mt-10 prose-h1:mb-6
 							prose-h2:text-2xl prose-h2:sm:text-3xl prose-h2:mt-10 prose-h2:mb-5
