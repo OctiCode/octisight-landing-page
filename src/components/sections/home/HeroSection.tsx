@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { heroSection } from "@/content/home";
-import { ScanSearch } from "lucide-react";
+import { Play, ScanSearch } from "lucide-react";
 import { useEffect, useRef } from "react";
+import HeroLiveStats from "./HeroLiveStats";
 
 const NETWORK_CONFIG = {
 	nodeCount: 50,
@@ -93,61 +95,88 @@ export default function HeroSection() {
 	}, []);
 
 	return (
-		<section className="relative w-full h-[calc(100vh-4rem)] overflow-hidden bg-linear-to-b from-background via-contrast to-background pb-0">
-			<canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+		<section className="relative w-full min-h-[calc(100vh-4rem)] overflow-hidden bg-linear-to-b from-background via-contrast to-background pt-8 sm:pt-10 lg:pt-14 pb-10 sm:pb-12 lg:pb-16">
+			<canvas
+				ref={canvasRef}
+				className="absolute inset-0 w-full h-full"
+				aria-hidden="true"
+			/>
 
-			<div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/50 to-black/0" />
+			<div className="absolute inset-0 bg-linear-to-b from-black/20 via-black/40 to-black/0" />
 
-			<div className="relative z-10 mx-auto max-w-7xl h-full px-4 sm:px-6 flex items-center">
-				<div className="grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 sm:gap-10 lg:gap-12 items-center w-full">
+			<div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 flex flex-col gap-8 sm:gap-10 lg:gap-12">
+				<div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 sm:gap-10 lg:gap-12 items-center">
+					{/* Left — copy */}
 					<div className="flex flex-col gap-4 sm:gap-5 md:gap-6 text-white">
-						{/* <div className="inline-flex">
-							<span className="px-4 py-2 rounded-full bg-primary/40 border border-light-contrast/30 text-light-contrast text-sm font-book backdrop-blur-sm">
-								{heroSection.headerTitle}
+						<div className="inline-flex">
+							<span className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-primary/40 border border-light-contrast/30 text-light-contrast text-[0.65rem] sm:text-xs font-bold tracking-[0.15em] uppercase backdrop-blur-sm">
+								{heroSection.eyebrow}
 							</span>
-						</div> */}
+						</div>
 
-						<h1 className="text-3xl my-2 sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
+						<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1]">
 							{heroSection.title}
 						</h1>
 
-						<p className="text-base sm:text-lg md:text-xl text-text/90 max-w-xl leading-relaxed">
+						<p className="text-base sm:text-lg md:text-xl text-text/85 max-w-xl leading-relaxed">
 							{heroSection.paragraph}
 						</p>
 
-						<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-2 sm:mt-4">
+						<div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-1 sm:mt-2">
+							<Link
+								href={heroSection.buttons.primary.href}
+								className="bg-accent hover:bg-light-contrast text-white px-6 sm:px-7 py-3 sm:py-3.5 text-base sm:text-lg font-medium rounded-lg transition-all duration-300 shadow-sm shadow-accent/30 hover:shadow-accent/50 w-full sm:w-auto flex items-center justify-center gap-2"
+							>
+								{heroSection.buttons.primary.text}
+								<ScanSearch className="w-5 h-5" />
+							</Link>
 							<button
 								type="button"
-								onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
-								className="cursor-pointer bg-accent hover:bg-light-contrast text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium rounded-lg transition-all duration-300 shadow-sm shadow-accent/30 hover:shadow-accent/50 w-full sm:w-auto flex items-center justify-center gap-2"
+								onClick={() =>
+									document
+										.getElementById(
+											heroSection.buttons.secondary.href.replace("#", ""),
+										)
+										?.scrollIntoView({ behavior: "smooth" })
+								}
+								className="cursor-pointer bg-white/5 hover:bg-white/10 text-white border border-light-contrast/30 hover:border-light-contrast/60 px-6 sm:px-7 py-3 sm:py-3.5 text-base sm:text-lg font-medium rounded-lg backdrop-blur-sm transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2"
 							>
-								Book a Demo
-								<ScanSearch className="w-5 h-5" />
+								{heroSection.buttons.secondary.text}
+								<Play className="w-4 h-4 fill-current" />
 							</button>
 						</div>
-						<p className="text-sm sm:text-base text-text/70 mt-2 sm:mt-4">
-							Built for SMBs. Powered by AI. No security team required.
+
+						<p className="flex items-center gap-2 text-sm text-text/65">
+							<span
+								className="inline-block h-1.5 w-1.5 rounded-full bg-success shrink-0"
+								aria-hidden="true"
+							/>
+							{heroSection.trustLine}
 						</p>
 					</div>
 
-					<div className="hidden lg:flex items-center justify-center">
-						<div className="relative">
+					{/* Right — dashboard screenshot */}
+					<div className="flex items-center justify-center mt-2 lg:mt-0">
+						<div className="relative w-full max-w-xl">
 							<div className="absolute inset-0 bg-light-contrast/20 blur-[80px] rounded-full scale-150" />
 
 							<div className="relative rounded-xl overflow-hidden shadow-2xl shadow-accent/20 border border-light-contrast/20">
 								<Image
-									src="/images/dashboard/screenshot-vulns.png"
-									alt="OctiSight vulnerability dashboard"
-									width={2028}
-									height={1208}
-									className="w-full max-w-xl h-auto"
-									sizes="(max-width: 1024px) 0px, 576px"
+									src={heroSection.dashboardImage.src}
+									alt={heroSection.dashboardImage.alt}
+									width={heroSection.dashboardImage.width}
+									height={heroSection.dashboardImage.height}
+									className="w-full h-auto"
+									sizes="(max-width: 640px) 92vw, (max-width: 1024px) 80vw, 576px"
 									priority
 								/>
 							</div>
 						</div>
 					</div>
 				</div>
+
+				{/* Live stats — full width below the grid */}
+				<HeroLiveStats />
 			</div>
 		</section>
 	);

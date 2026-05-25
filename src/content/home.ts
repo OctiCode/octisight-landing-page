@@ -17,21 +17,34 @@
  * Contains main value proposition and primary CTAs
  */
 export const heroSection = {
-	headerTitle: "Next-Generation Cybersecurity",
+	eyebrow: "Vulnerability management",
 	title: "Security from insight to action",
 	paragraph:
 		"OctiSight connects to your systems, analyzes thousands of vulnerabilities, and shows you only what truly matters with clear actions to fix them.",
+	trustLine: "No credit card. Connect a repo and get findings in 90s.",
 	buttons: {
 		primary: {
-			text: "Scan My Systems",
+			text: "Start free scan",
 			href: "/signup",
 			variant: "primary" as const,
 		},
 		secondary: {
-			text: "Book a Demo",
-			href: "/signup",
+			text: "See it in Action",
+			href: "#about",
 			variant: "secondary" as const,
 		},
+	},
+	dashboardImage: {
+		src: "/images/dashboard/screenshot-vulns.png",
+		alt: "OctiSight vulnerability dashboard",
+		width: 2028,
+		height: 1208,
+	},
+	stats: {
+		tracked: { label: "Vulnerabilities tracked", initial: 712418 },
+		exploited: { label: "Actively exploited", initial: 1234 },
+		critical: { label: "Critical findings", initial: 1234 },
+		lastSyncSeconds: 90,
 	},
 } as const;
 
