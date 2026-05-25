@@ -475,7 +475,7 @@ export const blogSection = {
  */
 export const footerSection = {
 	logo: {
-		src: "/images/logo/OctiSight_logo-02.svg",
+		src: "/images/logo/octisight-white-logo.png",
 		alt: "OctiSight",
 	},
 	tagline:

@@ -6,7 +6,7 @@ import HowItWorksSection from "@/components/sections/home/HowItWorksSection";
 import BenefitsSection from "@/components/sections/home/BenefitsSection";
 import UseCasesSection from "@/components/sections/home/UseCasesSection";
 import MidCTASection from "@/components/sections/home/MidCTASection";
-// import PricingSection from "@/components/sections/home/PricingSection";
+import PricingSection from "@/components/sections/home/PricingSection";
 import ObjectionHandlingSection from "@/components/sections/home/ObjectionHandlingSection";
 import ContactSection from "@/components/sections/contact/ContactSection";
 import EarlyAccessPricingSection from "@/components/sections/home/EarlyAccessPricingSection";
@@ -25,15 +25,15 @@ export default function Home() {
 			<HeroSection />
 			<AboutSection />
 			<HowItWorksSection />
-			{/* <FeaturesSection /> */}
-			{/* <WhySection /> */}
+			<FeaturesSection />
+			<WhySection />
 			<BenefitsSection />
 			<UseCasesSection />
 			<MidCTASection />
 			<ObjectionHandlingSection />
-			{/* <PricingSection /> */}
+			<PricingSection />
 			<EarlyAccessPricingSection />
-			{/* <ReviewsSection /> */}
+			<ReviewsSection />
 			<FAQSection />
 			<ContactSection />
 			<LatestBlogsSection />

@@ -55,6 +55,7 @@ export default function Navbar() {
 
 	// Close mobile menu on route change
 	useEffect(() => {
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setIsOpen(false);
 	}, [pathname]);
 
@@ -67,23 +68,24 @@ export default function Navbar() {
 	}, [isOpen]);
 
 	return (
-		<header className="w-full border-b bg-white sticky top-0 left-0 right-0 z-50">
+		<header className="w-full border-b border-primary/20 bg-background/70 backdrop-blur-md sticky top-0 left-0 right-0 z-50">
 			<div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
 				{/* Logo */}
 				<Link href="/" className="flex items-center z-50 shrink-0">
 					<Image
-						src="/images/logo/OctiSight_logo-01.svg"
+						src="/images/logo/octisight-white-logo.png"
 						alt="OctiSight"
-						width={140}
-						height={32}
-						className="h-8 w-auto"
-						sizes="140px"
+						width={200}
+						height={100}
+						className="h-16 w-auto"
+						sizes="200px"
+						priority
 					/>
 				</Link>
 
 				{/* Desktop nav */}
 				<nav
-					className="hidden md:flex items-center gap-6 text-sm font-book text-gray-600"
+					className="hidden md:flex items-center gap-6 text-sm font-book"
 					aria-label="Main navigation"
 				>
 					{NAV_LINKS.map(({ href, label }) => (
@@ -91,7 +93,7 @@ export default function Navbar() {
 							key={href}
 							href={href}
 							onClick={(e) => handleAnchor(e, href)}
-							className="text-contrast hover:text-primary transition-colors duration-200"
+							className="text-text/80 hover:text-light-contrast transition-colors duration-200"
 						>
 							{label}
 						</Link>
@@ -111,7 +113,7 @@ export default function Navbar() {
 				<button
 					type="button"
 					onClick={() => setIsOpen((v) => !v)}
-					className="md:hidden z-50 p-2 text-gray-600 hover:text-primary transition-colors"
+					className="md:hidden z-50 p-2 text-text/80 hover:text-light-contrast transition-colors"
 					aria-label={isOpen ? "Close menu" : "Open menu"}
 					aria-expanded={isOpen}
 				>
@@ -121,7 +123,7 @@ export default function Navbar() {
 
 			{/* Mobile menu */}
 			<div
-				className={`fixed inset-0 top-16 bg-white md:hidden transition-all duration-300 ease-in-out z-40 ${
+				className={`fixed inset-0 top-16 bg-background/95 backdrop-blur-md md:hidden transition-all duration-300 ease-in-out z-40 ${
 					isOpen
 						? "opacity-100 translate-y-0 pointer-events-auto"
 						: "opacity-0 -translate-y-4 pointer-events-none"
@@ -138,7 +140,7 @@ export default function Navbar() {
 								key={href}
 								href={href}
 								onClick={(e) => handleAnchor(e, href, () => setIsOpen(false))}
-								className="w-full text-center py-3 text-xl font-medium text-contrast hover:text-primary transition-colors duration-200 border-b border-gray-100 last:border-0"
+								className="w-full text-center py-3 text-xl font-medium text-text/80 hover:text-light-contrast transition-colors duration-200 border-b border-primary/15 last:border-0"
 								style={{
 									opacity: isOpen ? 1 : 0,
 									transform: isOpen ? "translateY(0)" : "translateY(-12px)",

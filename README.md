@@ -43,7 +43,7 @@ This landing page showcases the platform's features, pricing, and value proposit
 - **Custom Gotham Font** - Professional typography
 
 ### Tools & Development
-- **Biome** - Fast formatter and linter
+- **ESLint** - Linting with `eslint-config-next`
 - **Turbopack** - Next-generation bundler
 - **Git** - Version control
 
@@ -89,7 +89,7 @@ client/
 │       └── utils.ts        # Utility functions
 │
 ├── .gitignore
-├── biome.json              # Biome configuration
+├── eslint.config.mjs       # ESLint configuration
 ├── components.json         # shadcn/ui configuration
 ├── next.config.mjs         # Next.js configuration
 ├── package.json            # Dependencies & scripts
@@ -122,7 +122,7 @@ client/
 - 🚀 Server-side rendering (SSR) with Next.js
 - ⚡ Optimized performance with Turbopack
 - 🎯 Type-safe with TypeScript
-- 🧹 Clean code with Biome formatting
+- 🧹 Linted with ESLint
 - 📦 Component-based architecture
 - 🎨 Centralized content management
 
@@ -163,8 +163,7 @@ client/
 npm run dev          # Start development server
 npm run build        # Build for production
 npm start            # Start production server
-npm run lint         # Run Biome linter
-npm run format       # Format code with Biome
+npm run lint         # Run ESLint
 ```
 
 ---
@@ -216,7 +215,7 @@ npm start
 
 ### Standards
 - ✅ TypeScript strict mode
-- ✅ Biome formatting and linting
+- ✅ ESLint with `eslint-config-next`
 - ✅ Component-based architecture
 - ✅ Clean code principles
 - ✅ Semantic HTML

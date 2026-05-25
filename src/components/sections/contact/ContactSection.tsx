@@ -82,10 +82,10 @@ export default function ContactSection({
 						{/* Left — logo */}
 						<div className="hidden lg:flex items-center justify-center p-8 sm:p-10 md:p-12">
 							<Image
-								src="/images/logo/OctiSight_logo-02.svg"
+								src="/images/logo/octisight-white-logo.png"
 								alt="OctiSight — Security, from insight to action"
-								width={320}
-								height={100}
+								width={360}
+								height={120}
 								className="w-56 sm:w-64 md:w-72 h-auto"
 							/>
 						</div>
