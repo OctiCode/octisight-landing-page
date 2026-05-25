@@ -1,15 +1,6 @@
-import { CheckCircle2 } from "lucide-react";
-import StepMockupImage from "@/components/ui/custom/StepMockupImage";
+import StepImage from "@/components/ui/custom/StepImage";
 import { howItWorksContent } from "@/content/howItWorks";
 
-/**
- * Shared step-by-step rendering used by both:
- *  - /how-it-works page  (StepsSection)
- *  - Home page           (HowItWorksSection)
- *
- * Accepts an optional `firstStepPriority` flag so the home page can defer
- * all image loads (below the fold), while the dedicated page can preload step 1.
- */
 interface StepsListProps {
 	firstStepPriority?: boolean;
 }
@@ -39,7 +30,6 @@ export default function StepsList({
 									isEven ? "lg:flex-row-reverse" : "lg:flex-row"
 								} items-center gap-8 sm:gap-10 md:gap-12 lg:gap-16`}
 							>
-								{/* ─── Text ─── */}
 								<div className="flex-1 w-full">
 									<div className="flex items-center gap-3 mb-4 sm:mb-5">
 										<span
@@ -60,27 +50,12 @@ export default function StepsList({
 									<p className="text-sm sm:text-base md:text-lg text-text/80 leading-relaxed mb-5 sm:mb-6 max-w-lg">
 										{step.description}
 									</p>
-
-									<ul className="flex flex-col gap-2.5 sm:gap-3" role="list">
-										{step.bullets.map((bullet) => (
-											<li
-												key={bullet}
-												className="flex items-center gap-2.5 sm:gap-3"
-											>
-												<CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-accent shrink-0" />
-												<span className="text-sm sm:text-base text-text/80">
-													{bullet}
-												</span>
-											</li>
-										))}
-									</ul>
 								</div>
 
-								{/* ─── Mockup ─── */}
 								<div className="flex-1 w-full max-w-sm sm:max-w-md lg:max-w-none">
-									<StepMockupImage
-										src={step.mockupImage}
-										alt={step.mockupAlt}
+									<StepImage
+										src={step.image}
+										alt={step.imageAlt }
 										priority={index === 0 && firstStepPriority}
 									/>
 								</div>

@@ -60,6 +60,30 @@ a, button, [role="button"] {
 	animation-delay: 1s;
 }
 
+/* Scroll-cue: dot drops inside the mouse outline, fades, resets. */
+@keyframes scroll-dot {
+	0% {
+		transform: translate(-50%, 0);
+		opacity: 1;
+	}
+	55% {
+		transform: translate(-50%, 10px);
+		opacity: 0;
+	}
+	56% {
+		transform: translate(-50%, 0);
+		opacity: 0;
+	}
+	100% {
+		transform: translate(-50%, 0);
+		opacity: 1;
+	}
+}
+
+.animate-scroll-dot {
+	animation: scroll-dot 1.8s ease-in-out infinite;
+}
+
 .blog-content img {
 	width: 100% !important;
 	height: auto !important;

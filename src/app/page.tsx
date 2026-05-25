@@ -1,8 +1,8 @@
 import HeroSection from "@/components/sections/home/HeroSection";
-import AboutSection from "@/components/sections/home/AboutSection";
 import FeaturesSection from "@/components/sections/home/FeaturesSection";
 import WhySection from "@/components/sections/home/WhySection";
 import HowItWorksSection from "@/components/sections/home/HowItWorksSection";
+import ProblemSection from "@/components/sections/home/ProblemSection";
 import BenefitsSection from "@/components/sections/home/BenefitsSection";
 import UseCasesSection from "@/components/sections/home/UseCasesSection";
 import MidCTASection from "@/components/sections/home/MidCTASection";
@@ -23,8 +23,8 @@ export default function Home() {
 		<div className="bg-background">
 			<Navbar />
 			<HeroSection />
-			<AboutSection />
 			<HowItWorksSection />
+			<ProblemSection />
 			<FeaturesSection />
 			<WhySection />
 			<BenefitsSection />

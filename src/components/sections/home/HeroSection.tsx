@@ -95,7 +95,7 @@ export default function HeroSection() {
 	}, []);
 
 	return (
-		<section className="relative w-full min-h-[calc(100vh-4rem)] overflow-hidden bg-linear-to-b from-background via-contrast to-background pt-8 sm:pt-10 lg:pt-14 pb-10 sm:pb-12 lg:pb-16">
+		<section className="relative w-full min-h-[calc(100vh-4rem)] overflow-hidden bg-linear-to-b from-background via-contrast to-background pt-8 sm:pt-10 lg:pt-14 pb-0 sm:pb-12 lg:pb-16">
 			<canvas
 				ref={canvasRef}
 				className="absolute inset-0 w-full h-full"
@@ -177,6 +177,28 @@ export default function HeroSection() {
 
 				{/* Live stats — full width below the grid */}
 				<HeroLiveStats />
+
+				{/* Scroll cue */}
+				<button
+					type="button"
+					onClick={() =>
+						document
+							.getElementById("about")
+							?.scrollIntoView({ behavior: "smooth" })
+					}
+					aria-label="Scroll to next section"
+					className="group self-center mt-2 sm:mt-3 flex flex-col items-center gap-2 text-text/55 hover:text-text/90 transition-colors cursor-pointer"
+				>
+					<span
+						aria-hidden="true"
+						className="relative w-5 h-8 rounded-full border-2 border-current"
+					>
+						<span className="absolute left-1/2 top-1.5 w-0.5 h-1.5 bg-current rounded-full -translate-x-1/2 animate-scroll-dot" />
+					</span>
+					<span className="text-[0.6rem] sm:text-[0.65rem] uppercase tracking-[0.25em] font-medium">
+						Scroll
+					</span>
+				</button>
 			</div>
 		</section>
 	);

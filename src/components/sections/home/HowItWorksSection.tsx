@@ -1,13 +1,6 @@
-import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import { howItWorksContent } from "@/content/howItWorks";
 import StepsList from "@/components/sections/how-it-works/StepsList";
 
-/**
- * Home-page embed of the How It Works content.
- * Shares StepsList with the dedicated /how-it-works page — single source of truth.
- * Images are all lazy-loaded (below the fold on the home page).
- */
 export default function HowItWorksSection() {
 	const { hero } = howItWorksContent;
 
@@ -15,9 +8,8 @@ export default function HowItWorksSection() {
 		<section
 			id="how-it-works"
 			aria-labelledby="how-it-works-heading"
-			className="relative w-full py-10 sm:py-14 md:py-16 lg:py-20"
+			className="relative w-full"
 		>
-			{/* ─── Section header ─── */}
 			<div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 text-center">
 				<div className="inline-flex mb-4">
 					<span className="px-4 py-2 rounded-full bg-primary/40 border border-light-contrast/30 text-light-contrast text-sm font-book backdrop-blur-sm">
@@ -37,7 +29,6 @@ export default function HowItWorksSection() {
 				</p>
 			</div>
 
-			{/* ─── Steps (shared with /how-it-works page) ─── */}
 			<StepsList firstStepPriority={false} />
 		</section>
 	);

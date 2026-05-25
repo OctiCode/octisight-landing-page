@@ -35,7 +35,7 @@ export const heroSection = {
 		},
 	},
 	dashboardImage: {
-		src: "/images/dashboard/screenshot-vulns.png",
+		src: "/images/why-octisight/kanban-screen-octisight.png",
 		alt: "OctiSight vulnerability dashboard",
 		width: 2028,
 		height: 1208,
@@ -45,6 +45,61 @@ export const heroSection = {
 		exploited: { label: "Actively exploited", initial: 1234 },
 		critical: { label: "Critical findings", initial: 1234 },
 		lastSyncSeconds: 90,
+	},
+} as const;
+
+/**
+ * ───────────────────────────────────────────────────────────────────────────
+ * PROBLEM SECTION
+ * ───────────────────────────────────────────────────────────────────────────
+ * Articulates the pain point — CVE volume growth vs. team capacity.
+ * CVE counts sourced from NVD public statistics.
+ */
+export const problemSection = {
+	eyebrow: "The problem",
+	title: {
+		line1: "The vulnerability landscape",
+		line2: "doubled in 5 years.",
+		line3: "Your team isn't growing that fast.",
+	},
+	description:
+		"Every year brings ~30,000 new CVEs. The tools that worked when you had 10 dependencies don't scale to 10,000. OctiSight is built for teams that can't hire a security engineer to keep up.",
+	chart: {
+		title: "CVEs published per year",
+		source: "Source: NVD (National Vulnerability Database)",
+		data: [
+			{ year: 2010, cves: 4653 },
+			{ year: 2011, cves: 4154 },
+			{ year: 2012, cves: 5297 },
+			{ year: 2013, cves: 5191 },
+			{ year: 2014, cves: 7946 },
+			{ year: 2015, cves: 6488 },
+			{ year: 2016, cves: 6447 },
+			{ year: 2017, cves: 14645 },
+			{ year: 2018, cves: 16556 },
+			{ year: 2019, cves: 17308 },
+			{ year: 2020, cves: 18325 },
+			{ year: 2021, cves: 20171 },
+			{ year: 2022, cves: 25084 },
+			{ year: 2023, cves: 28902 },
+			{ year: 2024, cves: 40290 },
+			{ year: 2025, cves: 42150 },
+		],
+	},
+	stats: [
+		{ value: "~30,000", label: "new CVEs published every year" },
+		{
+			value: "<7 days",
+			label: "average time-to-exploit for new critical findings",
+		},
+		{
+			value: "<1%",
+			label: "of CVEs are actually exploited in the wild — where OctiSight focuses",
+		},
+	],
+	cta: {
+		text: "Start free scan",
+		href: "/signup",
 	},
 } as const;
 

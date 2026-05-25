@@ -1,89 +1,57 @@
-/**
- * ═══════════════════════════════════════════════════════════════════════════
- * HOW IT WORKS PAGE — CONTENT CONFIGURATION
- * ═══════════════════════════════════════════════════════════════════════════
- *
- * All content for the /how-it-works page.
- * Each step maps to a full-width section with a visual mockup.
- *
- * ═══════════════════════════════════════════════════════════════════════════
- */
-
 export const howItWorksContent = {
 	hero: {
-		badge: "How It Works",
-		title: "See OctiSight Into Action",
+		badge: "WHY OCTISIGHT",
+		title: "Less noise. More fixed.",
 		description:
-			"From connecting your systems to continuous protection — discover how OctiSight keeps your business secure in four simple steps.",
+			"OctiSight cuts through the CVE flood with AI-prioritized findings,\n" +
+			"remediation steps written for your code and a kanban view your\n" +
+			"team will actually use. Here's what each piece looks like.",
 	},
 
 	steps: [
 		{
-			id: "connect",
+			id: "kanban",
 			number: "01",
-			badge: "Connect your systems",
-			title: "See exactly which vulnerabilities affect your systems",
+			badge: "TRIAGE",
+			title: "Findings flow like work, not like reports.",
 			description:
-				"No more generic alerts. OctiSight maps vulnerabilities directly to your applications, so you instantly know what impacts your business.",
-			bullets: [
-				"Real-time vulnerability mapping",
-				"Linked to your actual stack",
-				"No irrelevant noise",
-			],
-			mockupImage: "/images/mockups/vulnerabilities-mockup.jpg",
-			mockupAlt:
-				"OctiSight system connection dashboard showing connected integrations and discovered assets",
+				"OctiSight turns vulnerabilities into actionable kanban cards your team can triage, assign, review and close. No PDF dumps, no inbox-zero rituals.",
+			image: "/images/why-octisight/kanban-screen-octisight.png",
+			imageAlt:
+				"OctiSight kanban board showing vulnerability cards organized by status, severity and project.",
 		},
 		{
-			id: "prioritize",
+			id: "remediation",
 			number: "02",
-			badge: "Smart Prioritization",
-			title: "Focus only on what matters",
+			badge: "REMEDIATION",
+			title: "Every finding comes with a fix.",
 			description:
-				"Thousands of vulnerabilities exist but only a few truly matter. OctiSight highlights the most critical risks based on real impact.",
-			bullets: [
-				"Risk-based prioritization",
-				"Business impact scoring",
-				"Critical issues surfaced instantly",
-			],
-			mockupImage: "/images/mockups/alert.jpg",
-			mockupAlt:
-				"OctiSight alerts dashboard showing prioritized vulnerabilities with business impact scores and risk levels",
+				"Get step-by-step remediation guidance for every finding, adapted to your team’s technical level. The same vulnerability, explained for the right reader.",
+			image: "/images/why-octisight/remediation-screen-octisight.png",
+			imageAlt:
+				"OctiSight remediation panel showing AI-generated fix instructions for a security vulnerability.",
 		},
 		{
-			id: "remediate",
+			id: "coverage",
 			number: "03",
-			badge: "AI Remediation",
-			title: "Get clear, actionable steps to fix issues",
+			badge: "COVERAGE",
+			title: "500,000+ vulnerabilities. Multiple sources. One view.",
 			description:
-				"No more guessing. OctiSight gives you precise actions to resolve vulnerabilities quickly and efficiently.",
-			bullets: [
-				"Step-by-step remediation",
-				"Practical, actionable guidance",
-				"No complex documentation needed",
-			],
-			mockupImage: "/images/mockups/remediation.jpg",
-			mockupAlt:
-				"OctiSight AI remediation interface showing step-by-step fix instructions for a vulnerability",
+				"Search the full vulnerability catalog OctiSight tracks, cross-referenced with CISA KEV, FIRST.org EPSS and trusted threat intelligence signals.",
+			image: "/images/why-octisight/global-catalog-screen-octisight.png",
+			imageAlt:
+				"OctiSight global vulnerability catalog showing searchable CVEs with severity, CVSS score and publication date.",
 		},
 		{
-			id: "monitor",
+			id: "setup",
 			number: "04",
-			badge: "Continuous Monitoring",
-			title: "Stay protected continuously",
+			badge: "SETUP",
+			title: "Connect your code repositories in minutes.",
 			description:
-				"Your environment evolves, and so do threats. OctiSight keeps monitoring and alerts you only when it matters.",
-			bullets: [
-				"Real-time updates",
-				"Smart alerts (no spam)",
-				"Continuous protection",
-			],
-			mockupImage: "/images/mockups/secondalerts.jpg",
-			mockupAlt:
-				"OctiSight continuous monitoring dashboard with real-time alerts and system health status",
+				"Connect GitHub, GitLab or Bitbucket, choose the repositories you want to monitor, and let OctiSight keep your security findings up to date.",
+			image: "/images/why-octisight/integration-screen-octisight.png",
+			imageAlt:
+				"OctiSight integrations screen showing GitHub, GitLab and Bitbucket source code provider connections.",
 		},
 	],
 } as const;
-
-export type HowItWorksContent = typeof howItWorksContent;
-export type HowItWorksStep = (typeof howItWorksContent.steps)[number];
