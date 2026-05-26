@@ -1,70 +1,83 @@
 "use client";
 
-import {
-	Area,
-	AreaChart,
-	CartesianGrid,
-	type DotItemDotProps,
-	XAxis,
-	YAxis,
-} from "recharts";
+import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
 import {
 	type ChartConfig,
 	ChartContainer,
 	ChartTooltip,
-	ChartTooltipContent,
 } from "@/components/ui/chart";
 import { problemSection } from "@/content/home";
+import { useLandingStats } from "@/components/providers/LandingStatsProvider";
+import { useTimeAgo } from "@/hooks/useTimeAgo";
+import {
+	formatApproxThousands,
+	formatCount,
+	formatDays,
+	formatPercentExploited,
+} from "@/lib/landing-stats";
+
+const ACCENT = "#c530db";
 
 const chartConfig = {
-	cves: {
-		label: "CVEs published",
-		color: "#c530db",
-	},
+	count: { label: "CVEs published", color: ACCENT },
 } satisfies ChartConfig;
 
-const lastDataIndex = problemSection.chart.data.length - 1;
-
-function LiveDot(props: DotItemDotProps) {
-	const { cx, cy, index } = props;
-	if (cx == null || cy == null) return <g aria-hidden="true" />;
-	if (index !== lastDataIndex) return <g aria-hidden="true" />;
-
-	return (
-		<g>
-			{/* Pulsing halo */}
-			<circle cx={cx} cy={cy} r={6} fill="#c530db" opacity={0.4}>
-				<animate
-					attributeName="r"
-					values="6;16;6"
-					dur="1.8s"
-					repeatCount="indefinite"
-				/>
-				<animate
-					attributeName="opacity"
-					values="0.55;0;0.55"
-					dur="1.8s"
-					repeatCount="indefinite"
-				/>
-			</circle>
-			{/* Solid core */}
-			<circle
-				cx={cx}
-				cy={cy}
-				r={4.5}
-				fill="#c530db"
-				stroke="#ffffff"
-				strokeWidth={2}
-			/>
-		</g>
-	);
-}
+type ChartRow = {
+	year: number;
+	displayCount: number;
+	/** Solid line — null at the partial current year so it doesn't dip. */
+	count: number | null;
+	/** Dashed line — only the last (full→partial) segment. */
+	partial: number | null;
+};
 
 export default function ProblemSection() {
 	const { eyebrow, title, description, chart, stats } = problemSection;
-	const data = chart.data;
-	const latestYear = data[lastDataIndex].year;
-	const latestCount = data[lastDataIndex].cves;
+	const { stats: live, lastUpdatedAt } = useLandingStats();
+	const problem = live?.problem;
+	const updatedAgo = useTimeAgo(lastUpdatedAt);
+
+	const currentYear = new Date().getFullYear();
+
+	// Live trajectory (key: count) or static fallback (key: cves → count).
+	const points: { year: number; count: number }[] =
+		problem?.yearlyTrajectory ??
+		chart.data.map((d) => ({ year: d.year, count: d.cves }));
+
+	const lastIndex = points.length - 1;
+	const isPartialLast =
+		points.length > 0 && points[lastIndex].year === currentYear;
+
+	// Split into solid (full years) + dashed (final partial segment) so a low
+	// year-to-date number reads as "in progress", never as a decline.
+	const chartData: ChartRow[] = points.map((p, i) => {
+		if (!isPartialLast) {
+			return { year: p.year, displayCount: p.count, count: p.count, partial: null };
+		}
+		const isLast = i === lastIndex;
+		const isPrev = i === lastIndex - 1;
+		return {
+			year: p.year,
+			displayCount: p.count,
+			count: isLast ? null : p.count,
+			partial: isLast || isPrev ? p.count : null,
+		};
+	});
+
+	// Stat-card values (live, else static strings).
+	const statValues = problem
+		? [
+				formatApproxThousands(problem.averageCvesPerYear),
+				formatDays(problem.averageTimeToExploitDays),
+				formatPercentExploited(problem.percentActivelyExploited),
+			]
+		: stats.map((s) => s.value);
+
+	const totalVulns =
+		problem?.totalVulns ?? points.reduce((sum, p) => sum + p.count, 0);
+	const caption = problem
+		? `${formatCount(totalVulns)} vulnerabilities tracked · ${formatApproxThousands(problem.averageCvesPerYear)} new every year`
+		: `${formatCount(totalVulns)} vulnerabilities tracked`;
 
 	return (
 		<section
@@ -118,7 +131,7 @@ export default function ProblemSection() {
 								Live
 							</span>
 							<span className="text-[0.65rem] sm:text-xs text-text/45">
-								· {latestYear}: {latestCount.toLocaleString("en-US")}
+								· Updated {updatedAgo}
 							</span>
 						</div>
 					</div>
@@ -129,21 +142,13 @@ export default function ProblemSection() {
 						className="aspect-[16/7] sm:aspect-[16/6] md:aspect-[16/5] w-full"
 					>
 						<AreaChart
-							data={data}
+							data={chartData}
 							margin={{ top: 12, right: 12, left: 0, bottom: 4 }}
 						>
 							<defs>
-								<linearGradient id="fillCves" x1="0" y1="0" x2="0" y2="1">
-									<stop
-										offset="5%"
-										stopColor="var(--color-cves)"
-										stopOpacity={0.7}
-									/>
-									<stop
-										offset="95%"
-										stopColor="var(--color-cves)"
-										stopOpacity={0.05}
-									/>
+								<linearGradient id="fillTrend" x1="0" y1="0" x2="0" y2="1">
+									<stop offset="5%" stopColor={ACCENT} stopOpacity={0.7} />
+									<stop offset="95%" stopColor={ACCENT} stopOpacity={0.05} />
 								</linearGradient>
 							</defs>
 							<CartesianGrid
@@ -171,58 +176,119 @@ export default function ProblemSection() {
 							/>
 							<ChartTooltip
 								cursor={{ stroke: "rgba(224,113,245,0.4)", strokeWidth: 1 }}
-								content={
-									<ChartTooltipContent
-										indicator="line"
-										labelFormatter={(label) => `Year ${label}`}
-										formatter={(value) => [
-											`${Number(value).toLocaleString("en-US")} CVEs`,
-											"",
-										]}
-									/>
-								}
+								content={({ active, payload }) => {
+									if (!active || !payload?.length) return null;
+									const row = payload[0]?.payload as ChartRow | undefined;
+									if (!row) return null;
+									const ytd = isPartialLast && row.year === currentYear;
+									return (
+										<div className="rounded-lg border border-light-contrast/20 bg-background/95 backdrop-blur-md px-3 py-2 shadow-lg shadow-black/30">
+											<p className="text-[0.7rem] text-text/55">
+												{row.year}
+												{ytd ? " · year to date" : ""}
+											</p>
+											<p className="text-sm font-bold text-white tabular-nums">
+												{formatCount(row.displayCount)} CVEs
+											</p>
+										</div>
+									);
+								}}
 							/>
+							{/* Solid — full years */}
 							<Area
-								dataKey="cves"
+								dataKey="count"
 								type="monotone"
-								fill="url(#fillCves)"
-								stroke="var(--color-cves)"
+								fill="url(#fillTrend)"
+								stroke={ACCENT}
 								strokeWidth={2.5}
 								dot={false}
-								activeDot={{
-									r: 5,
-									fill: "var(--color-cves)",
-									stroke: "#ffffff",
-									strokeWidth: 2,
-								}}
+								connectNulls={false}
 								isAnimationActive
 								animationDuration={1400}
 								animationEasing="ease-out"
 							/>
-							{/* Overlay the pulsing latest dot via a second invisible series */}
+							{/* Dashed — partial current-year segment */}
 							<Area
-								dataKey="cves"
+								dataKey="partial"
+								type="monotone"
+								fill="transparent"
+								stroke={ACCENT}
+								strokeWidth={2.5}
+								strokeDasharray="5 4"
+								dot={false}
+								connectNulls
+								isAnimationActive={false}
+							/>
+							{/* Invisible overlay carrying the pulsing "live" dot on the last point */}
+							<Area
+								dataKey="displayCount"
 								type="monotone"
 								fill="transparent"
 								stroke="transparent"
-								dot={LiveDot}
-								activeDot={false}
 								isAnimationActive={false}
 								legendType="none"
+								dot={(props) => {
+									const { cx, cy, index, key } = props as {
+										cx?: number;
+										cy?: number;
+										index?: number;
+										key?: string;
+									};
+									if (cx == null || cy == null || index !== lastIndex) {
+										return <g key={key} aria-hidden="true" />;
+									}
+									return (
+										<g key={key}>
+											<circle cx={cx} cy={cy} r={6} fill={ACCENT} opacity={0.4}>
+												<animate
+													attributeName="r"
+													values="6;16;6"
+													dur="1.8s"
+													repeatCount="indefinite"
+												/>
+												<animate
+													attributeName="opacity"
+													values="0.55;0;0.55"
+													dur="1.8s"
+													repeatCount="indefinite"
+												/>
+											</circle>
+											<circle
+												cx={cx}
+												cy={cy}
+												r={4.5}
+												fill={ACCENT}
+												stroke="#ffffff"
+												strokeWidth={2}
+											/>
+										</g>
+									);
+								}}
 							/>
 						</AreaChart>
 					</ChartContainer>
+
+					{/* Caption */}
+					<p className="mt-4 text-center text-xs sm:text-sm text-text/55">
+						{caption}
+						{isPartialLast ? (
+							<span className="text-text/40">
+								{" "}
+								· {currentYear} year to date
+							</span>
+						) : null}
+					</p>
 				</div>
 
 				{/* Stats */}
 				<div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-3.5">
-					{stats.map((stat) => (
+					{stats.map((stat, i) => (
 						<div
 							key={stat.label}
 							className="rounded-lg border border-white/8 bg-white/[0.03] px-4 py-3 sm:px-4 sm:py-3.5"
 						>
 							<div className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-none mb-1 sm:mb-1.5 tabular-nums">
-								{stat.value}
+								{statValues[i]}
 							</div>
 							<div className="text-xs sm:text-[0.8rem] text-text/60 leading-snug">
 								{stat.label}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
 	Activity,
 	Bug,
@@ -9,106 +9,79 @@ import {
 	TriangleAlert,
 } from "lucide-react";
 import { heroSection } from "@/content/home";
+import { useLandingStats } from "@/components/providers/LandingStatsProvider";
+import { useTimeAgo } from "@/hooks/useTimeAgo";
 
 type StatKey = "tracked" | "exploited" | "critical";
 
 const COUNTUP_MS = 1400;
-const TICK_MIN_MS = 6000;
-const TICK_MAX_MS = 11000;
-const FLASH_MS = 900;
+const FLASH_MS = 1000;
 
+/**
+ * Starts AT the target (so SSR renders the real number — no 0→animate jank and
+ * no hydration mismatch), then animates old→new whenever the polled value
+ * changes. The live delta animation is the meaningful signal, not a one-off
+ * count-from-zero.
+ */
 function useCountUp(target: number, durationMs = COUNTUP_MS) {
-	const [value, setValue] = useState(0);
+	const [value, setValue] = useState(target);
+	const fromRef = useRef(target);
 
 	useEffect(() => {
-		const start = performance.now();
-		const startValue = value;
-		const delta = target - startValue;
-		let raf = 0;
+		const from = fromRef.current;
+		fromRef.current = target;
+		if (from === target) return;
 
+		const start = performance.now();
+		let raf = 0;
 		const tick = (now: number) => {
 			const t = Math.min((now - start) / durationMs, 1);
 			const eased = 1 - (1 - t) ** 3;
-			setValue(Math.round(startValue + delta * eased));
+			setValue(Math.round(from + (target - from) * eased));
 			if (t < 1) raf = requestAnimationFrame(tick);
 		};
-
 		raf = requestAnimationFrame(tick);
 		return () => cancelAnimationFrame(raf);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [target, durationMs]);
 
 	return value;
 }
 
-function formatRelative(seconds: number) {
-	if (seconds < 60) return `${seconds}s ago`;
-	if (seconds < 3600) return `${Math.floor(seconds / 60)} min ago`;
-	return `${Math.floor(seconds / 3600)}h ago`;
-}
-
 export default function HeroLiveStats() {
-	const { tracked, exploited, critical, lastSyncSeconds } = heroSection.stats;
+	const { stats, lastUpdatedAt } = useLandingStats();
+	const hero = stats?.hero;
+	const fallback = heroSection.stats;
 
-	const [trackedTarget, setTrackedTarget] = useState<number>(tracked.initial);
-	const [exploitedTarget, setExploitedTarget] = useState<number>(
-		exploited.initial,
-	);
-	const [criticalTarget, setCriticalTarget] = useState<number>(
-		critical.initial,
-	);
-	const [syncSec, setSyncSec] = useState<number>(lastSyncSeconds);
+	// Live values with static fallbacks (section must never look broken).
+	const tracked = hero?.vulnerabilitiesTracked ?? fallback.tracked.initial;
+	const exploited = hero?.activelyExploited ?? fallback.exploited.initial;
+	const critical = hero?.criticalFindings ?? fallback.critical.initial;
+
+	const trackedValue = useCountUp(tracked);
+	const exploitedValue = useCountUp(exploited);
+	const criticalValue = useCountUp(critical);
+
+	const updatedAgo = useTimeAgo(lastUpdatedAt);
+	const lastSyncAgo = useTimeAgo(hero?.lastSyncAt ?? null);
+
+	// Flash the card whose value just ticked up after a poll.
 	const [flash, setFlash] = useState<StatKey | null>(null);
-
-	const trackedValue = useCountUp(trackedTarget);
-	const exploitedValue = useCountUp(exploitedTarget);
-	const criticalValue = useCountUp(criticalTarget);
-
-	// Tick the "last sync" counter every second
+	const prev = useRef({ tracked, exploited, critical });
 	useEffect(() => {
-		const id = window.setInterval(() => setSyncSec((s) => s + 1), 1000);
-		return () => window.clearInterval(id);
-	}, []);
-
-	// Periodically bump a stat to simulate live updates from an API
-	useEffect(() => {
-		let timeoutId = 0;
-		let flashTimeoutId = 0;
-
-		const scheduleNext = () => {
-			const wait = TICK_MIN_MS + Math.random() * (TICK_MAX_MS - TICK_MIN_MS);
-			timeoutId = window.setTimeout(() => {
-				const pick = Math.random();
-				let key: StatKey;
-				if (pick < 0.7) {
-					key = "tracked";
-					setTrackedTarget((v) => v + Math.floor(Math.random() * 4) + 1);
-				} else if (pick < 0.88) {
-					key = "exploited";
-					setExploitedTarget((v) => v + 1);
-				} else {
-					key = "critical";
-					setCriticalTarget((v) => v + 1);
-				}
-				setFlash(key);
-				setSyncSec(0);
-				flashTimeoutId = window.setTimeout(() => setFlash(null), FLASH_MS);
-				scheduleNext();
-			}, wait);
-		};
-
-		scheduleNext();
-		return () => {
-			window.clearTimeout(timeoutId);
-			window.clearTimeout(flashTimeoutId);
-		};
-	}, []);
-
-	const lastSyncText = syncSec < 120 ? "<2 min ago" : formatRelative(syncSec);
+		let key: StatKey | null = null;
+		if (tracked > prev.current.tracked) key = "tracked";
+		else if (exploited > prev.current.exploited) key = "exploited";
+		else if (critical > prev.current.critical) key = "critical";
+		prev.current = { tracked, exploited, critical };
+		if (!key) return;
+		setFlash(key);
+		const id = window.setTimeout(() => setFlash(null), FLASH_MS);
+		return () => window.clearTimeout(id);
+	}, [tracked, exploited, critical]);
 
 	return (
 		<div className="relative rounded-xl border border-light-contrast/15 bg-background/55 backdrop-blur-md px-3 py-2.5 sm:px-4 sm:py-3 shadow-lg shadow-primary/10">
-			{/* Header — compact, single row */}
+			{/* Header — LIVE + updated-ago ticker */}
 			<div className="flex items-center gap-2 mb-2.5 sm:mb-3">
 				<span className="relative flex h-2 w-2 shrink-0">
 					<span className="absolute inline-flex h-full w-full rounded-full bg-success opacity-75 animate-ping" />
@@ -118,7 +91,7 @@ export default function HeroLiveStats() {
 					Live
 				</span>
 				<span className="text-[0.65rem] sm:text-xs text-text/40 truncate">
-					· Security telemetry
+					· Updated {updatedAgo}
 				</span>
 			</div>
 
@@ -126,29 +99,25 @@ export default function HeroLiveStats() {
 			<div className="grid grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5">
 				<StatCard
 					icon={Bug}
-					label={tracked.label}
+					label={fallback.tracked.label}
 					value={trackedValue}
 					flash={flash === "tracked"}
 				/>
 				<StatCard
 					icon={Activity}
-					label={exploited.label}
+					label={fallback.exploited.label}
 					value={exploitedValue}
 					flash={flash === "exploited"}
 					accent="warn"
 				/>
 				<StatCard
 					icon={TriangleAlert}
-					label={critical.label}
+					label={fallback.critical.label}
 					value={criticalValue}
 					flash={flash === "critical"}
 					accent="danger"
 				/>
-				<StatCard
-					icon={Clock}
-					label="Last sync"
-					textValue={lastSyncText}
-				/>
+				<StatCard icon={Clock} label="Last sync" textValue={lastSyncAgo} />
 			</div>
 		</div>
 	);

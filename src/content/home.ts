@@ -41,7 +41,7 @@ export const problemSection = {
 		"Every year brings ~30,000 new CVEs. The tools that worked when you had 10 dependencies don't scale to 10,000. OctiSight is built for teams that can't hire a security engineer to keep up.",
 	chart: {
 		title: "CVEs published per year",
-		source: "Source: NVD (National Vulnerability Database)",
+		source: "Source: Multiple official sources and dark web intelligence.",
 		data: [
 			{ year: 2010, cves: 4653 },
 			{ year: 2011, cves: 4154 },

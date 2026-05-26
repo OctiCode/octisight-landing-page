@@ -7,21 +7,28 @@ import GetStartedSection from "@/components/sections/home/GetStartedSection";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import FAQSection from "@/components/sections/home/FAQSection";
+import { LandingStatsProvider } from "@/components/providers/LandingStatsProvider";
+import { fetchLandingStats } from "@/lib/landing-stats";
 
-export const revalidate = 300;
+export const revalidate = 60;
 
-export default function Home() {
+export default async function Home() {
+	// SSR first paint with real numbers; the client poll takes over for "live".
+	const initialStats = await fetchLandingStats();
+
 	return (
 		<div className="bg-background">
 			<Navbar />
-			<HeroSection />
-			<HowItWorksSection />
-			<ProblemSection />
-			<GetStartedSection />
+			<LandingStatsProvider initialStats={initialStats}>
+				<HeroSection />
+				<HowItWorksSection />
+				<ProblemSection />
+				<GetStartedSection />
 
-			<FeaturesSection />
-			<FAQSection />
-			<ContactSection />
+				<FeaturesSection />
+				<FAQSection />
+				<ContactSection />
+			</LandingStatsProvider>
 			<Footer />
 		</div>
 	);
