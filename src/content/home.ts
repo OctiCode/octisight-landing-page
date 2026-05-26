@@ -1,21 +1,3 @@
-/**
- * ═══════════════════════════════════════════════════════════════════════════
- * HOME PAGE CONTENT CONFIGURATION
- * ═══════════════════════════════════════════════════════════════════════════
- *
- * This file contains all content for the OctiSight landing page.
- * Organized by sections for easy maintenance and localization.
- *
- * ═══════════════════════════════════════════════════════════════════════════
- */
-
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * HERO SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Primary landing section - First impression for visitors
- * Contains main value proposition and primary CTAs
- */
 export const heroSection = {
 	eyebrow: "Vulnerability management",
 	title: "Security from insight to action",
@@ -48,13 +30,6 @@ export const heroSection = {
 	},
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * PROBLEM SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Articulates the pain point — CVE volume growth vs. team capacity.
- * CVE counts sourced from NVD public statistics.
- */
 export const problemSection = {
 	eyebrow: "The problem",
 	title: {
@@ -103,13 +78,6 @@ export const problemSection = {
 	},
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * ABOUT SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Company mission and introduction
- * Includes video demonstration
- */
 export const aboutSection = {
 	headerTitle: "About OctiSight",
 	title: "Security that's human-first",
@@ -122,13 +90,6 @@ export const aboutSection = {
 	},
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * PLATFORM FEATURES SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Core platform capabilities and features
- * Grid layout with icon-based feature cards
- */
 export const platformFeaturesSection = {
 	headerTitle: "Platform Features",
 	title: "Everything you need to secure your infrastructure",
@@ -137,56 +98,49 @@ export const platformFeaturesSection = {
 	features: [
 		{
 			id: "ft1",
-			icon: "Shield", // Lucide icon name
-			title: "AI-Powered Detection",
+			icon: "GitPullRequest",
+			title: "CI-pipeline scans",
 			description:
-				"Advanced machine learning algorithms identify vulnerabilities before they become threats.",
+				"Auto-scan on every push and pull request. Works with GitHub Actions, GitLab CI, Bitbucket Pipelines and CircleCI to catch vulnerabilities before they ship.",
 		},
 		{
 			id: "ft2",
-			icon: "Scan",
-			title: "Continuous Monitoring",
+			icon: "Wand2",
+			title: "AI remediation steps",
 			description:
-				"Real-time scanning and monitoring across your entire infrastructure, 24/7.",
+				"Every finding ships with step-by-step fixes, written by AI and tunable for security engineers, developers or non-technical stakeholders.",
 		},
 		{
 			id: "ft3",
-			icon: "Target",
-			title: "Contextual Intelligence",
+			icon: "FileChartLine",
+			title: "Branded executive reports",
 			description:
-				"Understand the business impact of each vulnerability with contextual risk scoring.",
+				"Generate PDF reports with your logo and brand colors. Schedule monthly summaries to leadership and security progress in language they read, not CVSS spec sheets.",
 		},
 		{
 			id: "ft4",
-			icon: "Zap",
-			title: "Automated Remediation",
+			icon: "FileSearch",
+			title: "AI vulnerability briefs",
 			description:
-				"Get actionable remediation guidance and automate fixes where possible.",
+				"One-page PDF for any critical finding, impact, fix steps and reproduction guide written by AI. Share with stakeholders, customers or auditors without exposing your dashboard.",
 		},
 		{
 			id: "ft5",
-			icon: "BarChart3",
-			title: "Comprehensive Reporting",
+			icon: "History",
+			title: "Audit log + retention",
 			description:
-				"Executive dashboards and detailed reports for compliance and stakeholder communication.",
+				"Every action recorded with actor, timestamp and context. Configurable retention windows per organization. Export-ready when your SOC 2 auditor asks.",
 		},
 		{
 			id: "ft6",
-			icon: "Users",
-			title: "Team Collaboration",
+			icon: "Timer",
+			title: "Per-project SLAs",
 			description:
-				"Seamless workflows for security teams to prioritize, assign, and track remediation.",
+				"Define remediation deadlines per severity, per project. Overdue findings bubble up automatically and your auditors see proof of timely action.",
 		},
 	],
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * WHY OCTISIGHT SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Value propositions and differentiators
- * Highlights what makes OctiSight unique
- */
 export const whyOctiSightSection = {
 	headerTitle: "Why OctiSight",
 	title: "Security that makes sense",
@@ -213,12 +167,6 @@ export const whyOctiSightSection = {
 	],
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * OBJECTION HANDLING SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Q&A format addressing the most common concerns
- */
 export const objectionHandlingSection = {
 	headerTitle: "Objection Handling",
 	title: "You don't need to be a cybersecurity expert",
@@ -250,12 +198,6 @@ export const objectionHandlingSection = {
 	],
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * USE CASES SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Audience segments — who OctiSight is built for
- */
 export const useCasesSection = {
 	headerTitle: "Use Cases",
 	title: "Built for modern businesses",
@@ -287,12 +229,6 @@ export const useCasesSection = {
 	],
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * BENEFITS SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Core business value props — why OctiSight matters for the customer
- */
 export const benefitsSection = {
 	headerTitle: "Why OctiSight",
 	title: "Focus on growth, we handle the risk.",
@@ -324,104 +260,6 @@ export const benefitsSection = {
 	],
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * PRICING SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Pricing tiers and plan details
- * Includes trial information and feature comparison
- */
-export const pricingSection = {
-	headerTitle: "Simple, Transparent Pricing",
-	title: "Security for teams of all sizes",
-	paragraph:
-		"Start with a 14-day free trial. No credit card required. Cancel anytime.",
-	plans: [
-		{
-			id: "starter",
-			target: "Starter",
-			description: "For small teams getting started with security",
-			price: {
-				amount: 49,
-				currency: "USD",
-				period: "month",
-				billingCycle: "monthly",
-			},
-			features: [
-				"Up to 10 assets",
-				"Basic vulnerability scanning",
-				"Email support",
-				"7-day data retention",
-				"Community access",
-			],
-			cta: {
-				text: "Start Free Trial",
-				href: "/signup?plan=starter",
-			},
-			highlighted: false,
-		},
-		{
-			id: "professional",
-			target: "Professional",
-			description: "For growing teams with advanced security needs",
-			price: {
-				amount: 199,
-				currency: "USD",
-				period: "month",
-				billingCycle: "monthly",
-			},
-			features: [
-				"Up to 100 assets",
-				"Advanced AI-powered scanning",
-				"Priority support",
-				"90-day data retention",
-				"Custom integrations",
-				"Team collaboration tools",
-				"Compliance reporting",
-			],
-			cta: {
-				text: "Start Free Trial",
-				href: "/signup?plan=professional",
-			},
-			highlighted: true,
-		},
-		{
-			id: "enterprise",
-			target: "Enterprise",
-			description: "For organizations requiring enterprise-grade security",
-			price: {
-				amount: null, // Custom pricing
-				currency: "USD",
-				period: "month",
-				billingCycle: "custom",
-				customLabel: "Custom",
-			},
-			features: [
-				"Unlimited assets",
-				"Full platform access",
-				"Dedicated support team",
-				"Unlimited data retention",
-				"Custom integrations & API",
-				"Advanced team management",
-				"SLA guarantees",
-				"On-premise deployment option",
-			],
-			cta: {
-				text: "Contact Sales",
-				href: "/contact?inquiry=enterprise",
-			},
-			highlighted: false,
-		},
-	],
-} as const;
-
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * CUSTOMER REVIEWS SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Social proof and testimonials
- * Builds trust through customer success stories
- */
 export const customerReviewsSection = {
 	headerTitle: "Customer Reviews",
 	title: "Trusted by security leaders",
@@ -461,16 +299,9 @@ export const customerReviewsSection = {
 	],
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * FAQ SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Frequently asked questions
- * Addresses common concerns and queries
- */
 export const faqSection = {
-	headerTitle: "FAQ",
-	title: "Frequently asked questions",
+	headerTitle: "Common questions",
+	title: "Things people ask before signing up.",
 	paragraph: "Have a question not answered here? Contact our sales team.",
 	contactCta: {
 		text: "Contact Sales",
@@ -478,31 +309,45 @@ export const faqSection = {
 	},
 	faqs: [
 		{
-			id: "faq1",
-			question: "What systems can I connect?",
+			id: "faq-languages",
+			question: "Which languages and package managers do you support?",
 			answer:
-				"Modern applications, infrastructure, and environments (expand later)",
+				"Native support: JavaScript/TypeScript (npm, yarn, pnpm), Python (pip, Poetry, Pipenv), Java and Kotlin (Maven, Gradle), Go, Rust (Cargo), PHP (Composer), Ruby (Bundler), and .NET (NuGet). For ecosystems we don't natively parse Dart, Swift, Docker base images and others upload a CycloneDX or SPDX SBOM and we'll ingest it the same way.",
 		},
 		{
-			id: "faq2",
-			question: "How fast does it work?",
-			answer: "You get insights within minutes of connection.",
+			id: "faq-github-only",
+			question: "Do you only work with GitHub?",
+			answer:
+				"OctiSight integrates with GitHub, GitLab and Bitbucket. The GitHub flow uses a GitHub App with per-repository permissions (the modern approach); GitLab and Bitbucket use OAuth 2.0. The product features scanning, AI remediation, kanban triage, reports and notifications are identical across all three.",
 		},
 		{
-			id: "faq3",
-			question: "Is this suitable for non-technical users?",
-			answer: "Yes explanations adapt to your level.",
+			id: "faq-vs-competitors",
+			question:
+				"How is OctiSight different from Snyk, Dependabot, or GitHub Security?",
+			answer:
+				"Three differences: (1) We prioritize findings using CISA KEV (actively exploited) and FIRST.org EPSS (exploit probability), not just CVSS so \"critical\" actually means \"attackers are exploiting this today.\" (2) Our generated step-by-step remediation tuned to your team's technical level not just a link to an advisory. (3) We're priced for teams of 5–50, not Fortune 500.",
+		},
+		{
+			id: "faq-source-protection",
+			question: "How do you protect my source code?",
+			answer:
+				"OctiSight clones your code into ephemeral containers, scans it, and discards the clone after the scan completes. We never store source code permanently, only the resulting findings and dependency metadata. All credentials are AES-256 encrypted at rest, and the GitHub App installs with per-repository permissions you control (no org-wide tokens, ever).",
+		},
+		{
+			id: "faq-vuln-freshness",
+			question: "How fast do you learn about new vulnerabilities?",
+			answer:
+				"OctiSight monitors many upstream vulnerability databases on 15-minute polling cycles. Newly-published CVEs typically appear in OctiSight within 20 min. Additions to CISA's actively-exploited list usually appear within the same day they're announced.",
+		},
+		{
+			id: "faq-data-on-cancel",
+			question: "What happens to my data if I cancel?",
+			answer:
+				"You own your data. While active, you can export findings, scan results, configurations and audit logs at any time via API or CSV. After cancellation, we retain your data for 30 days in case you want to reactivate, then permanently delete everything including cached source-code workspaces, encrypted credentials and audit logs. Configurable retention windows are available for organizations that need stricter timelines (SOC 2 / customer contractual obligations).",
 		},
 	],
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * LATEST NEWS SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Company news and announcements
- * Content fetched dynamically from API
- */
 export const latestNewsSection = {
 	headerTitle: "Latest News",
 	title: "Stay updated with OctiSight news",
@@ -515,13 +360,6 @@ export const latestNewsSection = {
 	displayLimit: 3,
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * BLOG SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Educational content and thought leadership
- * Content fetched dynamically from API
- */
 export const blogSection = {
 	headerTitle: "Blogs & News",
 	title: "Security insights and best practices",
@@ -535,19 +373,13 @@ export const blogSection = {
 	displayLimit: 3,
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * FOOTER SECTION
- * ───────────────────────────────────────────────────────────────────────────
- * Site footer with navigation, company info, and social links
- */
 export const footerSection = {
 	logo: {
 		src: "/images/logo/octisight-white-logo.png",
 		alt: "OctiSight",
 	},
 	tagline:
-		"Security, From Insight to Action. Modern cybersecurity that's human-first, intelligent, and built for teams of all sizes.",
+		"Security, From Insight to Action. Modern cybersecurity that's human-first, intelligent and built for teams of all sizes.",
 	navigation: {
 		product: {
 			title: "Platform",
@@ -582,19 +414,12 @@ export const footerSection = {
 	],
 } as const;
 
-/**
- * ───────────────────────────────────────────────────────────────────────────
- * COMPLETE HOME CONTENT EXPORT
- * ───────────────────────────────────────────────────────────────────────────
- * Aggregated content object for easy import
- */
 export const homeContent = {
 	hero: heroSection,
 	about: aboutSection,
 	platformFeatures: platformFeaturesSection,
 	whyOctiSight: whyOctiSightSection,
 	benefits: benefitsSection,
-	pricing: pricingSection,
 	customerReviews: customerReviewsSection,
 	faq: faqSection,
 	latestNews: latestNewsSection,
@@ -602,12 +427,6 @@ export const homeContent = {
 	footer: footerSection,
 } as const;
 
-/**
- * ═══════════════════════════════════════════════════════════════════════════
- * TYPE EXPORTS
- * ═══════════════════════════════════════════════════════════════════════════
- * TypeScript type definitions for type-safe content usage
- */
 export type HomeContent = typeof homeContent;
 export type HeroSection = typeof heroSection;
 export type AboutSection = typeof aboutSection;
@@ -616,7 +435,6 @@ export type WhyOctiSightSection = typeof whyOctiSightSection;
 export type BenefitsSection = typeof benefitsSection;
 export type UseCasesSection = typeof useCasesSection;
 export type ObjectionHandlingSection = typeof objectionHandlingSection;
-export type PricingSection = typeof pricingSection;
 export type CustomerReviewsSection = typeof customerReviewsSection;
 export type FAQSection = typeof faqSection;
 export type LatestNewsSection = typeof latestNewsSection;

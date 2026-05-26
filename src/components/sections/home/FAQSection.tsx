@@ -16,7 +16,7 @@ export default function FAQSection() {
 			<div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
 				<div className="flex flex-col items-center justify-center gap-3 sm:gap-4 w-full text-center">
 					<div className="inline-flex">
-						<span className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-primary/40 border border-light-contrast/30 text-light-contrast text-xs sm:text-sm font-book backdrop-blur-sm">
+						<span className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-primary/40 border border-light-contrast/30 text-light-contrast text-[0.65rem] sm:text-xs font-bold tracking-[0.15em] uppercase backdrop-blur-sm">
 							{faqSection.headerTitle}
 						</span>
 					</div>

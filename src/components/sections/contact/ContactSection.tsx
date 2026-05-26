@@ -58,11 +58,6 @@ export default function ContactSection({
 					>
 						We&apos;d love to hear from you
 					</Tag>
-
-					<p className="text-sm sm:text-base md:text-lg text-text/80 max-w-2xl mx-auto leading-relaxed">
-						Have questions about OctiSight? Want to schedule a demo? We&apos;re
-						here to help.
-					</p>
 				</div>
 
 				{/* ─── Background image + form ─── */}
@@ -83,7 +78,7 @@ export default function ContactSection({
 						<div className="hidden lg:flex items-center justify-center p-8 sm:p-10 md:p-12">
 							<Image
 								src="/images/logo/octisight-white-logo.png"
-								alt="OctiSight — Security, from insight to action"
+								alt="OctiSight, Security, from insight to action"
 								width={360}
 								height={120}
 								className="w-56 sm:w-64 md:w-72 h-auto"
@@ -103,39 +98,6 @@ export default function ContactSection({
 							</div>
 						</div>
 					</div>
-				</div>
-
-				{/* ─── Contact info cards ─── */}
-				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-					{contactInfo.map((info) => {
-						const Icon = info.icon;
-						const inner = (
-							<div className="flex flex-col items-center text-center gap-3 py-6 sm:py-8">
-								<div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-accent/40 flex items-center justify-center">
-									<Icon className="w-5 h-5 sm:w-6 sm:h-6 text-accent" />
-								</div>
-								<span className="text-text/80 text-sm sm:text-base font-medium">
-									{info.value}
-								</span>
-							</div>
-						);
-
-						return (
-							<a
-								key={info.label}
-								href={info.href}
-								target={info.href.startsWith("http") ? "_blank" : undefined}
-								rel={
-									info.href.startsWith("http")
-										? "noopener noreferrer"
-										: undefined
-								}
-								className="rounded-xl border border-white/8 bg-white/3 hover:border-accent/30 transition-colors duration-300"
-							>
-								{inner}
-							</a>
-						);
-					})}
 				</div>
 			</div>
 		</section>

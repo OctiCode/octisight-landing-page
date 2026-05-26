@@ -1,24 +1,21 @@
-"use client";
-
 import { platformFeaturesSection } from "@/content/home";
 import type { LucideIcon } from "lucide-react";
 import {
-	ArrowUpRight,
-	BarChart3,
-	Scan,
-	Shield,
-	Target,
-	Users,
-	Zap,
+	FileChartLine,
+	FileSearch,
+	GitPullRequest,
+	History,
+	Timer,
+	Wand2,
 } from "lucide-react";
 
 const iconMap: Record<string, LucideIcon> = {
-	Shield,
-	Scan,
-	Target,
-	Zap,
-	BarChart3,
-	Users,
+	GitPullRequest,
+	Wand2,
+	FileChartLine,
+	FileSearch,
+	History,
+	Timer,
 };
 
 export default function FeaturesSection() {
@@ -35,10 +32,6 @@ export default function FeaturesSection() {
 					<h2 className="text-2xl my-3 sm:text-3xl md:text-4xl lg:text-5xl font-black leading-tight text-white max-w-4xl">
 						{platformFeaturesSection.title}
 					</h2>
-
-					<p className="text-sm sm:text-base md:text-lg text-text/90 max-w-3xl leading-relaxed px-2">
-						{platformFeaturesSection.paragraph}
-					</p>
 
 					<div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 w-full mt-3 sm:mt-4 md:mt-6">
 						{platformFeaturesSection.features.map((feature) => {
@@ -59,17 +52,9 @@ export default function FeaturesSection() {
 										{feature.title}
 									</h3>
 
-									<p className="text-xs sm:text-sm text-text/70 leading-relaxed mb-4 sm:mb-6 text-left">
+									<p className="text-xs sm:text-sm text-text/70 leading-relaxed text-left">
 										{feature.description}
 									</p>
-
-									<button
-										type="button"
-										className="flex cursor-pointer items-center gap-1 sm:gap-2 text-white hover:text-light-contrast transition-colors duration-300 text-xs sm:text-sm font-semibold"
-									>
-										<span>Read more</span>
-										<ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-									</button>
 								</div>
 							);
 						})}

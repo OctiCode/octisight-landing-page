@@ -1,7 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import {
 	Area,
 	AreaChart,
@@ -72,7 +70,7 @@ export default function ProblemSection() {
 		<section
 			id="problem"
 			aria-labelledby="problem-heading"
-			className="relative w-full py-16 sm:py-20 md:py-24"
+			className="relative w-full py-0"
 		>
 			<div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
 				{/* Header */}
@@ -231,17 +229,6 @@ export default function ProblemSection() {
 							</div>
 						</div>
 					))}
-				</div>
-
-				{/* CTA */}
-				<div className="mt-10 sm:mt-12 flex flex-col items-center gap-3">
-					<Link
-						href={cta.href}
-						className="group inline-flex items-center gap-2 bg-accent hover:bg-light-contrast text-white px-6 py-3 text-base sm:text-lg font-medium rounded-lg transition-all duration-300 shadow-sm shadow-accent/30 hover:shadow-accent/50"
-					>
-						{cta.text}
-						<ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-					</Link>
 				</div>
 			</div>
 		</section>
