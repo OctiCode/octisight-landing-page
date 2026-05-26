@@ -64,18 +64,18 @@ export default function CookieBanner() {
 
 	return (
 		<div
-			className="fixed inset-x-0 bottom-0 z-[60] px-3 pb-3 sm:px-4 sm:pb-4 pointer-events-none"
+			className="fixed bottom-0 right-0 z-[60] w-full sm:max-w-md p-3 sm:p-4 pointer-events-none"
 			role="region"
 			aria-label="Cookie consent"
 		>
-			<div className="ocs-cookie-card pointer-events-auto mx-auto w-full max-w-3xl rounded-2xl border border-light-contrast/20 bg-background/95 backdrop-blur-md shadow-2xl shadow-black/40 p-5 sm:p-6">
+			<div className="ocs-cookie-card pointer-events-auto w-full rounded-xl border border-light-contrast/20 bg-background/95 backdrop-blur-md shadow-2xl shadow-black/40 p-4 sm:p-5">
 				{/* Header */}
-				<div className="flex items-start gap-3 mb-3 sm:mb-4">
-					<div className="w-9 h-9 shrink-0 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center">
-						<Cookie className="w-4.5 h-4.5 text-light-contrast" />
+				<div className="flex items-center gap-2.5 mb-2.5">
+					<div className="w-7 h-7 shrink-0 rounded-lg bg-accent/15 border border-accent/30 flex items-center justify-center">
+						<Cookie className="w-4 h-4 text-light-contrast" />
 					</div>
 					<div className="flex-1 min-w-0">
-						<h2 className="text-white font-bold text-base sm:text-lg leading-tight">
+						<h2 className="text-white font-bold text-sm sm:text-base leading-tight">
 							{view === "banner"
 								? "We value your privacy"
 								: "Cookie preferences"}
@@ -95,10 +95,9 @@ export default function CookieBanner() {
 
 				{view === "banner" ? (
 					<>
-						<p className="text-text/70 text-sm leading-relaxed mb-4 sm:mb-5">
+						<p className="text-text/70 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
 							We use cookies to run the site and, with your consent, to measure
-							traffic and improve OctiSight. You can accept all, reject all, or
-							choose what&apos;s on. Read our{" "}
+							traffic and improve OctiSight. Read our{" "}
 							<Link
 								href="/legal/cookies"
 								className="text-accent hover:text-light-contrast underline underline-offset-2 transition-colors"
@@ -108,87 +107,89 @@ export default function CookieBanner() {
 							.
 						</p>
 
-						{/* Equal-weight actions (EU requirement) */}
-						<div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+						{/* Accept / Reject — equal weight (EU requirement) */}
+						<div className="grid grid-cols-2 gap-2">
 							<button
 								type="button"
 								onClick={acceptAll}
-								className="px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-accent hover:bg-light-contrast transition-colors duration-200 cursor-pointer"
+								className="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white bg-accent hover:bg-light-contrast transition-colors duration-200 cursor-pointer"
 							>
 								Accept all
 							</button>
 							<button
 								type="button"
 								onClick={rejectAll}
-								className="px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 transition-colors duration-200 cursor-pointer"
+								className="px-3 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 transition-colors duration-200 cursor-pointer"
 							>
 								Reject all
 							</button>
-							<button
-								type="button"
-								onClick={() => setView("customise")}
-								className="px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 transition-colors duration-200 cursor-pointer"
-							>
-								Customise
-							</button>
 						</div>
+
+						{/* Customise — secondary path, not a consent decision */}
+						<button
+							type="button"
+							onClick={() => setView("customise")}
+							className="mt-2 w-full py-1 text-xs font-medium text-text/60 hover:text-light-contrast transition-colors duration-200 cursor-pointer"
+						>
+							Customise preferences
+						</button>
 					</>
 				) : (
 					<>
-						<div className="space-y-2.5 mb-4 sm:mb-5">
+						<div className="space-y-2 mb-3 sm:mb-4">
 							<CategoryRow
 								title="Strictly necessary"
-								description="Required for the site to function — security, load balancing, and your cookie choices. Always on."
+								description="Required for the site to function. Always on."
 								checked
 								disabled
 							/>
 							<CategoryRow
 								title="Analytics"
-								description="Help us understand how visitors use the site so we can improve it. No advertising."
+								description="Help us understand how the site is used. No advertising."
 								checked={analytics}
 								onChange={setAnalytics}
 							/>
 							<CategoryRow
 								title="Marketing"
-								description="Used to measure campaigns and show relevant messaging. Off by default."
+								description="Measure campaigns and show relevant messaging."
 								checked={marketing}
 								onChange={setMarketing}
 							/>
 						</div>
 
-						<div className="flex flex-col sm:flex-row gap-2.5">
-							<button
-								type="button"
-								onClick={saveChoices}
-								className="px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-accent hover:bg-light-contrast transition-colors duration-200 cursor-pointer sm:flex-1"
-							>
-								Save preferences
-							</button>
+						<div className="grid grid-cols-3 gap-2">
 							<button
 								type="button"
 								onClick={rejectAll}
-								className="px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 transition-colors duration-200 cursor-pointer"
+								className="px-2 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 transition-colors duration-200 cursor-pointer"
 							>
 								Reject all
 							</button>
 							<button
 								type="button"
 								onClick={acceptAll}
-								className="px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 transition-colors duration-200 cursor-pointer"
+								className="px-2 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 transition-colors duration-200 cursor-pointer"
 							>
 								Accept all
 							</button>
+							<button
+								type="button"
+								onClick={saveChoices}
+								className="px-2 py-2 rounded-lg text-xs sm:text-sm font-semibold text-white bg-accent hover:bg-light-contrast transition-colors duration-200 cursor-pointer"
+							>
+								Save
+							</button>
 						</div>
 
-						<p className="mt-4 text-xs text-text/45 leading-relaxed">
-							See the{" "}
+						<p className="mt-3 text-[0.7rem] text-text/45 leading-relaxed">
+							Full details in our{" "}
 							<Link
 								href="/legal/cookies"
 								className="text-accent/90 hover:text-light-contrast underline underline-offset-2 transition-colors"
 							>
 								Cookie Policy
-							</Link>{" "}
-							for the full list of cookies and how to manage them.
+							</Link>
+							.
 						</p>
 					</>
 				)}
@@ -227,10 +228,10 @@ function CategoryRow({
 	onChange?: (next: boolean) => void;
 }) {
 	return (
-		<div className="flex items-start justify-between gap-4 rounded-lg border border-white/8 bg-white/[0.02] px-4 py-3">
+		<div className="flex items-start justify-between gap-3 rounded-lg border border-white/8 bg-white/[0.02] px-3 py-2.5">
 			<div className="min-w-0">
-				<p className="text-white text-sm font-semibold">{title}</p>
-				<p className="text-text/55 text-xs leading-relaxed mt-0.5">
+				<p className="text-white text-[0.8rem] font-semibold">{title}</p>
+				<p className="text-text/55 text-[0.7rem] leading-snug mt-0.5">
 					{description}
 				</p>
 			</div>
@@ -242,13 +243,13 @@ function CategoryRow({
 				aria-label={title}
 				disabled={disabled}
 				onClick={() => onChange?.(!checked)}
-				className={`relative mt-0.5 h-6 w-11 shrink-0 rounded-full transition-colors duration-200 ${
+				className={`relative mt-0.5 h-5 w-9 shrink-0 rounded-full transition-colors duration-200 ${
 					checked ? "bg-accent" : "bg-white/15"
 				} ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
 			>
 				<span
-					className={`absolute top-0.5 left-0.5 h-5 w-5 rounded-full bg-white transition-transform duration-200 ${
-						checked ? "translate-x-5" : "translate-x-0"
+					className={`absolute top-0.5 left-0.5 h-4 w-4 rounded-full bg-white transition-transform duration-200 ${
+						checked ? "translate-x-4" : "translate-x-0"
 					}`}
 				/>
 			</button>

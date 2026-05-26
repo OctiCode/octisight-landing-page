@@ -17,7 +17,7 @@ export const heroSection = {
 		},
 	},
 	dashboardImage: {
-		src: "/images/why-octisight/kanban-screen-octisight.png",
+		src: "/images/hero/overview-screen-octisight.png",
 		alt: "OctiSight vulnerability dashboard",
 		width: 2028,
 		height: 1208,
