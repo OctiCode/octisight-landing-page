@@ -183,7 +183,7 @@ export default function HeroSection() {
 					type="button"
 					onClick={() =>
 						document
-							.getElementById("about")
+							.getElementById("how-it-works")
 							?.scrollIntoView({ behavior: "smooth" })
 					}
 					aria-label="Scroll to next section"

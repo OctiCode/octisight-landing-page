@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "@tailwindcss/typography";
 
 /* Gotham font is loaded via next/font/local in app/layout.tsx.
    The CSS variable --font-gotham is injected automatically. */
@@ -84,16 +83,3 @@ a, button, [role="button"] {
 	animation: scroll-dot 1.8s ease-in-out infinite;
 }
 
-.blog-content img {
-	width: 100% !important;
-	height: auto !important;
-	max-width: 100% !important;
-	border-radius: 0.75rem;
-}
-
-.blog-content figure {
-	width: 100% !important;
-	max-width: 100% !important;
-	margin-left: 0;
-	margin-right: 0;
-}

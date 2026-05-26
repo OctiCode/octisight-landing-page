@@ -1,27 +1,5 @@
 import Image from "next/image";
-import { Mail, Phone, MapPin } from "lucide-react";
 import ContactForm from "./ContactForm";
-
-const contactInfo = [
-	{
-		icon: Mail,
-		label: "Email",
-		value: "contact@octiSight.com",
-		href: "mailto:contact@octiSight.com",
-	},
-	{
-		icon: Phone,
-		label: "Phone",
-		value: "+212 6 62 63 65 83",
-		href: "tel:+212662636583",
-	},
-	{
-		icon: MapPin,
-		label: "Location",
-		value: "Bd Dammam, Casablanca, Morocco",
-		href: "https://maps.app.goo.gl/Lt7Vy7RtCaD4j96d6",
-	},
-] as const;
 
 interface ContactSectionProps {
 	/**

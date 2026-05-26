@@ -12,7 +12,10 @@ export default function FAQSection() {
 	};
 
 	return (
-		<section className="relative w-full py-4 sm:py-6 md:py-8">
+		<section
+			id="faq"
+			className="relative w-full py-4 sm:py-6 md:py-8"
+		>
 			<div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
 				<div className="flex flex-col items-center justify-center gap-3 sm:gap-4 w-full text-center">
 					<div className="inline-flex">

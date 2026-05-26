@@ -8,8 +8,8 @@ import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 
 const NAV_LINKS = [
-	{ href: "/#about", label: "About" },
 	{ href: "/#how-it-works", label: "How it works" },
+	{ href: "/#problem", label: "Problem" },
 	{ href: "/#pricing", label: "Pricing" },
 	{ href: "/#contact", label: "Contact" },
 ] as const;

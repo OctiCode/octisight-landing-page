@@ -61,7 +61,7 @@ function LiveDot(props: DotItemDotProps) {
 }
 
 export default function ProblemSection() {
-	const { eyebrow, title, description, chart, stats, cta } = problemSection;
+	const { eyebrow, title, description, chart, stats } = problemSection;
 	const data = chart.data;
 	const latestYear = data[lastDataIndex].year;
 	const latestCount = data[lastDataIndex].cves;
