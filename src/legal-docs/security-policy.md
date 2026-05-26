@@ -11,12 +11,12 @@ For the legal terms governing our processing of personal data on customers' beha
 
 ## 1. Compliance posture
 
-| Framework | Status |
-|---|---|
-| **GDPR / UK GDPR** | In effect — see [Privacy Policy](./privacy-policy.md) and [DPA](./data-processing-agreement.md) |
-| **SOC 2 Type II** | In progress — audit planned, report available under NDA when complete |
-| **ISO 27001** | Planned |
-| **Moroccan Law 09-08** | In effect |
+| Framework              | Status                                                                                         |
+|------------------------|------------------------------------------------------------------------------------------------|
+| **GDPR / UK GDPR**     | In effect, see [Privacy Policy](./privacy-policy.md) and [DPA](./data-processing-agreement.md) |
+| **SOC 2 Type II**      | In progress, audit planned, report available under NDA when complete                           |
+| **ISO 27001**          | Planned                                                                                        |
+| **Moroccan Law 09-08** | In effect                                                                                      |
 
 OctiSight follows industry-standard practices aligned with NIST CSF, OWASP ASVS, and CIS Benchmarks for the infrastructure components we operate.
 
@@ -28,8 +28,8 @@ OctiSight follows industry-standard practices aligned with NIST CSF, OWASP ASVS,
 
 The OctiSight production environment runs on:
 
-- **Hetzner Cloud** in Germany (Falkenstein and Nuremberg data centres) — primary EU-resident customers;
-- **Oracle Cloud** in the UK and (where available) Morocco — optional regional hosting for customers who require it.
+- **Hetzner Cloud** in Germany (Falkenstein and Nuremberg data centres) primary EU-resident customers;
+- **Oracle Cloud** in the UK and (where available) Morocco, optional regional hosting for customers who require it.
 
 These providers operate certified data centres (ISO 27001, SOC 2, and equivalent attestations).
 
@@ -48,7 +48,7 @@ OctiSight is multi-tenant by design. Tenant isolation is enforced at multiple la
 - **API**: every endpoint validates the user's membership and RBAC role in the requested org before responding.
 - **Audit log**: every action is recorded with the user, IP, org, and outcome.
 
-We treat tenant isolation as a security boundary — bypassing it would be a critical-severity bug under our [Vulnerability Disclosure Policy](./vulnerability-disclosure-policy.md).
+We treat tenant isolation as a security boundary bypassing it would be a critical-severity bug under our [Vulnerability Disclosure Policy](./vulnerability-disclosure-policy.md).
 
 ---
 
@@ -79,11 +79,11 @@ We treat tenant isolation as a security boundary — bypassing it would be a cri
 
 OctiSight provides a five-role RBAC model per organisation:
 
-- **Owner** — full control, can transfer or delete the org;
-- **Admin** — manage members, integrations, billing, policies;
-- **Security lead** — manage scans, AI features, reports;
-- **Developer** — work assigned projects, run scans, work the kanban board;
-- **Viewer** — read-only.
+- **Owner** full control, can transfer or delete the org;
+- **Admin** manage members, integrations, billing, policies;
+- **Security lead** manage scans, AI features, reports;
+- **Developer** work assigned projects, run scans, work the kanban board;
+- **Viewer** read-only.
 
 Permissions are enforced at the API layer, not just the UI.
 

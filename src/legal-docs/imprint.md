@@ -11,8 +11,6 @@ This page identifies the legal entities operating the OctiSight platform, in com
 > **Registered name:** OctiSight LTD
 > **Form:** Private company limited by shares
 > **Registered office:** 71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom
-> **Company number:** `[TODO: Companies House registration number]`
-> **VAT number:** `[TODO: VAT number, if registered]`
 > **Email:** `legal@octisight.com`
 
 OctiSight LTD is the contracting entity for customers in the European Union, European Economic Area, United Kingdom, United States, and rest of the world unless an alternative entity is specified on the applicable order form.
@@ -24,9 +22,6 @@ OctiSight LTD is the contracting entity for customers in the European Union, Eur
 > **Registered name:** OctiSight SARL
 > **Form:** Société à Responsabilité Limitée
 > **Registered office:** 78 BD La Résistance, Résidence El Marzouki, Casablanca 20250, Morocco
-> **Registre de Commerce (RC):** `[TODO: RC number]`
-> **ICE (Identifiant Commun de l'Entreprise):** `[TODO: ICE number]`
-> **TVA / IF (Tax identifier):** `[TODO: TVA or IF number]`
 > **Email:** `legal@octisight.com`
 
 OctiSight SARL is the contracting entity for customers in Africa and the MENA region, and where local invoicing in Morocco is preferred.
@@ -43,13 +38,13 @@ For content-related matters, contact `legal@octisight.com`.
 
 ## Contact
 
-| Topic | Email |
-|---|---|
-| Legal / general | `legal@octisight.com` |
-| Privacy and data protection | `privacy@octisight.com` |
-| Customer support | `support@octisight.com` |
-| Sales | `sales@octisight.com` |
-| Security disclosures | `security@octisight.com` |
+| Topic                       | Email                    |
+|-----------------------------|--------------------------|
+| Legal / general             | `legal@octisight.com`    |
+| Privacy and data protection | `privacy@octisight.com`  |
+| Customer support            | `support@octisight.com`  |
+| Sales                       | `sales@octisight.com`    |
+| Security disclosures        | `security@octisight.com` |
 
 ---
 
@@ -67,6 +62,6 @@ This site may contain links to external third-party websites. We have no influen
 
 ## Copyright
 
-All content on `octisight.com` and `app.octisight.io` — including text, design, graphics, logos, and software — is the property of OctiSight LTD, OctiSight SARL, or their respective licensors, and is protected by applicable copyright and intellectual-property law. Use beyond that permitted by law requires the prior written consent of the rights holder.
+All content on `octisight.com` and `app.octisight.io` including text, design, graphics, logos, and software is the property of OctiSight LTD, OctiSight SARL, or their respective licensors, and is protected by applicable copyright and intellectual-property law. Use beyond that permitted by law requires the prior written consent of the rights holder.
 
 The OctiSight wordmark and logo are trademarks of OctiSight LTD.

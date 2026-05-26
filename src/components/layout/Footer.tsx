@@ -1,6 +1,8 @@
 "use client";
 
 import { footerSection } from "@/content/home";
+import { LEGAL_FOOTER_LINKS } from "@/lib/legal-docs";
+import { openCookiePreferences } from "@/lib/cookie-consent";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
@@ -45,7 +47,7 @@ export default function Footer() {
 		<footer className="bg-linear-to-br from-background via-contrast to-background border-t border-primary/20">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 py-10 sm:py-12">
 				{/* ─── Main grid ─── */}
-				<div className="grid grid-cols-2 gap-8 lg:grid-cols-5">
+				<div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
 					{/* Logo + tagline */}
 					<div className="col-span-2 lg:col-span-2">
 						<Link href="/" className="inline-block mb-4">
@@ -63,12 +65,10 @@ export default function Footer() {
 						</p>
 					</div>
 
-					{/* Nav columns */}
+					{/* Platform + Company — single-column lists */}
 					{(
 						[
 							footerSection.navigation.product,
-							footerSection.navigation.company,
-							footerSection.navigation.resources,
 						] as const
 					).map((col) => (
 						<div key={col.title}>
@@ -90,49 +90,59 @@ export default function Footer() {
 							</ul>
 						</div>
 					))}
+
+					{/* Legal — wider, 2-column list to absorb the longer labels */}
+					<div className="col-span-2 lg:col-span-2">
+						<h3 className="text-text text-sm font-medium mb-4 uppercase tracking-wide">
+							Legal
+						</h3>
+						<ul className="grid grid-cols-2 gap-x-4 gap-y-3">
+							{LEGAL_FOOTER_LINKS.map((link) => (
+								<li key={link.href}>
+									<Link
+										href={link.href}
+										className="text-text/60 hover:text-light-contrast text-sm transition-colors duration-200"
+									>
+										{link.text}
+									</Link>
+								</li>
+							))}
+						</ul>
+					</div>
 				</div>
 
 				{/* ─── Bottom bar ─── */}
-				<div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-primary/20 flex flex-col gap-5 sm:gap-4">
-					{/* Legal links */}
-					<nav
-						aria-label="Legal"
-						className="flex flex-wrap items-center justify-center sm:justify-start gap-x-5 gap-y-2"
-					>
-						{footerSection.legal.map((link) => (
-							<Link
-								key={link.href}
-								href={link.href}
-								className="text-text/50 hover:text-light-contrast text-xs sm:text-sm transition-colors duration-200"
-							>
-								{link.text}
-							</Link>
-						))}
-					</nav>
-
-					<div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+				<div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-primary/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+					<div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
 						<p className="text-text/50 text-xs sm:text-sm">
 							© {currentYear} OctiSight. All rights reserved.
 						</p>
+						<button
+							type="button"
+							onClick={openCookiePreferences}
+							className="text-text/50 hover:text-light-contrast text-xs sm:text-sm transition-colors duration-200 cursor-pointer"
+						>
+							Cookie preferences
+						</button>
+					</div>
 
-						{/* Social icons */}
-						<div className="flex items-center gap-2 sm:gap-3">
-							{footerSection.social.map((social) => {
-								const Icon = iconMap[social.icon as keyof typeof iconMap];
-								return (
-									<Link
-										key={social.name}
-										href={social.href}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="text-text/50 hover:text-light-contrast transition-colors duration-200 p-2 hover:bg-primary/20 rounded-full"
-										aria-label={social.name}
-									>
-										<Icon size={18} />
-									</Link>
-								);
-							})}
-						</div>
+					{/* Social icons */}
+					<div className="flex items-center gap-2 sm:gap-3">
+						{footerSection.social.map((social) => {
+							const Icon = iconMap[social.icon as keyof typeof iconMap];
+							return (
+								<Link
+									key={social.name}
+									href={social.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-text/50 hover:text-light-contrast transition-colors duration-200 p-2 hover:bg-primary/20 rounded-full"
+									aria-label={social.name}
+								>
+									<Icon size={18} />
+								</Link>
+							);
+						})}
 					</div>
 				</div>
 			</div>

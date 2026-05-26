@@ -20,8 +20,8 @@ We have written this policy to comply with:
 
 The OctiSight entity that acts as data controller depends on which entity contracts with you (see [Imprint](./imprint.md)):
 
-- **OctiSight LTD** — England & Wales — registered office: 71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom.
-- **OctiSight SARL** — Morocco — registered office: 78 BD La Résistance, Résidence El Marzouki, Casablanca 20250, Morocco.
+- **OctiSight LTD** England & Wales, registered office: 71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom.
+- **OctiSight SARL** Morocco, registered office: 78 BD La Résistance, Résidence El Marzouki, Casablanca 20250, Morocco.
 
 Where these entities act jointly (e.g., shared engineering, shared infrastructure), they are joint controllers for those processing activities.
 
@@ -29,16 +29,15 @@ Where these entities act jointly (e.g., shared engineering, shared infrastructur
 
 OctiSight acts in **two distinct capacities**:
 
-| Capacity | When | What it covers |
-|---|---|---|
-| **Data controller** | For data we collect directly about visitors, leads, account holders, and users (e.g., name, email, billing) | Our processing of your personal data is governed by this Privacy Policy |
-| **Data processor** | When customers process personal data of *their own* end users through the Service (e.g., a user's email in a SAST finding's git blame) | Governed by the [Data Processing Agreement (DPA)](./data-processing-agreement.md), not this Privacy Policy |
+| Capacity            | When                                                                                                                                   | What it covers                                                                                             |
+|---------------------|----------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| **Data controller** | For data we collect directly about visitors, leads, account holders, and users (e.g., name, email, billing)                            | Our processing of your personal data is governed by this Privacy Policy                                    |
+| **Data processor**  | When customers process personal data of *their own* end users through the Service (e.g., a user's email in a SAST finding's git blame) | Governed by the [Data Processing Agreement (DPA)](./data-processing-agreement.md), not this Privacy Policy |
 
 ### 1.3 Contact
 
 - **Privacy queries:** `privacy@octisight.com`
 - **General legal:** `legal@octisight.com`
-- We have **not** appointed a Data Protection Officer (DPO). We will appoint one if required by Article 37 GDPR in the future.
 
 ---
 
@@ -46,26 +45,26 @@ OctiSight acts in **two distinct capacities**:
 
 ### 2.1 Data you provide directly
 
-| Category | Examples | Why we need it |
-|---|---|---|
-| Account data | Name, email address, hashed password, profile photo, technical-level preference, time zone | Create and manage your account |
-| Organisation data | Org name, role, team membership | Operate the multi-tenant platform |
-| Billing data | Billing contact, billing address, VAT number, tax ID. Card data is collected directly by Stripe and is not stored by OctiSight | Invoicing, tax compliance |
-| Communication data | Content of support tickets, sales enquiries, email replies | Respond to you |
-| Integration credentials | OAuth tokens, API keys, webhook secrets, scan tokens | Operate integrations you authorise |
+| Category                | Examples                                                                                                                       | Why we need it                     |
+|-------------------------|--------------------------------------------------------------------------------------------------------------------------------|------------------------------------|
+| Account data            | Name, email address, hashed password, profile photo, technical-level preference, time zone                                     | Create and manage your account     |
+| Organisation data       | Org name, role, team membership                                                                                                | Operate the multi-tenant platform  |
+| Billing data            | Billing contact, billing address, VAT number, tax ID. Card data is collected directly by Stripe and is not stored by OctiSight | Invoicing, tax compliance          |
+| Communication data      | Content of support tickets, sales enquiries, email replies                                                                     | Respond to you                     |
+| Integration credentials | OAuth tokens, API keys, webhook secrets, scan tokens                                                                           | Operate integrations you authorise |
 
 ### 2.2 Data we collect automatically
 
-| Category | Examples | Why we need it |
-|---|---|---|
-| Device and connection data | IP address, browser type and version, OS, device identifiers, language | Security, fraud prevention, troubleshooting |
-| Usage data | Pages viewed, features used, click events, request paths, response codes, timestamps | Improve the Service, debug, capacity planning |
-| Audit and security logs | Login events, RBAC actions, API key usage, scan triggers, webhook deliveries | Security, audit (required by SOC 2), forensic investigation |
-| Cookies and similar | See the [Cookie Policy](./cookie-policy.md) | Authentication, analytics |
+| Category                   | Examples                                                                             | Why we need it                                              |
+|----------------------------|--------------------------------------------------------------------------------------|-------------------------------------------------------------|
+| Device and connection data | IP address, browser type and version, OS, device identifiers, language               | Security, fraud prevention, troubleshooting                 |
+| Usage data                 | Pages viewed, features used, click events, request paths, response codes, timestamps | Improve the Service, debug, capacity planning               |
+| Audit and security logs    | Login events, RBAC actions, API key usage, scan triggers, webhook deliveries         | Security, audit (required by SOC 2), forensic investigation |
+| Cookies and similar        | See the [Cookie Policy](./cookie-policy.md)                                          | Authentication, analytics                                   |
 
 ### 2.3 Data collected through the Service (controller-mode use only)
 
-When you use the Service, OctiSight processes data that may incidentally include personal data — for example, a git commit author email shown in a SAST finding, or the email address of a user assigned to a kanban card. **For this category, OctiSight acts as a processor** for the customer organisation, not a controller. See the DPA.
+When you use the Service, OctiSight processes data that may incidentally include personal data, for example, a git commit author email shown in a SAST finding, or the email address of a user assigned to a kanban card. **For this category, OctiSight acts as a processor** for the customer organisation, not a controller. See the DPA.
 
 ### 2.4 Data we do **not** collect
 
@@ -79,15 +78,15 @@ When you use the Service, OctiSight processes data that may incidentally include
 
 For each processing activity, we rely on at least one of the following lawful bases under Article 6 GDPR (and equivalents under UK GDPR / Moroccan law):
 
-| Purpose | Lawful basis |
-|---|---|
-| Providing the Service to you (account, scans, integrations, dashboards) | **Performance of a contract** (Art. 6(1)(b)) |
-| Billing and tax compliance | **Legal obligation** (Art. 6(1)(c)) and **performance of a contract** |
-| Security, fraud prevention, audit logging | **Legitimate interest** (Art. 6(1)(f)) — operating a secure platform |
-| Service-improvement analytics | **Legitimate interest** and, where required, **consent** (Art. 6(1)(a)) |
-| Marketing emails to existing customers (about similar services) | **Legitimate interest** with opt-out (soft opt-in under PECR for UK) |
-| Marketing emails to prospects | **Consent** (Art. 6(1)(a)) |
-| Compliance with legal requests | **Legal obligation** (Art. 6(1)(c)) |
+| Purpose                                                                 | Lawful basis                                                            |
+|-------------------------------------------------------------------------|-------------------------------------------------------------------------|
+| Providing the Service to you (account, scans, integrations, dashboards) | **Performance of a contract** (Art. 6(1)(b))                            |
+| Billing and tax compliance                                              | **Legal obligation** (Art. 6(1)(c)) and **performance of a contract**   |
+| Security, fraud prevention, audit logging                               | **Legitimate interest** (Art. 6(1)(f)) operating a secure platform      |
+| Service-improvement analytics                                           | **Legitimate interest** and, where required, **consent** (Art. 6(1)(a)) |
+| Marketing emails to existing customers (about similar services)         | **Legitimate interest** with opt-out (soft opt-in under PECR for UK)    |
+| Marketing emails to prospects                                           | **Consent** (Art. 6(1)(a))                                              |
+| Compliance with legal requests                                          | **Legal obligation** (Art. 6(1)(c))                                     |
 
 You may object to processing based on legitimate interests at any time by contacting `privacy@octisight.com`. We will weigh your objection against our legitimate interests and respect it unless we can demonstrate compelling overriding grounds.
 
@@ -101,8 +100,8 @@ For California residents, the "business purposes" for which we process personal 
 
 We use cookies and similar technologies on `octisight.com` and `app.octisight.io`. Categories:
 
-- **Essential cookies** (session, authentication, CSRF protection) — no consent required;
-- **Analytics cookies** (Google Analytics) — used to understand aggregate site usage. Set only after consent in EU/UK regions.
+- **Essential cookies** (session, authentication, CSRF protection) no consent required;
+- **Analytics cookies** (Google Analytics) used to understand aggregate site usage. Set only after consent in EU/UK regions.
 
 Full details, including a complete cookie table and instructions for managing your preferences, are in the **[Cookie Policy](./cookie-policy.md)**.
 
@@ -116,15 +115,15 @@ We share personal data only with the categories of recipient below. A full, curr
 
 We engage third-party service providers to operate the Service. Each is bound by a written contract requiring confidentiality, data protection, and security measures consistent with GDPR Article 28. Categories include:
 
-| Category | Provider | Region |
-|---|---|---|
-| Hosting infrastructure | Hetzner Cloud (DE), Oracle Cloud (UK / Morocco) | EU / UK / Morocco |
-| File storage (static assets) | Firebase Storage (Google Cloud) | EU |
-| Transactional email | Mailgun | EU/US (region depends on plan) |
-| Payment processing | Stripe | Ireland / US |
-| LLM providers (AI features) | See [Subprocessors](./subprocessors.md) | Varies |
-| Source-code OAuth providers | GitHub, GitLab, Bitbucket | US |
-| Webhook destinations | Slack, Microsoft Teams (only if you configure) | US |
+| Category                     | Provider                                        | Region                         |
+|------------------------------|-------------------------------------------------|--------------------------------|
+| Hosting infrastructure       | Hetzner Cloud (DE), Oracle Cloud (UK / Morocco) | EU / UK / Morocco              |
+| File storage (static assets) | Firebase Storage (Google Cloud)                 | EU                             |
+| Transactional email          | Mailgun                                         | EU/US (region depends on plan) |
+| Payment processing           | Stripe                                          | Ireland / US                   |
+| LLM providers (AI features)  | See [Subprocessors](./subprocessors.md)         | Varies                         |
+| Source-code OAuth providers  | GitHub, GitLab, Bitbucket                       | US                             |
+| Webhook destinations         | Slack, Microsoft Teams (only if you configure)  | US                             |
 
 ### 5.2 Affiliates
 
@@ -167,17 +166,17 @@ You may request a copy of the relevant transfer mechanism by emailing `privacy@o
 
 We keep personal data only as long as needed for the purposes set out in this Policy and as required by law.
 
-| Data category | Retention period |
-|---|---|
-| Account data | Duration of your account + 30 days after account closure |
+| Data category              | Retention period                                                                                                                                                                                              |
+|----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Account data               | Duration of your account + 30 days after account closure                                                                                                                                                      |
 | Customer Data (org-scoped) | Per the [Retention Policy](./terms-of-service.md#section-6) and your in-app configuration; default 30–365 days by data class; permanently deleted within 30 days of account closure unless legal hold applies |
-| Billing and tax records | Up to **7 years** (UK statutory minimum: 6 years; we round up) |
-| Audit logs | Default 365 days; configurable by org admin |
-| Webhook delivery logs | Default 30 days; configurable |
-| Scan artefacts | Default 90 days; configurable |
-| Marketing prospect data | Until you opt out or 2 years of inactivity, whichever is sooner |
-| Support tickets | 3 years from the date of the last reply |
-| Backups | Rotated every 30 days |
+| Billing and tax records    | Up to **7 years** (UK statutory minimum: 6 years; we round up)                                                                                                                                                |
+| Audit logs                 | Default 365 days; configurable by org admin                                                                                                                                                                   |
+| Webhook delivery logs      | Default 30 days; configurable                                                                                                                                                                                 |
+| Scan artefacts             | Default 90 days; configurable                                                                                                                                                                                 |
+| Marketing prospect data    | Until you opt out or 2 years of inactivity, whichever is sooner                                                                                                                                               |
+| Support tickets            | 3 years from the date of the last reply                                                                                                                                                                       |
+| Backups                    | Rotated every 30 days                                                                                                                                                                                         |
 
 After expiry, we delete or fully anonymise the data.
 
@@ -189,26 +188,26 @@ Subject to applicable law, you have the following rights regarding your personal
 
 ### 8.1 Rights under GDPR / UK GDPR
 
-- **Right of access** — get a copy of the personal data we hold about you.
-- **Right to rectification** — correct inaccurate or incomplete data.
-- **Right to erasure** ("right to be forgotten") — request deletion, subject to exceptions (e.g., legal obligations to retain).
-- **Right to restriction of processing** — temporarily limit how we use your data.
-- **Right to data portability** — receive your data in a structured, commonly used, machine-readable format.
-- **Right to object** — object to processing based on legitimate interests or for direct marketing (always honoured).
-- **Right to withdraw consent** — for processing based on consent, without affecting prior lawful processing.
-- **Right not to be subject to automated decision-making** — that has legal or similarly significant effects. OctiSight does **not** make solely automated decisions of this type.
+- **Right of access** get a copy of the personal data we hold about you.
+- **Right to rectification** correct inaccurate or incomplete data.
+- **Right to erasure** ("right to be forgotten") request deletion, subject to exceptions (e.g., legal obligations to retain).
+- **Right to restriction of processing** temporarily limit how we use your data.
+- **Right to data portability** receive your data in a structured, commonly used, machine-readable format.
+- **Right to object** object to processing based on legitimate interests or for direct marketing (always honoured).
+- **Right to withdraw consent** for processing based on consent, without affecting prior lawful processing.
+- **Right not to be subject to automated decision-making** that has legal or similarly significant effects. OctiSight does **not** make solely automated decisions of this type.
 - **Right to lodge a complaint** with a supervisory authority:
-  - In the **UK**: the Information Commissioner's Office — `ico.org.uk`.
+  - In the **UK**: the Information Commissioner's Office `ico.org.uk`.
   - In the **EU**: your local Data Protection Authority. A full list is at `edpb.europa.eu/about-edpb/about-edpb/members_en`.
-  - In **Morocco**: the CNDP (Commission Nationale de contrôle de la protection des Données à caractère Personnel) — `cndp.ma`.
+  - In **Morocco**: the CNDP (Commission Nationale de contrôle de la protection des Données à caractère Personnel) `cndp.ma`.
 
 ### 8.2 Rights under CCPA / CPRA (California residents)
 
 - **Right to know** the categories and specific pieces of personal information we have collected.
 - **Right to delete** personal information.
 - **Right to correct** inaccurate personal information.
-- **Right to opt out of sale or sharing** — n/a; we do neither.
-- **Right to limit use of sensitive personal information** — n/a; we do not collect such information.
+- **Right to opt out of sale or sharing** n/a; we do neither.
+- **Right to limit use of sensitive personal information** n/a; we do not collect such information.
 - **Right to non-discrimination** for exercising any of these rights.
 
 To submit a CCPA request, email `privacy@octisight.com` with the subject "CCPA Request". You may also designate an authorised agent. We will verify your identity before fulfilling.
@@ -274,12 +273,12 @@ We may update this Privacy Policy. For **material changes**, we will give at lea
 
 ## 15. How to contact us
 
-| Topic | Contact |
-|---|---|
-| Privacy queries, rights requests | `privacy@octisight.com` |
-| Legal / general | `legal@octisight.com` |
-| Security disclosures | `security@octisight.com` |
-| Support | `support@octisight.com` |
+| Topic                            | Contact                  |
+|----------------------------------|--------------------------|
+| Privacy queries, rights requests | `privacy@octisight.com`  |
+| Legal / general                  | `legal@octisight.com`    |
+| Security disclosures             | `security@octisight.com` |
+| Support                          | `support@octisight.com`  |
 
 Postal:
 

@@ -7,7 +7,7 @@ This Acceptable Use Policy ("**AUP**") describes prohibited uses of the OctiSigh
 
 The AUP forms part of the [Terms of Service](./terms-of-service.md). Violating the AUP may result in **immediate suspension or termination** of your account.
 
-Because OctiSight is a security tool that scans code, dependencies, and software, the AUP is stricter than a generic SaaS AUP. **Misuse of a security tool can cause real harm.** Read it.
+Because OctiSight is a security tool that scans code, dependencies, and software, the AUP is stricter. **Misuse of a security tool can cause real harm.** Read it.
 
 ---
 
@@ -112,7 +112,7 @@ Your obligations under this AUP apply to **all users in your organisation**. Own
 
 ## 5. Reporting abuse
 
-If you become aware of a violation of this AUP — whether by another OctiSight customer, by someone using OctiSight to attack you, or by your own organisation — please report it:
+If you become aware of a violation of this AUP, whether by another OctiSight customer, by someone using OctiSight to attack you, or by your own organisation, please report it:
 
 - **Security or attack-related abuse:** `security@octisight.com`
 - **Other AUP violations:** `legal@octisight.com`

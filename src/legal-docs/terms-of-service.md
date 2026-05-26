@@ -13,8 +13,8 @@ By creating an account, accessing the Service, or agreeing to these Terms in any
 
 The OctiSight entity that contracts with you ("**OctiSight**", "**we**", "**us**") depends on the entity identified at signup or on your applicable order form:
 
-- **OctiSight LTD**, a company incorporated in England & Wales (registered office: 71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom; company number `[TODO: Companies House number]`), for customers in the European Union, European Economic Area, United Kingdom, United States, and rest of the world unless otherwise agreed.
-- **OctiSight SARL**, a company incorporated in Morocco (registered office: 78 BD La Résistance, Résidence El Marzouki, Casablanca 20250, Morocco; RC `[TODO]`; ICE `[TODO]`), for customers in Africa and the MENA region, and where local invoicing is preferred.
+- **OctiSight LTD**, a company incorporated in England & Wales (registered office: 71-75 Shelton Street, Covent Garden, London, WC2H 9JQ, United Kingdom; for customers in the European Union, European Economic Area, United Kingdom, United States, and rest of the world unless otherwise agreed.
+- **OctiSight SARL**, a company incorporated in Morocco (registered office: 78 BD La Résistance, Résidence El Marzouki, Casablanca 20250, Morocco; for customers in Africa and the MENA region, and where local invoicing is preferred.
 
 Where these Terms refer to "OctiSight", they refer to the applicable contracting entity.
 

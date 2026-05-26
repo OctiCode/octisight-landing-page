@@ -1,0 +1,5 @@
+Contact: mailto:security@octisight.com
+Policy: https://octisight.com/legal/vdp
+Preferred-Languages: en, fr
+Canonical: https://octisight.com/.well-known/security.txt
+Expires: 2027-05-26T00:00:00.000Z

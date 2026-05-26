@@ -11,9 +11,9 @@ This Cookie Policy explains how OctiSight uses cookies and similar technologies 
 
 Cookies are small text files stored on your device by a website. They allow the site to recognise your device, remember your preferences, and operate features such as login sessions. We also use **similar technologies**, including:
 
-- **localStorage and sessionStorage** — for client-side UI state (e.g., remembering whether your sidebar is collapsed);
-- **pixels and tracking tags** — only where you have consented;
-- **server-side identifiers** — set in cookies but evaluated on the server.
+- **localStorage and sessionStorage** for client-side UI state (e.g., remembering whether your sidebar is collapsed);
+- **pixels and tracking tags** only where you have consented;
+- **server-side identifiers** set in cookies but evaluated on the server.
 
 Throughout this policy, "cookies" includes all of the above.
 
@@ -23,12 +23,11 @@ Throughout this policy, "cookies" includes all of the above.
 
 We classify cookies into the following categories:
 
-| Category | Required? | Consent needed? |
-|---|---|---|
-| **Strictly necessary** | Yes — the Service cannot function without them | No (lawful basis: necessity) |
-| **Functional** | Optional — improves your experience | Consent in EU/UK |
-| **Analytics** | Optional — helps us improve the Service | Consent in EU/UK |
-| **Marketing / advertising** | Not currently used | Would require consent |
+| Category                    | Required?                                     | Consent needed?              |
+|-----------------------------|-----------------------------------------------|------------------------------|
+| **Strictly necessary**      | Yes, the Service cannot function without them | No (lawful basis: necessity) |
+| **Functional**              | Optional, improves your experience            | Consent in EU/UK             |
+| **Analytics**               | Optional, helps us improve the Service        | Consent in EU/UK             |
 
 We do **not** use cookies for cross-context behavioural advertising, ad personalisation, or selling personal data.
 
@@ -40,22 +39,22 @@ The table below lists the cookies set on `octisight.com` and `app.octisight.io`.
 
 ### 3.1 Strictly necessary cookies
 
-| Cookie | Domain | Purpose | Lifetime |
-|---|---|---|---|
-| `octi_session` | `app.octisight.io` | Authenticates your logged-in session | Session (deleted on logout) |
-| `octi_csrf` | `app.octisight.io` | CSRF protection on form submissions and API calls | Session |
-| `octi_org` | `app.octisight.io` | Remembers your active organisation context | 30 days |
-| `cookie_consent` | both | Stores your cookie preferences | 12 months |
-| Load balancer / proxy cookies | both | Routes you to the correct backend | Session |
+| Cookie                        | Domain             | Purpose                                           | Lifetime                    |
+|-------------------------------|--------------------|---------------------------------------------------|-----------------------------|
+| `octi_session`                | `app.octisight.io` | Authenticates your logged-in session              | Session (deleted on logout) |
+| `octi_csrf`                   | `app.octisight.io` | CSRF protection on form submissions and API calls | Session                     |
+| `octi_org`                    | `app.octisight.io` | Remembers your active organisation context        | 30 days                     |
+| `cookie_consent`              | both               | Stores your cookie preferences                    | 12 months                   |
+| Load balancer / proxy cookies | both               | Routes you to the correct backend                 | Session                     |
 
 These cookies are necessary for the Service to work; they are not subject to consent under GDPR / ePrivacy.
 
 ### 3.2 Functional cookies
 
-| Cookie | Domain | Purpose | Lifetime |
-|---|---|---|---|
-| `octi_theme` | both | Remembers your dark/light theme preference | 12 months |
-| `octi_locale` | both | Remembers your language preference | 12 months |
+| Cookie         | Domain             | Purpose                                    | Lifetime  |
+|----------------|--------------------|--------------------------------------------|-----------|
+| `octi_theme`   | both               | Remembers your dark/light theme preference | 12 months |
+| `octi_locale`  | both               | Remembers your language preference         | 12 months |
 | `octi_sidebar` | `app.octisight.io` | Remembers sidebar collapsed/expanded state | 12 months |
 
 ### 3.3 Analytics cookies
@@ -67,10 +66,10 @@ We use **Google Analytics 4** to understand aggregate site and product usage. We
 - **Advertising features** are disabled;
 - **Data retention** is set to the shortest available period.
 
-| Cookie | Domain | Purpose | Lifetime |
-|---|---|---|---|
-| `_ga` | both | Distinguishes unique users | 24 months |
-| `_ga_<container-id>` | both | Maintains session state for Google Analytics 4 | 24 months |
+| Cookie               | Domain | Purpose                                        | Lifetime  |
+|----------------------|--------|------------------------------------------------|-----------|
+| `_ga`                | both   | Distinguishes unique users                     | 24 months |
+| `_ga_<container-id>` | both   | Maintains session state for Google Analytics 4 | 24 months |
 
 Analytics cookies are set **only after you consent** in regions where consent is required (EU, UK, EEA, and equivalent jurisdictions).
 
@@ -92,7 +91,7 @@ When you first visit `octisight.com` or `app.octisight.io` from a region that re
 
 Strictly necessary cookies are set without consent because they are required for the Service to function.
 
-We do not use a "consent wall" — you can use most of the Service without accepting analytics cookies.
+We do not use a "consent wall" you can use most of the Service without accepting analytics cookies.
 
 ---
 
@@ -109,12 +108,12 @@ You can change your cookie preferences at any time:
 
 You can block, delete, or get notified about cookies in your browser settings:
 
-- **Chrome** — `chrome://settings/cookies`
-- **Firefox** — `about:preferences#privacy`
-- **Safari** — Preferences → Privacy
-- **Edge** — `edge://settings/cookies`
+- **Chrome** `chrome://settings/cookies`
+- **Firefox** `about:preferences#privacy`
+- **Safari** Preferences → Privacy
+- **Edge** `edge://settings/cookies`
 
-If you block strictly necessary cookies, parts of the Service will not work — for example, you will not be able to log in.
+If you block strictly necessary cookies, parts of the Service will not work, for example, you will not be able to log in.
 
 ### 5.3 Do Not Track and Global Privacy Control
 

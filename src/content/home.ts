@@ -188,20 +188,8 @@ export const footerSection = {
 				{ text: "How It Works", href: "/#how-it-works" },
 				{ text: "The Problem", href: "/#problem" },
 				{ text: "FAQ", href: "/#faq" },
-			],
-		},
-		company: {
-			title: "Company",
-			links: [
 				{ text: "Contact", href: "/#contact" },
-				{ text: "Pricing", href: "/#pricing" },
-			],
-		},
-		resources: {
-			title: "Get Started",
-			links: [
-				{ text: "Create Account", href: "/signup" },
-				{ text: "Sign In", href: "/login" },
+				{ text: "Trust Center", href: "/trust" },
 			],
 		},
 	},
@@ -211,12 +199,6 @@ export const footerSection = {
 			href: "https://www.linkedin.com/company/ostisight/about/?viewAsMember=true",
 			icon: "Linkedin",
 		},
-	],
-	legal: [
-		{ text: "Privacy Policy", href: "/legal/privacy" },
-		{ text: "Terms of Service", href: "/legal/terms" },
-		{ text: "Cookie Policy", href: "/legal/cookies" },
-		{ text: "Security", href: "/legal/security" },
 	],
 } as const;
 

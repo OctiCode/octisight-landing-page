@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import CookieBanner from "@/components/cookie/CookieBanner";
 
 // ─── Fonts ────────────────────────────────────────────────────────────────────
 // next/font/local handles preloading, subsetting, and font-display automatically.
@@ -112,7 +113,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
 	return (
 		<html lang="en" className={`scroll-smooth ${gotham.variable}`}>
-			<body>{children}</body>
+			<body>
+				{children}
+				<CookieBanner />
+			</body>
 		</html>
 	);
 }

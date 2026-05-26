@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 /* Gotham font is loaded via next/font/local in app/layout.tsx.
    The CSS variable --font-gotham is injected automatically. */
