@@ -1,33 +1,25 @@
 "use client";
 
 import { useState, useRef, useCallback } from "react";
-import emailjs from "@emailjs/browser";
-import { Send, Loader2 } from "lucide-react";
-
-// ─── Environment ──────────────────────────────────────────────────────────────
-const EJS_SERVICE = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID ?? "";
-const EJS_TEMPLATE = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID ?? "";
-const EJS_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY ?? "";
+import { CheckCircle2, Loader2, Send } from "lucide-react";
 
 // ─── Security helpers ─────────────────────────────────────────────────────────
 
 /**
- * Strip HTML tags, null bytes, and leading/trailing whitespace.
- * Prevents XSS content being forwarded through the email template.
+ * Strip HTML tags, null bytes, and leading/trailing whitespace before sending
+ * to the server. The server re-validates and sanitises again — this is just a
+ * first line of defence to keep the payload small and obviously benign.
  */
 function sanitize(value: string, maxLength = 2000): string {
 	return value
 		.trim()
-		.replace(/<[^>]*>/g, "") // strip HTML tags
-		.replace(/\0/g, "") // strip null bytes
-		.replace(/javascript:/gi, "") // strip JS protocol
+		.replace(/<[^>]*>/g, "")
+		.replace(/\0/g, "")
+		.replace(/javascript:/gi, "")
 		.slice(0, maxLength);
 }
 
-/**
- * Client-side rate limiting — 60-second cooldown between sends.
- * Secondary defence; EmailJS enforces its own server-side limits.
- */
+/** Client-side rate limiting — 60-second cooldown between sends. */
 const RL_KEY = "ocs_contact_ts";
 const RL_MS = 60_000;
 
@@ -86,54 +78,52 @@ function FieldError({ message }: { message?: string }) {
 	);
 }
 
-/** Animated SVG checkmark drawn on success */
+/** Green success banner — replaces the form and announces via aria-live. */
 function SuccessState() {
 	return (
-		<div className="flex flex-col items-center justify-center gap-4 py-6 text-center animate-fade-in">
-			<svg viewBox="0 0 52 52" className="w-16 h-16" aria-hidden="true">
-				<circle
-					cx="26"
-					cy="26"
-					r="24"
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="2.5"
-					className="text-accent"
-					style={{
-						strokeDasharray: 166,
-						strokeDashoffset: 166,
-						animation: "draw-circle 0.5s cubic-bezier(0.65,0,0.45,1) forwards",
-					}}
+		<div
+			role="status"
+			aria-live="polite"
+			className="ocs-success flex flex-col items-center justify-center gap-3 sm:gap-4 py-8 sm:py-10 px-4 text-center rounded-2xl border-2 border-success/50 bg-success/12 shadow-lg shadow-success/15"
+		>
+			<div className="relative">
+				<span
+					aria-hidden="true"
+					className="absolute inset-0 rounded-full bg-success/30 blur-md animate-pulse"
 				/>
-				<path
-					fill="none"
-					stroke="currentColor"
-					strokeWidth="3"
-					strokeLinecap="round"
-					strokeLinejoin="round"
-					d="M14 27 l8 8 l16 -16"
-					className="text-accent"
-					style={{
-						strokeDasharray: 48,
-						strokeDashoffset: 48,
-						animation:
-							"draw-check 0.35s cubic-bezier(0.65,0,0.45,1) 0.5s forwards",
-					}}
+				<CheckCircle2
+					className="relative w-14 h-14 sm:w-16 sm:h-16 text-success"
+					strokeWidth={1.75}
 				/>
-			</svg>
+			</div>
 
-			<p className="text-white font-bold text-lg">Message sent!</p>
-			<p className="text-text/60 text-sm leading-relaxed max-w-xs">
+			<div className="space-y-1">
+				<p className="text-white font-extrabold text-lg sm:text-xl">
+					Message sent!
+				</p>
+				<p className="text-success-contrast text-xs sm:text-sm font-medium uppercase tracking-[0.15em]">
+					Delivered successfully
+				</p>
+			</div>
+
+			<p className="text-text/75 text-sm leading-relaxed max-w-sm">
 				Thanks for reaching out. We&apos;ll get back to you within one business
 				day.
 			</p>
 
 			<style jsx>{`
-				@keyframes draw-circle {
-					to { stroke-dashoffset: 0; }
+				.ocs-success {
+					animation: ocs-success-in 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
 				}
-				@keyframes draw-check {
-					to { stroke-dashoffset: 0; }
+				@keyframes ocs-success-in {
+					0% {
+						opacity: 0;
+						transform: translateY(6px) scale(0.985);
+					}
+					100% {
+						opacity: 1;
+						transform: translateY(0) scale(1);
+					}
 				}
 			`}</style>
 		</div>
@@ -169,7 +159,6 @@ export default function ContactForm() {
 			const { name, value } = e.target;
 			const next = { ...formData, [name]: value };
 			setFormData(next);
-			// Live-validate only touched fields
 			if (touched.has(name)) {
 				const errs = validate(next);
 				setErrors((prev) => ({ ...prev, [name]: errs[name as keyof Fields] }));
@@ -195,12 +184,13 @@ export default function ContactForm() {
 		e.preventDefault();
 		setServerError("");
 
-		// ① Honeypot check — bots fill the hidden field
+		// ① Honeypot — bots fill the hidden field
 		if (honeypotRef.current?.value) return;
 
-		// ② Rate limit
+		// ② Client-side rate limit
 		if (isRateLimited()) {
 			setServerError("Please wait a moment before sending another message.");
+			setStatus("error");
 			return;
 		}
 
@@ -213,27 +203,55 @@ export default function ContactForm() {
 
 		setStatus("submitting");
 
-		// ④ Sanitize every field before sending
-		const safe = {
-			from_name: sanitize(formData.name, 100),
-			from_email: sanitize(formData.email, 254),
+		// ④ Light sanitisation before the wire — server re-validates anyway
+		const payload = {
+			name: sanitize(formData.name, 100),
+			email: sanitize(formData.email, 254),
 			company: sanitize(formData.company, 200),
 			message: sanitize(formData.message, 2000),
-			reply_to: sanitize(formData.email, 254),
 		};
 
 		try {
-			await emailjs.send(EJS_SERVICE, EJS_TEMPLATE, safe, {
-				publicKey: EJS_KEY,
+			// ⑤ Fetch a fresh CSRF token (sets HttpOnly cookie + returns token body)
+			const csrfRes = await fetch("/api/csrf", {
+				credentials: "same-origin",
+				cache: "no-store",
 			});
+			if (!csrfRes.ok) throw new Error("Could not initialise the request.");
+			const { token: csrfToken } = (await csrfRes.json()) as { token: string };
+
+			// ⑥ Submit through our Mailgun-backed API route
+			const res = await fetch("/api/contact", {
+				method: "POST",
+				credentials: "same-origin",
+				headers: {
+					"Content-Type": "application/json",
+					"x-csrf-token": csrfToken,
+				},
+				body: JSON.stringify(payload),
+			});
+
+			if (!res.ok) {
+				const data = (await res
+					.json()
+					.catch(() => ({}) as Record<string, unknown>)) as {
+					error?: string;
+				};
+				throw new Error(
+					data.error ?? "Something went wrong. Please try again.",
+				);
+			}
+
 			stampRateLimit();
 			setStatus("success");
 			setFormData(INITIAL);
 			setTouched(new Set());
 			setErrors({});
-		} catch {
+		} catch (err) {
 			setServerError(
-				"Something went wrong. Please try again or email us directly.",
+				err instanceof Error
+					? err.message
+					: "Something went wrong. Please try again or email us directly.",
 			);
 			setStatus("error");
 		}
@@ -248,7 +266,7 @@ export default function ContactForm() {
 			noValidate
 			aria-label="Contact form"
 		>
-			{/* ── Honeypot (invisible to humans, bots fill it) ── */}
+			{/* Honeypot — bots fill it */}
 			<input
 				ref={honeypotRef}
 				type="text"
@@ -306,7 +324,7 @@ export default function ContactForm() {
 					required
 					autoComplete="email"
 					maxLength={254}
-					placeholder="you@gmail.com"
+					placeholder="you@company.com"
 					value={formData.email}
 					onChange={handleChange}
 					onBlur={handleBlur}

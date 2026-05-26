@@ -65,7 +65,7 @@ export default function ContactSection({
 
 						{/* Right — form card */}
 						<div className="flex items-center justify-center lg:justify-end p-4 sm:p-6 md:p-8 lg:p-10">
-							<div className="w-full max-w-md rounded-2xl bg-white/6 backdrop-blur-md border border-white/12 p-6 sm:p-8 md:p-10">
+							<div className="w-full max-w-md lg:max-w-xl rounded-2xl bg-white/6 backdrop-blur-md border border-white/12 p-6 sm:p-8 md:p-10">
 								<h3 className="text-xl sm:text-2xl font-bold text-white mb-2 text-center">
 									Send us a message
 								</h3>
