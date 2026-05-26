@@ -93,28 +93,46 @@ export default function Footer() {
 				</div>
 
 				{/* ─── Bottom bar ─── */}
-				<div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-primary/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-					<p className="text-text/50 text-xs sm:text-sm">
-						© {currentYear} OctiSight. All rights reserved.
-					</p>
+				<div className="mt-10 sm:mt-12 pt-6 sm:pt-8 border-t border-primary/20 flex flex-col gap-5 sm:gap-4">
+					{/* Legal links */}
+					<nav
+						aria-label="Legal"
+						className="flex flex-wrap items-center justify-center sm:justify-start gap-x-5 gap-y-2"
+					>
+						{footerSection.legal.map((link) => (
+							<Link
+								key={link.href}
+								href={link.href}
+								className="text-text/50 hover:text-light-contrast text-xs sm:text-sm transition-colors duration-200"
+							>
+								{link.text}
+							</Link>
+						))}
+					</nav>
 
-					{/* Social icons */}
-					<div className="flex items-center gap-2 sm:gap-3">
-						{footerSection.social.map((social) => {
-							const Icon = iconMap[social.icon as keyof typeof iconMap];
-							return (
-								<Link
-									key={social.name}
-									href={social.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									className="text-text/50 hover:text-light-contrast transition-colors duration-200 p-2 hover:bg-primary/20 rounded-full"
-									aria-label={social.name}
-								>
-									<Icon size={18} />
-								</Link>
-							);
-						})}
+					<div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+						<p className="text-text/50 text-xs sm:text-sm">
+							© {currentYear} OctiSight. All rights reserved.
+						</p>
+
+						{/* Social icons */}
+						<div className="flex items-center gap-2 sm:gap-3">
+							{footerSection.social.map((social) => {
+								const Icon = iconMap[social.icon as keyof typeof iconMap];
+								return (
+									<Link
+										key={social.name}
+										href={social.href}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-text/50 hover:text-light-contrast transition-colors duration-200 p-2 hover:bg-primary/20 rounded-full"
+										aria-label={social.name}
+									>
+										<Icon size={18} />
+									</Link>
+								);
+							})}
+						</div>
 					</div>
 				</div>
 			</div>

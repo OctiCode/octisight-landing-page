@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { ArrowRight, Phone, ScanSearch } from "lucide-react";
 
 /**
@@ -62,14 +61,14 @@ export default function GetStartedSection() {
 							</p>
 						</div>
 
-						<Link
-							href="/signup"
+						<a
+							href="https://app.octisight.io/auth/login"
 							className="relative w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-white bg-accent hover:bg-accent/80 shadow-lg shadow-accent/25 hover:shadow-accent/40 transition-all duration-300 text-sm sm:text-base"
 						>
 							<ScanSearch className="w-4 h-4 sm:w-5 sm:h-5" />
 							Start free scan
 							<ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-						</Link>
+						</a>
 					</div>
 
 					{/* Sales card */}

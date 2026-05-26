@@ -7,12 +7,12 @@ export const heroSection = {
 	buttons: {
 		primary: {
 			text: "Start free scan",
-			href: "/signup",
+			href: "https://app.octisight.io/auth/login",
 			variant: "primary" as const,
 		},
 		secondary: {
 			text: "See it in Action",
-			href: "#how-it-works",
+			href: "#contact",
 			variant: "secondary" as const,
 		},
 	},
@@ -211,6 +211,12 @@ export const footerSection = {
 			href: "https://www.linkedin.com/company/ostisight/about/?viewAsMember=true",
 			icon: "Linkedin",
 		},
+	],
+	legal: [
+		{ text: "Privacy Policy", href: "/legal/privacy" },
+		{ text: "Terms of Service", href: "/legal/terms" },
+		{ text: "Cookie Policy", href: "/legal/cookies" },
+		{ text: "Security", href: "/legal/security" },
 	],
 } as const;
 

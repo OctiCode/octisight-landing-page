@@ -2,10 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { LogIn, Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
+
+const APP_LOGIN_URL = "https://app.octisight.io/auth/login";
 
 const NAV_LINKS = [
 	{ href: "/#how-it-works", label: "How it works" },
@@ -102,10 +104,13 @@ export default function Navbar() {
 
 				{/* Desktop actions */}
 				<div className="hidden md:flex items-center gap-4">
-					<a href="https://app.octisight.io/auth/login">
-						<Button className="bg-accent hover:bg-secondary text-white cursor-pointer">
-							Sign in
-						</Button>
+					<a
+						href={APP_LOGIN_URL}
+						aria-label="Sign in"
+						title="Sign in"
+						className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-accent hover:bg-secondary text-white transition-colors duration-200 cursor-pointer"
+					>
+						<LogIn className="w-4 h-4" />
 					</a>
 				</div>
 
@@ -153,8 +158,9 @@ export default function Navbar() {
 					</div>
 
 					<div className="mt-auto flex flex-col gap-3 pb-8">
-						<a href="https://app.octisight.io/auth/login" onClick={() => setIsOpen(false)}>
-							<Button className="w-full bg-accent hover:bg-secondary text-white py-6 text-lg cursor-pointer">
+						<a href={APP_LOGIN_URL} onClick={() => setIsOpen(false)}>
+							<Button className="w-full bg-accent hover:bg-secondary text-white py-6 text-lg cursor-pointer flex items-center justify-center gap-2">
+								<LogIn className="w-5 h-5" />
 								Sign in
 							</Button>
 						</a>
