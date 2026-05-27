@@ -1,4 +1,5 @@
 FROM node:22-alpine AS base
+ENV NEXT_TELEMETRY_DISABLED=1
 
 # --- Dependencies ---
 FROM base AS deps

@@ -2,5 +2,9 @@ node_modules
 .next
 .git
 .gitignore
-*.md
 .env*
+.DS_Store
+npm-debug.log*
+# NOTE: do not blanket-ignore *.md — src/legal-docs/*.md are build inputs
+# (the /legal pages are statically generated from them).
+README.md
