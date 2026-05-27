@@ -1,6 +1,6 @@
 export const heroSection = {
-	eyebrow: "Vulnerability management",
-	title: "Security from insight to action",
+	eyebrow: "Built for small teams",
+	title: "Vulnerability management, from insight to action",
 	paragraph:
 		"OctiSight connects to your systems, analyzes thousands of vulnerabilities, and shows you only what truly matters with clear actions to fix them.",
 	trustLine: "No credit card. Connect a repo and get findings in 90s.",
@@ -69,7 +69,7 @@ export const problemSection = {
 		},
 		{
 			value: "<1%",
-			label: "of CVEs are actually exploited in the wild — where OctiSight focuses",
+			label: "of CVEs are actually exploited in the wild, where OctiSight focuses",
 		},
 	],
 } as const;

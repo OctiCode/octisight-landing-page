@@ -15,15 +15,21 @@ import {
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { LEGAL_DOCS, type LegalSlug } from "@/lib/legal-docs";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/structured-data";
+import { localeAlternates } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-	title: "Trust Center | OctiSight",
+	// Bare title — the root layout template appends " | OctiSight".
+	title: "Trust Center",
 	description:
-		"Everything an auditor, security reviewer, or buyer needs about OctiSight in one place security overview, customer agreements, subprocessor list, and our responsible disclosure programme.",
+		"Everything an auditor, security reviewer, or buyer needs about OctiSight in one place: security overview, customer agreements, subprocessor list, and our responsible disclosure programme.",
+	alternates: localeAlternates("/trust"),
 	openGraph: {
-		title: "Trust Center — OctiSight",
+		title: "Trust Center | OctiSight",
 		description:
 			"Security overview, customer agreements, subprocessor list, and responsible disclosure programme.",
+		url: "/trust",
 	},
 	robots: { index: true, follow: true },
 };
@@ -65,9 +71,19 @@ const SECTIONS: Section[] = [
 export default function TrustPage() {
 	return (
 		<div className="bg-background min-h-screen">
+			<JsonLd
+				schema={breadcrumbSchema([
+					{ name: "Home", path: "/" },
+					{ name: "Trust Center", path: "/trust" },
+				])}
+			/>
 			<Navbar />
 
-			<main className="relative w-full pt-12 sm:pt-16 md:pt-20 pb-16 sm:pb-20 md:pb-24">
+			<main
+				id="main-content"
+				tabIndex={-1}
+				className="relative w-full pt-12 sm:pt-16 md:pt-20 pb-16 sm:pb-20 md:pb-24 focus:outline-none"
+			>
 				<div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
 					{/* Header */}
 					<header className="text-center mb-12 sm:mb-14 md:mb-16">

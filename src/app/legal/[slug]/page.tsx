@@ -13,6 +13,9 @@ import {
 	slugFromHref,
 } from "@/lib/legal-docs";
 import { getLegalDoc } from "@/lib/legal-docs.server";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbSchema } from "@/lib/structured-data";
+import { localeAlternates } from "@/lib/i18n";
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -25,12 +28,18 @@ export async function generateMetadata({
 	params,
 }: PageProps): Promise<Metadata> {
 	const { slug } = await params;
-	if (!(slug in LEGAL_DOCS)) return { title: "Not found | OctiSight" };
+	if (!(slug in LEGAL_DOCS)) return { title: "Not found" };
 	const meta = LEGAL_DOCS[slug as keyof typeof LEGAL_DOCS];
+	// Bare title — the root layout template appends " | OctiSight".
 	return {
-		title: `${meta.title} | OctiSight`,
+		title: meta.title,
 		description: meta.description,
-		openGraph: { title: meta.title, description: meta.description },
+		alternates: localeAlternates(`/legal/${slug}`),
+		openGraph: {
+			title: `${meta.title} | OctiSight`,
+			description: meta.description,
+			url: `/legal/${slug}`,
+		},
 		robots: { index: true, follow: true },
 	};
 }
@@ -63,9 +72,19 @@ export default async function LegalDocPage({ params }: PageProps) {
 
 	return (
 		<div className="bg-background min-h-screen">
+			<JsonLd
+				schema={breadcrumbSchema([
+					{ name: "Home", path: "/" },
+					{ name: meta.title, path: `/legal/${doc.slug}` },
+				])}
+			/>
 			<Navbar />
 
-			<main className="relative w-full pt-10 sm:pt-12 md:pt-14 pb-12 sm:pb-16 md:pb-20">
+			<main
+				id="main-content"
+				tabIndex={-1}
+				className="relative w-full pt-10 sm:pt-12 md:pt-14 pb-12 sm:pb-16 md:pb-20 focus:outline-none"
+			>
 				<div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6">
 					<div className="grid grid-cols-1 lg:grid-cols-[200px_1fr] gap-8 lg:gap-12">
 						{/* Sidebar (lg+) — quick switch between legal docs, grouped */}

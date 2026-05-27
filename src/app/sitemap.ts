@@ -1,7 +1,6 @@
 import type { MetadataRoute } from "next";
 import { LEGAL_SLUGS } from "@/lib/legal-docs";
-
-const BASE = "https://octisight.io";
+import { SITE_URL as BASE } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
 	const now = new Date();

@@ -18,6 +18,9 @@ import {
 
 const ACCENT = "#c530db";
 
+/** Chart shows the recent, dramatic stretch only. */
+const CHART_START_YEAR = 2016;
+
 const chartConfig = {
 	count: { label: "CVEs published", color: ACCENT },
 } satisfies ChartConfig;
@@ -40,9 +43,12 @@ export default function ProblemSection() {
 	const currentYear = new Date().getFullYear();
 
 	// Live trajectory (key: count) or static fallback (key: cves → count).
-	const points: { year: number; count: number }[] =
+	const allPoints: { year: number; count: number }[] =
 		problem?.yearlyTrajectory ??
 		chart.data.map((d) => ({ year: d.year, count: d.cves }));
+
+	// Chart shows 2016 → present only (the recent, dramatic climb).
+	const points = allPoints.filter((p) => p.year >= CHART_START_YEAR);
 
 	const lastIndex = points.length - 1;
 	const isPartialLast =
@@ -73,8 +79,10 @@ export default function ProblemSection() {
 			]
 		: stats.map((s) => s.value);
 
+	// Total reflects the full catalog (live) / full dataset (fallback), not the
+	// chart's trimmed 2016+ window.
 	const totalVulns =
-		problem?.totalVulns ?? points.reduce((sum, p) => sum + p.count, 0);
+		problem?.totalVulns ?? allPoints.reduce((sum, p) => sum + p.count, 0);
 	const caption = problem
 		? `${formatCount(totalVulns)} vulnerabilities tracked · ${formatApproxThousands(problem.averageCvesPerYear)} new every year`
 		: `${formatCount(totalVulns)} vulnerabilities tracked`;
