@@ -3,9 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { LogIn, Menu, X } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
 
 const APP_LOGIN_URL = "https://app.octisight.io/auth/login";
 
@@ -17,34 +16,26 @@ const NAV_LINKS = [
 ] as const;
 
 /**
- * Handles anchor links correctly whether the user is already on the home page
- * or navigating from another page.
- *
- * - Same page  → preventDefault + smooth scroll via scrollIntoView
- * - Other page → navigate to /#hash, browser handles scroll on load
+ * Anchor-link handler: smooth-scroll if we're already on /, otherwise let
+ * Next.js navigate and the browser handle the hash.
  */
 function useAnchorNav() {
 	const pathname = usePathname();
-
 	return (
 		e: React.MouseEvent<HTMLAnchorElement>,
 		href: string,
 		onDone?: () => void,
 	) => {
-		const isAnchor = href.startsWith("/#");
-		if (!isAnchor) {
+		if (!href.startsWith("/#")) {
 			onDone?.();
 			return;
 		}
-
-		const id = href.slice(2); // strip "/#"
-
+		const id = href.slice(2);
 		if (pathname === "/") {
 			e.preventDefault();
 			document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 			onDone?.();
 		} else {
-			// Let Next.js navigate; scroll happens after page load via hash
 			onDone?.();
 		}
 	};
@@ -55,13 +46,23 @@ export default function Navbar() {
 	const pathname = usePathname();
 	const handleAnchor = useAnchorNav();
 
-	// Close mobile menu on route change
+	// Close mobile menu on route change.
 	useEffect(() => {
 		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setIsOpen(false);
 	}, [pathname]);
 
-	// Prevent body scroll when mobile menu is open
+	// Close on Escape.
+	useEffect(() => {
+		if (!isOpen) return;
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === "Escape") setIsOpen(false);
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [isOpen]);
+
+	// Lock body scroll while the mobile menu is open.
 	useEffect(() => {
 		document.body.style.overflow = isOpen ? "hidden" : "";
 		return () => {
@@ -70,17 +71,21 @@ export default function Navbar() {
 	}, [isOpen]);
 
 	return (
-		<header className="w-full border-b border-primary/20 bg-background/70 backdrop-blur-md sticky top-0 left-0 right-0 z-50">
+		<header className="sticky top-0 left-0 right-0 z-50 w-full border-b border-primary/20 bg-background/80 backdrop-blur-md">
 			<div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-				{/* Logo */}
-				<Link href="/" className="flex items-center z-50 shrink-0">
+				{/* Logo — smaller on mobile so the toggle has breathing room. */}
+				<Link
+					href="/"
+					className="relative z-[55] flex items-center shrink-0"
+					aria-label="OctiSight home"
+				>
 					<Image
 						src="/images/logo/octisight-white-logo.png"
 						alt="OctiSight"
-						width={200}
-						height={100}
-						className="h-16 w-auto"
-						sizes="200px"
+						width={180}
+						height={60}
+						className="h-12 md:h-12 lg:h-14 w-auto"
+						sizes="180px"
 						priority
 					/>
 				</Link>
@@ -102,69 +107,73 @@ export default function Navbar() {
 					))}
 				</nav>
 
-				{/* Desktop actions */}
-				<div className="hidden md:flex items-center gap-4">
-					<a
-						href={APP_LOGIN_URL}
-						aria-label="Sign in"
-						title="Sign in"
-						className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-accent hover:bg-secondary text-white transition-colors duration-200 cursor-pointer"
-					>
-						<LogIn className="w-4 h-4" />
-					</a>
-				</div>
+				{/* Desktop sign-in (icon-only) */}
+				<a
+					href={APP_LOGIN_URL}
+					aria-label="Sign in"
+					title="Sign in"
+					className="hidden md:inline-flex items-center justify-center w-10 h-10 rounded-lg bg-accent hover:bg-secondary text-white transition-colors duration-200"
+				>
+					<LogIn className="w-4 h-4" />
+				</a>
 
-				{/* Mobile toggle */}
+				{/* Mobile toggle — high z-index so it sits above the open menu. */}
 				<button
 					type="button"
 					onClick={() => setIsOpen((v) => !v)}
-					className="md:hidden z-50 p-2 text-text/80 hover:text-light-contrast transition-colors"
 					aria-label={isOpen ? "Close menu" : "Open menu"}
 					aria-expanded={isOpen}
+					aria-controls="mobile-nav"
+					className="md:hidden relative z-[55] -mr-1 inline-flex h-11 w-11 items-center justify-center rounded-lg text-white hover:bg-white/5 active:bg-white/10 transition-colors"
 				>
-					{isOpen ? <X size={24} /> : <Menu size={24} />}
+					{isOpen ? (
+						<X className="w-6 h-6" strokeWidth={2.2} />
+					) : (
+						<Menu className="w-6 h-6" strokeWidth={2.2} />
+					)}
 				</button>
 			</div>
 
-			{/* Mobile menu */}
+			{/* Mobile menu — full-screen overlay below the nav bar. Uses 100dvh so
+			    iOS Safari's URL bar doesn't push items below the fold. */}
 			<div
-				className={`fixed inset-0 top-16 bg-background/95 backdrop-blur-md md:hidden transition-all duration-300 ease-in-out z-40 ${
-					isOpen
-						? "opacity-100 translate-y-0 pointer-events-auto"
-						: "opacity-0 -translate-y-4 pointer-events-none"
-				}`}
+				id="mobile-nav"
+				role="dialog"
+				aria-label="Mobile navigation"
 				aria-hidden={!isOpen}
+				className={`md:hidden fixed inset-x-0 top-16 z-40 bg-background h-[calc(100dvh-4rem)] transition-opacity duration-300 ease-out ${
+					isOpen
+						? "opacity-100 pointer-events-auto"
+						: "opacity-0 pointer-events-none"
+				}`}
 			>
 				<nav
-					className="flex flex-col h-full px-6 py-8 overflow-y-auto"
-					aria-label="Mobile navigation"
+					aria-label="Mobile navigation links"
+					className="flex h-full flex-col px-6 py-6 sm:py-8"
 				>
-					<div className="flex flex-col items-center gap-2 my-8">
-						{NAV_LINKS.map(({ href, label }, index) => (
-							<Link
-								key={href}
-								href={href}
-								onClick={(e) => handleAnchor(e, href, () => setIsOpen(false))}
-								className="w-full text-center py-3 text-xl font-medium text-text/80 hover:text-light-contrast transition-colors duration-200 border-b border-primary/15 last:border-0"
-								style={{
-									opacity: isOpen ? 1 : 0,
-									transform: isOpen ? "translateY(0)" : "translateY(-12px)",
-									transition: `opacity 0.25s ease ${index * 0.05}s, transform 0.25s ease ${index * 0.05}s`,
-								}}
-							>
-								{label}
-							</Link>
+					{/* Items — vertically centered in the available space. */}
+					<ul className="flex flex-col gap-1 my-auto">
+						{NAV_LINKS.map(({ href, label }) => (
+							<li key={href}>
+								<Link
+									href={href}
+									onClick={(e) => handleAnchor(e, href, () => setIsOpen(false))}
+									className="block w-full py-4 text-center text-2xl font-medium text-white hover:text-light-contrast border-b border-light-contrast/10 transition-colors duration-200"
+								>
+									{label}
+								</Link>
+							</li>
 						))}
-					</div>
+					</ul>
 
-					<div className="mt-auto flex flex-col gap-3 pb-8">
-						<a href={APP_LOGIN_URL} onClick={() => setIsOpen(false)}>
-							<Button className="w-full bg-accent hover:bg-secondary text-white py-6 text-lg cursor-pointer flex items-center justify-center gap-2">
-								<LogIn className="w-5 h-5" />
-								Sign in
-							</Button>
-						</a>
-					</div>
+					<a
+						href={APP_LOGIN_URL}
+						onClick={() => setIsOpen(false)}
+						className="flex items-center justify-center gap-2 w-full py-4 rounded-lg bg-accent hover:bg-light-contrast text-white font-semibold text-base shadow-lg shadow-accent/25 transition-colors duration-200"
+					>
+						<LogIn className="w-5 h-5" />
+						Sign in
+					</a>
 				</nav>
 			</div>
 		</header>
