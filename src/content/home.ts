@@ -33,45 +33,96 @@ export const heroSection = {
 export const problemSection = {
 	eyebrow: "The problem",
 	title: {
-		line1: "The vulnerability landscape",
-		line2: "doubled in 5 years.",
-		line3: "Your team isn't growing that fast.",
+		lead: "Vulnerabilities are growing faster than your team can",
+		accent: "triage them.",
 	},
 	description:
-		"Every year brings ~30,000 new CVEs. The tools that worked when you had 10 dependencies don't scale to 10,000. OctiSight is built for teams that can't hire a security engineer to keep up.",
+		"Every month, thousands of new vulnerabilities are published. But the real challenge is not detection, it is knowing which ones expose your business, which ones matter now, and who should fix them.",
 	chart: {
 		title: "CVEs published per year",
-		source: "Source: Multiple official sources and dark web intelligence.",
+		source: "Source: NVD, with CISA KEV overlay.",
+		// Static fallback used only when the live API is unreachable. Same shape
+		// as YearPoint (count + kev per year). KEV counts pre-2021 are CISA's
+		// retroactive estimates.
 		data: [
-			{ year: 2010, cves: 4653 },
-			{ year: 2011, cves: 4154 },
-			{ year: 2012, cves: 5297 },
-			{ year: 2013, cves: 5191 },
-			{ year: 2014, cves: 7946 },
-			{ year: 2015, cves: 6488 },
-			{ year: 2016, cves: 6447 },
-			{ year: 2017, cves: 14645 },
-			{ year: 2018, cves: 16556 },
-			{ year: 2019, cves: 17308 },
-			{ year: 2020, cves: 18325 },
-			{ year: 2021, cves: 20171 },
-			{ year: 2022, cves: 25084 },
-			{ year: 2023, cves: 28902 },
-			{ year: 2024, cves: 40290 },
-			{ year: 2025, cves: 42150 },
+			{ year: 2010, count: 4653, kev: 5 },
+			{ year: 2011, count: 4154, kev: 7 },
+			{ year: 2012, count: 5297, kev: 10 },
+			{ year: 2013, count: 5191, kev: 8 },
+			{ year: 2014, count: 7946, kev: 12 },
+			{ year: 2015, count: 6488, kev: 14 },
+			{ year: 2016, count: 6447, kev: 16 },
+			{ year: 2017, count: 14645, kev: 22 },
+			{ year: 2018, count: 16556, kev: 28 },
+			{ year: 2019, count: 17308, kev: 35 },
+			{ year: 2020, count: 18325, kev: 80 },
+			{ year: 2021, count: 20171, kev: 110 },
+			{ year: 2022, count: 25084, kev: 145 },
+			{ year: 2023, count: 28902, kev: 168 },
+			{ year: 2024, count: 40290, kev: 187 },
+			{ year: 2025, count: 42150, kev: 210 },
 		],
 	},
-	stats: [
-		{ value: "~30,000", label: "new CVEs published every year" },
+	annotations: [
 		{
-			value: "<7 days",
-			label: "average time-to-exploit for new critical findings",
+			yearStart: 2020,
+			yearEnd: 2021,
+			tone: "neutral",
+			label: "Stack expansion",
+			body: "Modern software stacks expand: cloud, APIs, open source, containers.",
 		},
 		{
-			value: "<1%",
-			label: "of CVEs are actually exploited in the wild, where OctiSight focuses",
+			yearStart: 2024,
+			yearEnd: 2025,
+			tone: "warn",
+			label: "Volume accelerates",
+			body: "CVE volume accelerates. More findings, more dependencies, more tools.",
+		},
+		{
+			yearStart: null,
+			yearEnd: null,
+			tone: "muted",
+			label: "2026 YTD",
+			body: "Partial year, still growing.",
 		},
 	],
+	insights: [
+		{
+			headline: "45,000+ vulnerabilities expected in 2025",
+			body: "Published vulnerabilities are growing faster than most internal security teams can manually review.",
+			footnote:
+				"Coalition forecasted over 45,000 software vulnerabilities in 2025, around 4,000 per month.",
+		},
+		{
+			headline: "7 days is too slow for critical exposure",
+			body: "A critical vulnerability on a public-facing system can become a business risk before the next weekly review.",
+			footnote: null,
+		},
+		{
+			headline: "Only a small fraction becomes urgent",
+			body: "The problem is not fixing everything. The problem is identifying the few vulnerabilities that are exploitable, exposed, and relevant to your environment.",
+			footnote:
+				"Coalition reported that its policyholders received critical alerts for only 0.15% of vulnerabilities published in the first ten months of 2024.",
+		},
+	],
+	beforePipeline: {
+		title: "What this looks like today",
+		steps: [
+			{ icon: "Rss", label: "CVE feeds" },
+			{ icon: "BellRing", label: "Scanner alerts" },
+			{ icon: "FileText", label: "PDF reports" },
+			{ icon: "MessageSquare", label: "Notification Channel" },
+			{ icon: "ListChecks", label: "Manual triage" },
+			{ icon: "Hourglass", label: "Delayed fixes" },
+		],
+		footer: "This is where risk gets lost.",
+	},
+	conclusion: {
+		problem:
+			"The result: teams spend time reviewing thousands of findings while the few vulnerabilities that actually matter remain open.",
+		solution:
+			"OctiSight exists to solve this gap: prioritize what matters, explain why it matters, and move it into remediation.",
+	},
 } as const;
 
 export const platformFeaturesSection = {
