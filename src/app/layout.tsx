@@ -103,6 +103,10 @@ export const metadata: Metadata = {
 		follow: true,
 		googleBot: { index: true, follow: true, "max-snippet": -1 },
 	},
+
+	icons: {
+		icon: '/images/logo/octisight-favicon-white.svg',  // ← Chemin depuis public/
+	},
 };
 
 // ─── Layout ───────────────────────────────────────────────────────────────────
